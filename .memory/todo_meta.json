@@ -3,37 +3,37 @@
     "Coordinator": {
       "1": {
         "id": "1",
-        "content": "Research major tutoring platform features and business models",
-        "details": "Analyze platforms like Tutor.com, Wyzant, Chegg Tutors, Preply, and others to understand feature sets, pricing models, and user experience patterns",
-        "status": "completed",
+        "content": "Analyze premium positioning strategy for expert-level pharmacy tutor",
+        "details": "Research how PhD-level educators successfully position themselves in the online tutoring market, pricing strategies for expert tutors, and premium service differentiation",
+        "status": "pending",
         "priority": "high"
       },
       "2": {
         "id": "2",
-        "content": "Analyze pharmacy tutoring specific requirements",
-        "details": "Research pharmacy education standards, common topics, certification requirements, and specialized needs for pharmacy students",
-        "status": "completed",
+        "content": "Research Indian pharmacy education market and opportunities",
+        "details": "Analyze Indian pharmacy education system, licensing requirements (PCI, FIPEE, GPAT, NIPER, etc.), and specific challenges faced by Indian pharmacy students that can be addressed through your platform",
+        "status": "pending",
         "priority": "high"
       },
       "3": {
         "id": "3",
-        "content": "Research single-tutor platform features and monetization strategies",
-        "details": "Investigate how individual tutors successfully operate their own platforms, what features drive engagement, and sustainable revenue models",
-        "status": "completed",
+        "content": "Design expert-level feature set for PhD pharmacology tutor",
+        "details": "Develop sophisticated features that leverage 20 years of teaching experience, including advanced content creation tools, research integration, and professional development focus",
+        "status": "pending",
         "priority": "high"
       },
       "4": {
         "id": "4",
-        "content": "Analyze technical requirements and platform architecture",
-        "details": "Research essential technical features including scheduling, payment processing, content delivery, student management, and analytics",
-        "status": "completed",
+        "content": "Create Indian market monetization and pricing strategy",
+        "details": "Research pricing models for premium tutoring services in India, payment preferences, and competitive landscape for PhD-level educational services",
+        "status": "pending",
         "priority": "high"
       },
       "5": {
         "id": "5",
-        "content": "Compile comprehensive feature list with implementation recommendations",
-        "details": "Synthesize all research into a prioritized list of features suitable for a single pharmacy tutor, including core features, advanced features, and optional enhancements",
-        "status": "completed",
+        "content": "Develop comprehensive implementation roadmap",
+        "details": "Create detailed 6-18 month implementation plan with phases, timelines, and milestones specifically designed for your expertise level and background",
+        "status": "pending",
         "priority": "high"
       }
     }
