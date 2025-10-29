@@ -1,0 +1,41 @@
+📄 Extracted from page: Pharmacy Board of Australia - Registration Examination
+URL: https://www.pharmacyboard.gov.au/Registration/Registration-Examination.aspx
+
+Extracted content:
+```json
+{
+  "title": "Pharmacy Board of Australia - Registration Examination",
+  "url": "https://www.pharmacyboard.gov.au/Registration/Registration-Examination.aspx",
+  "summary": "The Pharmacy Board of Australia outlines the registration examination process required for pharmacists to achieve general registration in Australia. This process involves two main components: a written examination and an oral (practice) examination. The information is relevant for graduates of approved Australian programs and overseas qualified pharmacists who have met specific preliminary requirements, such as completing the KAPS or OPRA examinations. Candidates holding provisional registration (interns) must complete 75% of their supervised practice hours before being eligible to sit the examinations. Both the written and oral components must be passed within an 18-month timeframe. The written examination is conducted by the Australian Pharmacy Council (APC), while the oral examination is administered by Ahpra in various Australian capital cities, primarily face-to-face, with provisions for online delivery under exceptional circumstances. The page provides the schedule for 2026 oral examinations, including application open and close dates. Specific assessment criteria are detailed in linked documents, such as the Pharmacy oral examination (practice) candidate guide and on the APC website.",
+  "key_points": [
+    "The registration examination is mandatory for general registration as a pharmacist in Australia.",
+    "It consists of two parts: a Written Examination and an Oral (Practice) Examination.",
+    "Eligibility to sit the examination extends to graduates of Board-approved general or provisional programs, graduates of substantially equivalent programs, and overseas qualified pharmacists.",
+    "Overseas qualified pharmacists must have successfully completed the Australian Pharmacy Council’s Overseas Pharmacist Readiness Assessment (OPRA) exam or Knowledge Assessment of Pharmaceutical Sciences (KAPS) exam to be eligible for provisional registration, which then allows them to undertake the registration examination.",
+    "Individuals holding provisional registration (interns) must complete 75% of their Board-approved supervised practice hours (currently 1,575 hours due to COVID-19 modifications) to be eligible for the examination.",
+    "Both the written and oral examinations must be successfully completed within an 18-month period of each other.",
+    "The Written Examination is conducted by the Australian Pharmacy Council (APC), with further details available on their website.",
+    "The Oral Examination is conducted by the Australian Health Practitioner Regulation Agency (Ahpra) in Canberra, Sydney, Darwin, Brisbane, Adelaide, Hobart, Melbourne, and Perth.",
+    "Applications for the oral examination require the submission of the 'Application for a pharmacy intern to be a candidate for an oral examination (practice) - APOE-60' form by the specified closing dates.",
+    "The oral examination is primarily delivered face-to-face, but online delivery may be offered in exceptional circumstances (e.g., pandemic, examiner availability, remote location, low candidate numbers).",
+    "The 2026 schedule for oral examinations includes three periods: Feb 2-27 (applications Nov 16 - Dec 19, 2025), June 1-26 (applications Mar 2 - Apr 3, 2026), and Oct 5-30 (applications June 29 - July 31, 2026).",
+    "Candidates receive their specific oral examination date and time by email two weeks before the examination period begins.",
+    "Detailed assessment criteria for the oral examination are provided in the 'Pharmacy oral examination (practice) candidate guide', and for the written examination on the APC website.",
+    "Changes to the registration examination structure came into effect on January 1, 2021."
+  ],
+  "relevant_links": [
+    "https://www.ahpra.gov.au/documents/default.aspx?record=WD20%2f30466&dbid=AP&chksum=UPa3EElbs3xBztbY88ZUjA%3d%3d",
+    "https://www.ahpra.gov.au/documents/default.aspx?record=WD20%2f30467&dbid=AP&chksum=PQJ9mIsYwCMbnwzyEQ9F5g%3d%3d",
+    "https://www.pharmacycouncil.org.au/",
+    "https://www.ahpra.gov.au/documents/default.aspx?record=WD11%2f4973%5bv19%5d&dbid=AP&chksum=WdnR0XfePgymlT0yl94BBK3Cfx9M7y4EpASbH2AIG9g%3d",
+    "https://www.ahpra.gov.au/documents/default.aspx?record=WD21%2f31538&dbid=AP&chksum=NIyfh4MtF0f57lnuaG15Fw%3d%3d",
+    "https://www.ahpra.gov.au/documents/default.aspx?record=WD21%2f31539&dbid=AP&chksum=rnUCWHAecVj%2b5N032Y7MpQ%3d%3d",
+    "https://www.pharmacyboard.gov.au/Registration/Internships.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Forms.aspx",
+    "https://www.ahpra.gov.au/Registration/Online-upload.aspx",
+    "mailto:pharmacyoralexam@ahpra.gov.au",
+    "https://www.pharmacyboard.gov.au/Registration/Overseas.aspx"
+  ],
+  "file_name": "pharmacy_registration_examination_details.json"
+}
+```

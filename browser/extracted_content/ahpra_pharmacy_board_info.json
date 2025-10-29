@@ -1,0 +1,30 @@
+📄 Extracted from page: Australian Health Practitioner Regulation Agency - Home
+URL: https://www.ahpra.gov.au/
+
+Extracted content:
+```json
+{
+  "title": "Australian Health Practitioner Regulation Agency - Home",
+  "url": "https://www.ahpra.gov.au/",
+  "summary": "The Australian Health Practitioner Regulation Agency (AHPRA) homepage serves as a central hub for health practitioner regulation in Australia, working in partnership with various National Boards to ensure health practitioners are qualified and safe. The site provides general information about applying for and managing registration, raising concerns about practitioners, and accreditation processes. It explicitly lists all National Health Practitioner Boards, including the Pharmacy Board of Australia, directing users to their dedicated websites for profession-specific details. General registration standards managed by AHPRA, such as those concerning English language skills, criminal history, and continuing professional development, are outlined as applying across professions.",
+  "key_points": [
+    "AHPRA regulates health practitioners in Australia to ensure public safety.",
+    "The site lists the 'Pharmacy Board' with a direct link to its dedicated website: https://www.pharmacyboard.gov.au/.",
+    "General registration standards applicable to all regulated health professions, including pharmacy, are managed by AHPRA.",
+    "Key general registration requirements include: Continuing professional development, English language skills, Criminal history checks, Professional indemnity insurance, and Recency of practice.",
+    "Specific, detailed registration requirements for the Pharmacy Board of Australia are expected to be found on the Pharmacy Board's own website."
+  ],
+  "relevant_links": [
+    "https://www.pharmacyboard.gov.au/",
+    "https://www.ahpra.gov.au/Registration.aspx",
+    "https://www.ahpra.gov.au/Registration/Applying-for-registration.aspx",
+    "https://www.ahpra.gov.au/Registration/Registration-Standards.aspx",
+    "https://www.ahpra.gov.au/Registration/Registration-Standards/CPD.aspx",
+    "https://www.ahpra.gov.au/Registration/Registration-Standards/English-language-skills.aspx",
+    "https://www.ahpra.gov.au/Registration/Registration-Standards/Criminal-history.aspx",
+    "https://www.ahpra.gov.au/Registration/Registration-Standards/PII.aspx",
+    "https://www.ahpra.gov.au/Registration/Registration-Standards/Recency-of-practice.aspx"
+  ],
+  "file_name": "ahpra_pharmacy_board_info.json"
+}
+```

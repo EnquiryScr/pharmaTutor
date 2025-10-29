@@ -1,5 +1,5 @@
 {
-  "_source_id": 48,
+  "_source_id": 82,
   "sources": {
     "Major Tutoring Platforms Analysis 2024": {
       "https://www.tutor.com/": {
@@ -345,6 +345,252 @@
         "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC4386749/",
         "title": "Sterile Compounding Skills Training Study",
         "info": "Detailed research on pharmacy school sterile compounding training including hands-on laboratory exercises, media fill testing, quality control procedures, student performance outcomes (71-84% accuracy rates), and recommendations for incorporating sterile technique instruction across multiple professional years"
+      }
+    },
+    "International Pharmacy Student UX Research": {
+      "https://elearningindustry.com/time-zone-management-for-global-elearning-success": {
+        "id": 49,
+        "publisher": "eLearning Industry",
+        "url": "https://elearningindustry.com/time-zone-management-for-global-elearning-success",
+        "title": "Time-Zone Management For Global eLearning Success",
+        "info": "Comprehensive strategies for managing time zones in global eLearning platforms, including centralized access, recording capabilities, time-zone conversion tools, asynchronous learning methods, and 24/7 virtual support solutions for international students."
+      },
+      "https://pmc.ncbi.nlm.nih.gov/articles/PMC6581352/": {
+        "id": 50,
+        "publisher": "NIH National Center for Biotechnology Information",
+        "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6581352/",
+        "title": "An Introduction to Cultural Sensitivity and Global Pharmacy Engagement",
+        "info": "Authoritative academic research on cultural sensitivity in pharmacy education, defining key concepts, outlining challenges for international students, and providing recommendations for cultural competency development in pharmacy practice."
+      },
+      "https://arxiv.org/html/2510.06363v1": {
+        "id": 51,
+        "publisher": "arXiv",
+        "url": "https://arxiv.org/html/2510.06363v1",
+        "title": "Improving Assignment Submission in Higher Education through a Customized Git-Based System",
+        "info": "Advanced assignment submission workflows and feedback systems research, detailing Git-based collaborative submission processes, version control, automated feedback delivery, and performance metrics for international academic environments."
+      },
+      "https://elearningindustry.com/mobile-first-learning-designing-educational-apps-that-actually-engage": {
+        "id": 52,
+        "publisher": "eLearning Industry",
+        "url": "https://elearningindustry.com/mobile-first-learning-designing-educational-apps-that-actually-engage",
+        "title": "Mobile-First Learning: Designing Educational Apps That Actually Engage",
+        "info": "Mobile-first design principles for international education, emphasizing offline access for developing countries, bandwidth optimization, accessibility features, microlearning approaches, and culturally-sensitive interface design."
+      },
+      "https://www.cachefly.com/news/how-cdns-optimize-content-delivery-for-e-learning-platforms/": {
+        "id": 53,
+        "publisher": "CacheFly",
+        "url": "https://www.cachefly.com/news/how-cdns-optimize-content-delivery-for-e-learning-platforms/",
+        "title": "How CDNs Optimize Content Delivery for E-Learning Platforms",
+        "info": "Performance optimization strategies for global educational platforms, covering CDN implementation, caching strategies, adaptive streaming technologies, security enhancements, and scalability solutions for international users with varying connectivity."
+      },
+      "https://www.w3.org/WAI/standards-guidelines/wcag/": {
+        "id": 54,
+        "publisher": "W3C Web Accessibility Initiative",
+        "url": "https://www.w3.org/WAI/standards-guidelines/wcag/",
+        "title": "WCAG 2 Overview",
+        "info": "International accessibility compliance standards including WCAG 2.0, 2.1, and 2.2 guidelines, with specific guidance for Learning Management Systems, conformance levels, and global adoption through ISO standards and European Accessibility Act."
+      },
+      "https://www.translate.one/elearning-localization-strategy-best-practices/": {
+        "id": 55,
+        "publisher": "Translate.One",
+        "url": "https://www.translate.one/elearning-localization-strategy-best-practices/",
+        "title": "Best Practices for a Scalable eLearning Localization Strategy",
+        "info": "Comprehensive localization best practices for educational platforms, covering text expansion handling, cultural image adaptation, measurement localization, voice-over cultural considerations, and linguistic quality assurance processes."
+      },
+      "https://www.qodequay.com/cross-cultural-enterprise-ux": {
+        "id": 56,
+        "publisher": "QodeQuay",
+        "url": "https://www.qodequay.com/cross-cultural-enterprise-ux",
+        "title": "UX for Cross-Cultural Enterprise Applications",
+        "info": "Expert-level cross-cultural UX design principles, covering cultural adaptation patterns, internationalization frameworks, visual design considerations, and advanced strategies for culturally-sensitive interface development."
+      },
+      "https://propio.com/2024/12/02/best-practices-for-fostering-a-multilingual-learning-environment/": {
+        "id": 57,
+        "publisher": "Propio",
+        "url": "https://propio.com/2024/12/02/best-practices-for-fostering-a-multilingual-learning-environment/",
+        "title": "Best Practices for Fostering a Multilingual Learning Environment",
+        "info": "Strategies for multilingual educational environments including staff recruitment, language training, technology integration, and cultural competence development for supporting diverse international student populations."
+      },
+      "https://www.desk365.io/industries/school-helpdesk-software/": {
+        "id": 58,
+        "publisher": "Desk365",
+        "url": "https://www.desk365.io/industries/school-helpdesk-software/",
+        "title": "Best Helpdesk Software for Schools",
+        "info": "Student support system design principles for educational environments, covering multichannel support, ticketing systems, knowledge bases, automation features, and global accessibility considerations for international students."
+      },
+      "https://saima.ai/blog/top-7-online-community-platforms-for-student-networks": {
+        "id": 59,
+        "publisher": "Saima.ai",
+        "url": "https://saima.ai/blog/top-7-online-community-platforms-for-student-networks",
+        "title": "Top 7 Online Community Platforms for Student Networks",
+        "info": "Analysis of online community platforms for student networks, covering engagement strategies, collaboration tools, analytics capabilities, and platform features that support global learning communities with customization and integration options."
+      }
+    },
+    "Comprehensive Platform Architecture for Advanced Tutoring Platforms": {
+      "https://wearebrain.com/blog/edtech-development/best-tech-stack-for-edtech/": {
+        "id": 60,
+        "publisher": "WeareBrain",
+        "url": "https://wearebrain.com/blog/edtech-development/best-tech-stack-for-edtech/",
+        "title": "Best Tech Stack for EdTech 2025",
+        "info": "Comprehensive guide to technology stack selection for educational platforms including frontend (React.js, Angular, Vue.js), backend (Python/Django, Node.js, Go), databases (PostgreSQL, MongoDB), and security requirements (HTTPS, FERPA/GDPR compliance). Covers scalability patterns with microservices, containerization, and cloud infrastructure."
+      },
+      "https://www.linkedin.com/pulse/building-scalable-edtech-platforms-best-practices-niche-c5vgf/": {
+        "id": 61,
+        "publisher": "LinkedIn",
+        "url": "https://www.linkedin.com/pulse/building-scalable-edtech-platforms-best-practices-niche-c5vgf/",
+        "title": "Building Scalable EdTech Platforms: Best Practices",
+        "info": "Best practices for EdTech platform development including modular architecture design, cloud infrastructure for dynamic scaling, user experience prioritization, robust security implementation, and collaborative development approaches with educators."
+      },
+      "https://newsletter.systemdesign.one/p/khan-academy-architecture": {
+        "id": 62,
+        "publisher": "System Design Newsletter",
+        "url": "https://newsletter.systemdesign.one/p/khan-academy-architecture",
+        "title": "Khan Academy Architecture (30M Users)",
+        "info": "Detailed architecture case study of Khan Academy serving 30 million users. Covers technology migration from Python to Go, Google Cloud infrastructure, microservices architecture (~20 services), serverless computing with App Engine, NoSQL database strategy with Cloud Datastore, GraphQL API implementation, and CDN optimization with Fastly."
+      },
+      "https://fastpix.io/blog/e-learning-video-streaming-architecture/": {
+        "id": 63,
+        "publisher": "FastPix",
+        "url": "https://fastpix.io/blog/e-learning-video-streaming-architecture/",
+        "title": "E-Learning Platform Architecture Guide",
+        "info": "Comprehensive guide to e-learning platform architecture covering video processing pipelines, live streaming infrastructure, data management systems, content management architecture, authentication systems, and analytics implementation. Includes technical specifications for video transcoding, CDN delivery, and real-time streaming protocols."
+      },
+      "https://www.thelessonspace.com/": {
+        "id": 64,
+        "publisher": "Lessonspace",
+        "url": "https://www.thelessonspace.com/",
+        "title": "Virtual Classroom Platform Architecture",
+        "info": "Technical specifications for virtual classroom platform including WebRTC-based communication architecture, worldwide server network infrastructure, collaborative whiteboard system with infinite canvas, session recording capabilities, leading mode for synchronized student control, and comprehensive API architecture for custom integrations. Supports 10 languages and serves tutors from 50+ countries."
+      },
+      "https://stripe.com/resources/more/global-payment-apis-explained-how-they-work-and-how-to-use-them": {
+        "id": 65,
+        "publisher": "Stripe",
+        "url": "https://stripe.com/resources/more/global-payment-apis-explained-how-they-work-and-how-to-use-them",
+        "title": "Global Payment API Architecture Guide",
+        "info": "Comprehensive technical guide to global payment API implementation covering transaction flow architecture, multi-currency support (135+ currencies, 100+ payment methods), security compliance (PCI DSS, tokenization, encryption), fraud prevention systems, international payment routing, FX conversion, and API integration patterns for various payment types including digital wallets, bank transfers, and blockchain payments."
+      },
+      "https://www.aicoursify.com/analytics-dashboards-for-tracking-student-progress": {
+        "id": 66,
+        "publisher": "AI Coursify",
+        "url": "https://www.aicoursify.com/analytics-dashboards-for-tracking-student-progress",
+        "title": "Student Analytics Dashboard Architecture",
+        "info": "Detailed guide to student analytics platform architecture covering real-time data processing, progress tracking systems, performance metrics design, dashboard visualization principles, analytics platform comparisons (Power BI, Looker Studio, Tableau), predictive analytics implementation, and reporting capabilities. Includes case studies showing 67% engagement improvement and 23% test score enhancement."
+      },
+      "https://www.browserstack.com/guide/flutter-vs-react-native": {
+        "id": 67,
+        "publisher": "BrowserStack",
+        "url": "https://www.browserstack.com/guide/flutter-vs-react-native",
+        "title": "React Native vs Flutter Mobile Architecture",
+        "info": "Technical comparison of cross-platform mobile development frameworks covering architecture differences (widget-based vs component-based), compilation approaches (AOT vs JIT), performance characteristics, native integration capabilities, platform support scope, development ecosystem maturity, and implementation considerations for educational applications."
+      },
+      "https://bloomfire.com/platform/moderation-tools/": {
+        "id": 68,
+        "publisher": "Bloomfire",
+        "url": "https://bloomfire.com/platform/moderation-tools/",
+        "title": "Content Moderation System Architecture",
+        "info": "Comprehensive overview of content moderation platform architecture including collaborative approval workflows, automated content supervision, version control systems, bulk management capabilities, scheduled review automation, workflow optimization, and integration with knowledge management systems. Features multi-step approval processes and ROT (Redundant, Outdated, Trivial) content prevention."
+      },
+      "https://www.turnitin.com/products/similarity/": {
+        "id": 69,
+        "publisher": "Turnitin",
+        "url": "https://www.turnitin.com/products/similarity/",
+        "title": "Plagiarism Detection System Architecture",
+        "info": "Technical specifications for plagiarism detection system including database architecture (7 trillion matches across 170 languages), similarity algorithm implementation, integration methods (Web, API, LTI 1.3), security measures (GDPR compliance, SSL encryption, SOC2 certification), and LMS integration capabilities with Canvas, D2L, Moodle, and Microsoft Teams."
+      },
+      "https://training.safetyculture.com/blog/10-learning-content-management-systems/": {
+        "id": 70,
+        "publisher": "SC Training",
+        "url": "https://training.safetyculture.com/blog/10-learning-content-management-systems/",
+        "title": "Learning Content Management System Architecture",
+        "info": "Comprehensive analysis of LCMS architecture covering content creation and authoring tools, content management workflows, search and categorization systems, collaboration features, version control, personalization capabilities, delivery mechanisms, assessment integration, and analytics reporting. Includes comparison of 12 leading LCMS platforms with technical specifications."
+      },
+      "https://secureprivacy.ai/blog/vendor-privacy-agreement-tracker-for-schools-gdpr-ferpa-coppa": {
+        "id": 71,
+        "publisher": "SecurePrivacy.ai",
+        "url": "https://secureprivacy.ai/blog/vendor-privacy-agreement-tracker-for-schools-gdpr-ferpa-coppa",
+        "title": "Educational Data Privacy Compliance Architecture",
+        "info": "Detailed framework for educational data privacy compliance covering FERPA, COPPA, and GDPR requirements, vendor management architecture, automated compliance monitoring systems, risk assessment frameworks, data protection specifications, security measures, international compliance requirements, and implementation best practices for educational institutions managing 100-500+ EdTech vendors."
+      },
+      "https://www.inspiredinstruction.com/post/tools-to-create-online-assessment": {
+        "id": 72,
+        "publisher": "Inspired Instruction",
+        "url": "https://www.inspiredinstruction.com/post/tools-to-create-online-assessment",
+        "title": "Online Assessment and Content Creation Tools",
+        "info": "Comprehensive review of 20 online assessment platforms covering content creation capabilities, quiz builder architectures, video-based assessment systems, gamification implementations, real-time feedback mechanisms, integration capabilities, pricing models, and technical specifications for educational content development including Moodle, Edulastic, Edpuzzle, Kahoot, and specialized assessment tools."
+      }
+    },
+    "Global Monetization Strategy Research": {
+      "https://www.fortunebusinessinsights.com/private-tutoring-market-104753": {
+        "id": 73,
+        "publisher": "Fortune Business Insights",
+        "url": "https://www.fortunebusinessinsights.com/private-tutoring-market-104753",
+        "title": "Private Tutoring Market Analysis - Growth to 2032",
+        "info": "Global private tutoring market size projected to grow from $62.08 billion in 2024 to $132.21 billion by 2032 at CAGR of 9.91%. Analysis of subscription vs pay-per-session models and international growth patterns."
+      },
+      "https://tutorlms.com/blog/discount-pricing-strategy-for-elearning-business": {
+        "id": 74,
+        "publisher": "TutorLMS",
+        "url": "https://tutorlms.com/blog/discount-pricing-strategy-for-elearning-business",
+        "title": "Ultimate Guide to Discount Pricing for eLearning Businesses",
+        "info": "Comprehensive discount pricing strategies for e-learning businesses including bundle deals (20% discount examples), payment plans, limited offers, and subscription models. Detailed pricing control features and revenue optimization tactics."
+      },
+      "https://docs.karboncard.com/guides/best-way-to-receive-usd-payments-for-tutoring": {
+        "id": 75,
+        "publisher": "Karbon Business",
+        "url": "https://docs.karboncard.com/guides/best-way-to-receive-usd-payments-for-tutoring",
+        "title": "Best Way to Receive USD Payments for Tutoring",
+        "info": "Detailed analysis of international payment processing costs: Traditional methods cost 3.9% average vs modern solutions at 1% flat fee. Currency conversion fees, wire transfer costs ($10-$50), and best practices for tutoring services."
+      },
+      "https://vatabout.com/taxability-rules-for-online-courses--e-learning-platforms-vat-gst-and-sales-tax-explained": {
+        "id": 76,
+        "publisher": "VATAbout",
+        "url": "https://vatabout.com/taxability-rules-for-online-courses--e-learning-platforms-vat-gst-and-sales-tax-explained",
+        "title": "Taxability Rules for Online Courses - VAT, GST and Sales Tax Explained",
+        "info": "Comprehensive VAT, GST, and sales tax rules for online courses and e-learning platforms across EU, US, Asia-Pacific regions. Platform liability, deemed supplier rules, and compliance challenges for international tutoring services."
+      },
+      "https://www.edstellar.com/blog/corporate-training-companies-usa": {
+        "id": 77,
+        "publisher": "Edstellar",
+        "url": "https://www.edstellar.com/blog/corporate-training-companies-usa",
+        "title": "15 Best Corporate Training Companies in USA for 2025",
+        "info": "Analysis of 15 leading corporate training companies in USA with institutional sales models, B2B education approaches, pricing strategies, and delivery formats for corporate and institutional markets."
+      }
+    },
+    "Global Pharmacy Education Market Analysis 2024": {
+      "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32005L0036": {
+        "id": 78,
+        "publisher": "EUR-Lex (European Union Law)",
+        "url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32005L0036",
+        "title": "Directive 2005/36/EC on the recognition of professional qualifications",
+        "info": "Comprehensive framework for automatic recognition of pharmacy qualifications across EU member states, replacing original directive 85/433/EEC, establishing minimum training requirements of 5 years pharmaceutical education and 6-month practical training"
+      },
+      "https://www.gphc.org.uk/initial-training/": {
+        "id": 79,
+        "publisher": "General Pharmaceutical Council (GPhC)",
+        "url": "https://www.gphc.org.uk/initial-training/",
+        "title": "Initial training requirements for pharmacy professionals",
+        "info": "Detailed MPharm degree requirements (4-5 year programs), OSPAP one-year postgraduate diploma pathway for non-EEA pharmacists, GPhC registration standards and competency framework"
+      },
+      "https://www.nabp.pharmacy/programs/examination/naplex/": {
+        "id": 80,
+        "publisher": "National Association of Boards of Pharmacy (NABP)",
+        "url": "https://www.nabp.pharmacy/programs/examination/naplex/",
+        "title": "NAPLEX - North American Pharmacist Licensure Examination",
+        "info": "NAPLEX examination structure with 200 multiple-choice questions over 4.25 hours, eligibility requirements for recent pharmacy graduates and FPGEC-certified foreign graduates, application fees and score transfer process ($105 per jurisdiction)"
+      },
+      "https://pebc.ca": {
+        "id": 81,
+        "publisher": "Pharmacy Examining Board of Canada (PEBC)",
+        "url": "https://pebc.ca",
+        "title": "Canadian Pharmacy Certification Requirements",
+        "info": "Two-part PQE examination system (MCQ and OSCE), new 2025 streamlined pathway for ACPE/CCAPP graduates exempting them from Evaluating Exam, maximum 3 attempts per part with 9 total attempts allowed"
+      },
+      "https://www.ahpra.gov.au": {
+        "id": 82,
+        "publisher": "Australian Health Practitioner Regulation Agency (AHPRA)",
+        "url": "https://www.ahpra.gov.au",
+        "title": "Australian Pharmacy Registration Requirements",
+        "info": "KAPS examination system for international graduates, supervised practice requirements, five registration standards including CPD, criminal history, professional indemnity insurance, English language skills, and mentorship programs"
       }
     }
   }

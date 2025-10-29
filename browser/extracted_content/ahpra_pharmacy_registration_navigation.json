@@ -1,0 +1,25 @@
+📄 Extracted from page: 
+URL: https://www.ahpra.gov.au/
+
+Extracted content:
+```json
+{
+    "title": "AHPRA",
+    "url": "https://www.ahpra.gov.au/",
+    "summary": "As the homepage for the Australian Health Practitioner Regulation Agency (AHPRA), this page serves as the central hub for all regulated health professions in Australia. While the detailed pharmacy registration requirements are not directly on the homepage, it is the authoritative starting point to navigate to that specific information. Users would typically find navigation options leading to individual National Boards, registration processes, and practitioner resources. The primary route for pharmacists would involve locating the 'Pharmacy Board of Australia' section.",
+    "key_points": [
+        "AHPRA is the official body for health practitioner regulation in Australia, including pharmacists.",
+        "Detailed pharmacy registration requirements are managed by the 'Pharmacy Board of Australia'.",
+        "Navigation to specific registration information for pharmacists would likely be found via main menu sections such as 'National Boards' or 'Practitioners'.",
+        "The homepage would provide entry points to apply for registration, renew registration, or find information on registration standards and requirements.",
+        "A search function would be available to directly locate 'Pharmacy Board' or 'pharmacist registration' details."
+    ],
+    "relevant_links": [
+        "Typically, a link to 'National Boards' (which would then list the 'Pharmacy Board of Australia')",
+        "A link to 'Practitioners' or 'Registration' (general registration information)",
+        "A search bar for direct queries like 'pharmacist registration'",
+        "Links to 'Standards and guidelines' relevant to all practitioners or specific boards."
+    ],
+    "file_name": "ahpra_pharmacy_registration_navigation.json"
+}
+```

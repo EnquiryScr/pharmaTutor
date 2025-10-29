@@ -1,0 +1,38 @@
+📄 Extracted from page: Pharmacy Board of Australia - Overseas Practitioner Registration
+URL: https://www.pharmacyboard.gov.au/Registration/Overseas.aspx
+
+Extracted content:
+```json
+{
+  "title": "Pharmacy Board of Australia - Overseas Practitioner Registration",
+  "url": "https://www.pharmacyboard.gov.au/Registration/Overseas.aspx",
+  "summary": "This page outlines the requirements for overseas pharmacists seeking registration to practice in Australia. It differentiates between applicants from New Zealand and those from other countries, detailing separate pathways for each. Key steps include passing examinations (for non-NZ applicants), completing supervised practice, and meeting general registration standards. It also clarifies that registration is separate from visa processes and mentions the involvement of the Australian Pharmacy Council (APC) for assessment.",
+  "key_points": [
+    "To work as a pharmacist in Australia, registration with the Pharmacy Board of Australia is mandatory.",
+    "The registration process is entirely separate from the Australian Government Department of Home Affairs visa application process; success in one does not guarantee success in the other.",
+    "International criminal history checks from an approved supplier may be required.",
+    "New Zealand applicants with current registration and an annual practising certificate can apply under the Trans-Tasman Mutual Recognition Act 1997 (TTMR).",
+    "New Zealand applicants who are not currently registered in NZ or have never been issued an annual practising certificate may need to complete a supervised practice period assigned by the Board, requiring an APRO-60 application.",
+    "Other overseas qualified pharmacists (non-New Zealand) must pass an examination conducted by the Australian Pharmacy Council (APC).",
+    "The APC examination has two streams: 'Knowledge Stream' and 'Competency Stream'.",
+    "'Knowledge Stream' candidates must complete an internship (supervised practice) according to the Board's 'Registration Standard: Supervised practice arrangements', following procedures for Australian graduates, and require an APRO-60 application.",
+    "'Competency Stream' candidates undergo a shorter period of supervised practice and require limited registration for this period, with supervision and assessment determined case-by-case by the Board.",
+    "An 'Application - approval of supervised practice as a pharmacist - AASP-60' is required for 'Competency Stream' candidates before starting supervised practice.",
+    "After completing at least 75% of supervised practice hours, 'Competency Stream' candidates must undertake a registration assessment, which may include oral examinations on pharmacy law and ethics, and/or practice.",
+    "Upon successful completion of assessments and supervised practice, 'Competency Stream' candidates are eligible to apply for general registration.",
+    "Ahpra (Australian Health Practitioner Regulation Agency) supports the National Boards, including the Pharmacy Board, in setting standards, registering practitioners, and investigating complaints."
+  ],
+  "relevant_links": [
+    "https://immi.homeaffairs.gov.au/",
+    "https://www.ahpra.gov.au/Registration/Registration-Process/Criminal-history-checks/International-Criminal-History.aspx",
+    "https://www.ahpra.gov.au/Registration/International-practitioners.aspx",
+    "http://www.austlii.edu.au/au/legis/cth/consol_act/tmra1997350/",
+    "https://www.pharmacyboard.gov.au/Registration/Forms.aspx",
+    "http://www.pharmacycouncil.org.au/",
+    "https://www.pharmacyboard.gov.au/Registration-Standards.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Internships.aspx",
+    "/documents/default.aspx?record=WD11%2f4974%5Bv3%5D&dbid=AP&chksum=DXkp%2briY0pmh3xO3k91B2g%3d%3d"
+  ],
+  "file_name": "pharmacy_board_overseas_registration.json"
+}
+```

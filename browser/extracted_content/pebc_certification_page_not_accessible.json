@@ -1,0 +1,19 @@
+📄 Extracted from page: Just a moment...
+URL: https://pebc.ca/pharmacists
+
+Extracted content:
+```json
+{
+    "title": "Just a moment...",
+    "url": "https://pebc.ca/pharmacists",
+    "summary": "The provided page content consists solely of a Cloudflare security challenge page, indicating that the website is verifying the user before allowing access. The actual content of the 'pebc.ca/pharmacists' page, which would contain information about Canadian pharmacy certification requirements, is not displayed or accessible through the provided text. Therefore, no information relevant to the extraction goal could be retrieved.",
+    "key_points": [
+        "Page content is a Cloudflare security challenge.",
+        "The message 'Just a moment...' and 'Verify you are human' is displayed.",
+        "The system is 'Checking your Browser…'.",
+        "The actual content regarding pharmacy certification requirements is not available on this page."
+    ],
+    "relevant_links": [],
+    "file_name": "pebc_certification_page_not_accessible.json"
+}
+```
