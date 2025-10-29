@@ -3,38 +3,52 @@
     "Coordinator": {
       "1": {
         "id": "1",
-        "content": "Analyze premium positioning strategy for expert-level pharmacy tutor",
-        "details": "Research how PhD-level educators successfully position themselves in the online tutoring market, pricing strategies for expert tutors, and premium service differentiation",
-        "status": "completed",
+        "content": "Design Flutter MVVM architecture and project structure",
+        "details": "Set up Flutter project with MVVM pattern, repository pattern, dependency injection, and API Gateway architecture. Include folder structure, core utilities, and base classes.",
+        "status": "pending",
         "priority": "high"
       },
       "2": {
         "id": "2",
-        "content": "Research global pharmacy education market and requirements",
-        "details": "Analyze pharmacy education systems worldwide (US, UK, Canada, Australia, EU, etc.), international licensing requirements (NAPLEX, PEBC, OSPAP, etc.), and specific challenges faced by global pharmacy students that can be addressed through your platform",
-        "status": "completed",
+        "content": "Implement Supabase authentication integration",
+        "details": "Set up Supabase client, implement all authentication features: email/password signup, email verification, password reset, JWT tokens, social login (Google, Apple, Facebook), 2FA, role-based access control, session management",
+        "status": "pending",
         "priority": "high"
       },
       "3": {
         "id": "3",
-        "content": "Design comprehensive platform architecture for global expert tutoring",
-        "details": "Develop advanced features including: assignment submission/management system, query handling system, chat/messaging platform, article library with search, PhD-level content creation tools, student-tutor communication suite, and all regular tutoring functions",
-        "status": "completed",
+        "content": "Set up Firebase integration for backend services",
+        "details": "Configure Firebase for database, crashlytics, analytics, cloud messaging, and other backend features. Set up Firestore database structure for tutoring platform",
+        "status": "pending",
         "priority": "high"
       },
       "4": {
         "id": "4",
-        "content": "Create global market monetization and pricing strategy",
-        "details": "Research pricing models for premium international tutoring services, currency considerations, payment methods for global students, and competitive landscape for PhD-level educational services worldwide",
-        "status": "completed",
+        "content": "Build Node.js monolithic backend API",
+        "details": "Create Express.js or similar monolithic backend with API Gateway, middleware for JWT verification, CRUD operations for tutoring features, and integration with Firebase and Supabase",
+        "status": "pending",
         "priority": "high"
       },
       "5": {
         "id": "5",
-        "content": "Develop comprehensive implementation roadmap",
-        "details": "Create detailed 6-18 month implementation plan with phases, timelines, and milestones specifically designed for your expertise level and background",
-        "status": "completed",
+        "content": "Implement core tutoring platform features",
+        "details": "Build assignment management, query system, chat/messaging, article library, scheduling, payment processing, student-tutor communication features based on previous research",
+        "status": "pending",
         "priority": "high"
+      },
+      "6": {
+        "id": "6",
+        "content": "Implement Flutter UI with MVVM architecture",
+        "details": "Create Flutter screens, viewmodels, widgets for all tutoring features. Implement responsive design, navigation, state management, and user experience",
+        "status": "pending",
+        "priority": "high"
+      },
+      "7": {
+        "id": "7",
+        "content": "Add testing, deployment and final optimizations",
+        "details": "Unit tests, integration tests, performance optimization, security hardening, deployment setup, and final debugging",
+        "status": "pending",
+        "priority": "medium"
       }
     }
   }
