@@ -1,0 +1,322 @@
+// Firestore Security Rules for Tutoring Platform
+// This file should be deployed to Firebase as firestore.rules
+
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ========================================
+    // USERS COLLECTION
+    // ========================================
+    match /users/{userId} {
+      // Users can read and write their own data
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Users can read public profiles of other users
+      allow read: if request.auth != null && resource.data.status == 'active';
+      
+      // Allow update of user status and last_active
+      allow update: if request.auth != null && request.auth.uid == userId &&
+        // Only allow specific fields to be updated by users
+        (request.resource.data.diff(resource.data).changedKeys().hasOnly([
+          'display_name', 'bio', 'specialty', 'years_of_experience', 
+          'subjects', 'certifications', 'time_zone', 'language', 
+          'photo_url', 'last_active', 'preferences'
+        ]));
+      
+      // Only admins can change user roles and status
+      allow update: if request.auth != null && isAdmin();
+      
+      // Allow creation of user documents only after Firebase Auth account creation
+      allow create: if request.auth != null && request.auth.uid == userId;
+      
+      // Prevent deletion of user accounts (should be done through Firebase Auth)
+      allow delete: if false;
+    }
+    
+    // ========================================
+    // ASSIGNMENTS COLLECTION
+    // ========================================
+    match /assignments/{assignmentId} {
+      // Students can read and write their own assignments
+      allow read, write: if request.auth != null && 
+        (request.auth.uid == resource.data.student_id || request.auth.uid == resource.data.tutor_id);
+      
+      // Students can create assignments for themselves
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.student_id;
+      
+      // Tutors can update assignments they are assigned to
+      allow update: if request.auth != null && request.auth.uid == resource.data.tutor_id;
+      
+      // Students can update status of their own assignments
+      allow update: if request.auth != null && request.auth.uid == resource.data.student_id &&
+        request.resource.data.diff(resource.data).changedKeys().hasOnly(['status', 'feedback']);
+      
+      // Allow assignment status updates by system
+      allow update: if request.auth.token.admin == true;
+      
+      // Allow deletion by tutors or students (with confirmation)
+      allow delete: if request.auth != null &&
+        (request.auth.uid == resource.data.student_id || request.auth.uid == resource.data.tutor_id);
+      
+      // Assignment status validation
+      allow create, update: if validateAssignmentStatus(request.resource.data);
+      
+      // Grade validation
+      allow update: if request.auth != null && request.auth.uid == resource.data.tutor_id &&
+        validateGrade(request.resource.data.grade);
+    }
+    
+    // ========================================
+    // QUERIES COLLECTION
+    // ========================================
+    match /queries/{queryId} {
+      // Students can read and write their own queries
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.student_id;
+      
+      // Tutors can read all queries and update ones they respond to
+      allow read: if request.auth != null && request.auth.token.role == 'tutor';
+      allow update: if request.auth != null && request.auth.uid == resource.data.tutor_id;
+      
+      // Students can create queries for themselves
+      allow create: if request.auth != null && request.auth.uid == request.resource.data.student_id;
+      
+      // Allow upvotes/downvotes
+      allow update: if request.auth != null &&
+        request.resource.data.diff(resource.data).changedKeys().hasOnly(['upvotes', 'downvotes']) &&
+        // Users can only vote for themselves or remove their vote
+        ((request.auth.uid in resource.data.upvotes) || (request.auth.uid in resource.data.downvotes));
+      
+      // Allow view count updates
+      allow update: if request.resource.data.diff(resource.data).changedKeys().hasOnly(['view_count']);
+      
+      // Allow solution updates by assigned tutor
+      allow update: if request.auth != null && 
+        (request.auth.uid == resource.data.tutor_id || request.auth.uid == resource.data.student_id) &&
+        request.resource.data.diff(resource.data).changedKeys().hasOnly(['solution', 'status']);
+      
+      // Allow deletion by students
+      allow delete: if request.auth != null && request.auth.uid == resource.data.student_id;
+    }
+    
+    // ========================================
+    // CONVERSATIONS COLLECTION
+    // ========================================
+    match /conversations/{conversationId} {
+      // Only participants can read and update
+      allow read, update: if request.auth != null && 
+        (request.auth.uid == resource.data.student_id || request.auth.uid == resource.data.tutor_id);
+      
+      // Students can create conversations with tutors
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.student_id &&
+        isValidTutor(request.resource.data.tutor_id);
+      
+      // Only participants can update conversation
+      allow update: if request.auth != null &&
+        (request.auth.uid == resource.data.student_id || request.auth.uid == resource.data.tutor_id) &&
+        // Only allow certain fields to be updated
+        request.resource.data.diff(resource.data).changedKeys().hasOnly([
+          'last_message_id', 'last_message_at', 'unread_count', 'status', 'updated_at'
+        ]);
+      
+      // Prevent deletion
+      allow delete: if false;
+    }
+    
+    // ========================================
+    // MESSAGES COLLECTION
+    // ========================================
+    match /messages/{messageId} {
+      // Only participants in the conversation can read messages
+      allow read: if request.auth != null && isMessageParticipant(request.resource.data.conversation_id);
+      
+      // Participants can send messages
+      allow create: if request.auth != null && 
+        (request.auth.uid == request.resource.data.sender_id) &&
+        isMessageParticipant(request.resource.data.conversation_id) &&
+        validateMessage(request.resource.data);
+      
+      // Senders can update their own messages (for editing)
+      allow update: if request.auth != null && 
+        request.auth.uid == resource.data.sender_id &&
+        // Only allow certain fields to be updated
+        request.resource.data.diff(resource.data).changedKeys().hasOnly([
+          'content', 'is_edited', 'edited_at'
+        ]);
+      
+      // Allow read status updates by receivers
+      allow update: if request.auth != null && 
+        request.auth.uid == resource.data.receiver_id &&
+        request.resource.data.diff(resource.data).changedKeys().hasOnly(['status', 'read_at']);
+      
+      // Prevent deletion of messages
+      allow delete: if false;
+    }
+    
+    // ========================================
+    // ARTICLES COLLECTION
+    // ========================================
+    match /articles/{articleId} {
+      // Anyone can read published articles
+      allow read: if request.auth != null && resource.data.status == 'published';
+      
+      // Authors can read and write their own articles
+      allow read, write: if request.auth != null && request.auth.uid == resource.data.author_id;
+      
+      // Tutors and admins can create articles
+      allow create: if request.auth != null && 
+        (isTutor() || isAdmin()) &&
+        validateArticle(request.resource.data);
+      
+      // Authors can update their own articles
+      allow update: if request.auth != null && request.auth.uid == resource.data.author_id &&
+        validateArticleUpdate(request.resource.data, resource.data);
+      
+      // Admins can update any article
+      allow update: if request.auth != null && isAdmin();
+      
+      // Allow engagement (likes, bookmarks, views)
+      allow update: if request.auth != null &&
+        request.resource.data.diff(resource.data).changedKeys().hasOnly([
+          'liked_by', 'like_count', 'bookmarked_by', 'read_count', 'comments'
+        ]) &&
+        validateEngagement(request.resource.data, resource.data);
+      
+      // Allow deletion by authors or admins
+      allow delete: if request.auth != null && 
+        (request.auth.uid == resource.data.author_id || isAdmin());
+    }
+    
+    // ========================================
+    // SCHEDULES COLLECTION
+    // ========================================
+    match /schedules/{scheduleId} {
+      // Participants can read schedules they're involved in
+      allow read: if request.auth != null && 
+        (request.auth.uid == resource.data.student_id || request.auth.uid == resource.data.tutor_id);
+      
+      // Students can create schedules
+      allow create: if request.auth != null && 
+        request.auth.uid == request.resource.data.student_id &&
+        isValidTutor(request.resource.data.tutor_id) &&
+        validateSchedule(request.resource.data);
+      
+      // Tutors can update schedules they're assigned to
+      allow update: if request.auth != null && request.auth.uid == resource.data.tutor_id;
+      
+      // Students can update their own schedules
+      allow update: if request.auth != null && request.auth.uid == resource.data.student_id &&
+        // Students can only update certain fields
+        request.resource.data.diff(resource.data).changedKeys().hasOnly([
+          'status', 'meeting_link', 'participants'
+        ]);
+      
+      // Allow participants to cancel schedules
+      allow update: if request.auth != null &&
+        (request.auth.uid == resource.data.student_id || request.auth.uid == resource.data.tutor_id) &&
+        request.resource.data.diff(resource.data).changedKeys().hasOnly(['status', 'updated_at']) &&
+        request.resource.data.status == 'cancelled';
+      
+      // Allow deletion
+      allow delete: if request.auth != null &&
+        (request.auth.uid == resource.data.student_id || request.auth.uid == resource.data.tutor_id);
+    }
+    
+    // ========================================
+    // SYSTEM COLLECTIONS (READ-ONLY)
+    // ========================================
+    match /app_config/{document} {
+      allow read: if request.auth != null;
+      allow write: if isAdmin();
+    }
+    
+    match /system_logs/{document} {
+      allow read: if isAdmin();
+      allow write: if false;
+    }
+    
+    // ========================================
+    // HELPER FUNCTIONS
+    // ========================================
+    
+    // Check if user is admin
+    function isAdmin() {
+      return request.auth != null && 
+        (request.auth.token.role == 'admin' || request.auth.token.admin == true);
+    }
+    
+    // Check if user is tutor
+    function isTutor() {
+      return request.auth != null && 
+        (request.auth.token.role == 'tutor' || isAdmin());
+    }
+    
+    // Check if user is a valid tutor
+    function isValidTutor(tutorId) {
+      return exists(/databases/$(database)/documents/users/$(tutorId)) &&
+        get(/databases/$(database)/documents/users/$(tutorId)).data.role == 'tutor' &&
+        get(/databases/$(database)/documents/users/$(tutorId)).data.status == 'active';
+    }
+    
+    // Check if user is participant in a conversation
+    function isMessageParticipant(conversationId) {
+      return request.auth != null && 
+        get(/databases/$(database)/documents/conversations/$(conversationId)).data.student_id == request.auth.uid ||
+        get(/databases/$(database)/documents/conversations/$(conversationId)).data.tutor_id == request.auth.uid;
+    }
+    
+    // Validate assignment data
+    function validateAssignmentStatus(data) {
+      return data.status in ['pending', 'inProgress', 'completed', 'cancelled', 'overdue'];
+    }
+    
+    // Validate grade
+    function validateGrade(grade) {
+      return grade == null || (grade >= 0.0 && grade <= 100.0);
+    }
+    
+    // Validate message data
+    function validateMessage(data) {
+      return data.content is string &&
+        data.sender_id is string &&
+        data.receiver_id is string &&
+        data.conversation_id is string;
+    }
+    
+    // Validate article data
+    function validateArticle(data) {
+      return data.title is string &&
+        data.content is string &&
+        data.excerpt is string &&
+        data.category is string &&
+        data.type in ['article', 'tutorial', 'guide', 'tips', 'review', 'explanation'] &&
+        data.difficulty in ['beginner', 'intermediate', 'advanced', 'expert'];
+    }
+    
+    // Validate article update
+    function validateArticleUpdate(newData, oldData) {
+      return newData.author_id == oldData.author_id && // Cannot change author
+        newData.created_at == oldData.created_at; // Cannot change creation date
+    }
+    
+    // Validate engagement updates (likes, bookmarks, etc.)
+    function validateEngagement(newData, oldData) {
+      // Users can only add/remove themselves from engagement arrays
+      return (newData.liked_by.size() == oldData.liked_by.size() + 1 ||
+              newData.liked_by.size() == oldData.liked_by.size() - 1) ||
+             (newData.bookmarked_by.size() == oldData.bookmarked_by.size() + 1 ||
+              newData.bookmarked_by.size() == oldData.bookmarked_by.size() - 1);
+    }
+    
+    // Validate schedule data
+    function validateSchedule(data) {
+      return data.start_time is timestamp &&
+        data.end_time is timestamp &&
+        data.start_time < data.end_time &&
+        data.student_id == request.auth.uid &&
+        data.type in ['individual', 'group', 'consultation', 'review', 'examPrep'];
+    }
+  }
+}

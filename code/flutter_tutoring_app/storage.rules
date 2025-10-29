@@ -1,0 +1,294 @@
+// Firebase Storage Security Rules for Tutoring Platform
+// This file should be deployed to Firebase as storage.rules
+
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // ========================================
+    // USER PROFILE PICTURES
+    // ========================================
+    match /users/{userId}/profile_pictures/{fileName} {
+      // Users can read and write their own profile pictures
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Only allow image files
+      allow write: if request.auth != null && 
+        request.auth.uid == userId &&
+        request.resource.contentType.matches('image/.*') &&
+        request.resource.size < 5 * 1024 * 1024; // 5MB limit
+      
+      // Public read access for profile pictures
+      allow read: if true;
+      
+      // Allow admins to manage any profile picture
+      allow read, write: if request.auth != null && 
+        (request.auth.token.role == 'admin' || request.auth.token.admin == true);
+    }
+    
+    // ========================================
+    // ASSIGNMENT ATTACHMENTS
+    // ========================================
+    match /assignments/{assignmentId}/attachments/{fileName} {
+      // Only participants can read assignment attachments
+      allow read: if request.auth != null && isAssignmentParticipant(assignmentId);
+      
+      // Students can upload attachments for their assignments
+      allow write: if request.auth != null && 
+        isAssignmentStudent(assignmentId) &&
+        validateAssignmentAttachment();
+      
+      // Tutors can upload attachments for assigned assignments
+      allow write: if request.auth != null && 
+        isAssignmentTutor(assignmentId) &&
+        validateAssignmentAttachment();
+      
+      // Students and tutors can delete their own attachments
+      allow delete: if request.auth != null && 
+        isAssignmentParticipant(assignmentId);
+    }
+    
+    // ========================================
+    // QUERY ATTACHMENTS
+    // ========================================
+    match /queries/{queryId}/attachments/{fileName} {
+      // Students can read their own query attachments
+      allow read: if request.auth != null && isQueryOwner(queryId);
+      
+      // Tutors can read attachments for queries they're assigned to
+      allow read: if request.auth != null && isQueryTutor(queryId);
+      
+      // Students can upload attachments for their queries
+      allow write: if request.auth != null && 
+        isQueryOwner(queryId) &&
+        validateQueryAttachment();
+      
+      // Tutors can upload attachments for responses
+      allow write: if request.auth != null && 
+        isQueryTutor(queryId) &&
+        validateQueryAttachment();
+      
+      // Students and tutors can delete their attachments
+      allow delete: if request.auth != null && 
+        (isQueryOwner(queryId) || isQueryTutor(queryId));
+    }
+    
+    // ========================================
+    // ARTICLE ATTACHMENTS
+    // ========================================
+    match /articles/{articleId}/attachments/{fileName} {
+      // Anyone can read attachments from published articles
+      allow read: if request.auth != null && 
+        isArticlePublished(articleId);
+      
+      // Authors can read and write their article attachments
+      allow read, write: if request.auth != null && 
+        isArticleAuthor(articleId) &&
+        validateArticleAttachment();
+      
+      // Admins can manage any article attachments
+      allow read, write: if request.auth != null && 
+        (request.auth.token.role == 'admin' || request.auth.token.admin == true);
+      
+      // Allow delete by authors or admins
+      allow delete: if request.auth != null && 
+        (isArticleAuthor(articleId) || isAdmin());
+    }
+    
+    // ========================================
+    // MESSAGE ATTACHMENTS
+    // ========================================
+    match /messages/{conversationId}/attachments/{fileName} {
+      // Only conversation participants can read message attachments
+      allow read: if request.auth != null && 
+        isMessageParticipant(conversationId);
+      
+      // Conversation participants can upload attachments
+      allow write: if request.auth != null && 
+        isMessageParticipant(conversationId) &&
+        validateMessageAttachment();
+      
+      // Only message sender can delete their attachments
+      allow delete: if request.auth != null && 
+        isMessageParticipant(conversationId);
+    }
+    
+    // ========================================
+    // AVATAR UPLOADS (Legacy/Default)
+    // ========================================
+    match /avatars/{userId}/{fileName} {
+      // Users can manage their own avatars
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Public read access
+      allow read: if true;
+      
+      // Restrict to image files only
+      allow write: if request.auth != null && 
+        request.auth.uid == userId &&
+        request.resource.contentType.matches('image/.*') &&
+        request.resource.size < 5 * 1024 * 1024;
+    }
+    
+    // ========================================
+    // DOCUMENT UPLOADS (Generic)
+    // ========================================
+    match /documents/{userId}/{category}/{fileName} {
+      // Users can read and write their own documents
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Allow specific categories for students
+      allow write: if request.auth != null && 
+        request.auth.uid == userId &&
+        validateDocumentUpload(category);
+      
+      // Public read for educational content
+      allow read: if isEducationalContent(category);
+    }
+    
+    // ========================================
+    // SYSTEM FILES (Admin Only)
+    // ========================================
+    match /system/{fileName} {
+      // Only admins can read and write system files
+      allow read, write: if request.auth != null && 
+        (request.auth.token.role == 'admin' || request.auth.token.admin == true);
+    }
+    
+    // ========================================
+    // BACKUP FILES (Admin Only)
+    // ========================================
+    match /backup/{fileName} {
+      // Only admins can access backup files
+      allow read, write: if request.auth != null && 
+        (request.auth.token.role == 'admin' || request.auth.token.admin == true);
+    }
+    
+    // ========================================
+    // PUBLIC RESOURCES
+    // ========================================
+    match /public/{fileName} {
+      // Public read access for resources like terms of service, privacy policy
+      allow read: if true;
+      
+      // Only admins can write to public resources
+      allow write: if request.auth != null && 
+        (request.auth.token.role == 'admin' || request.auth.token.admin == true);
+    }
+    
+    // ========================================
+    // TEMPORARY FILES
+    // ========================================
+    match /temp/{userId}/{fileName} {
+      // Users can manage their own temporary files
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+      
+      // Temporary files expire after 24 hours
+      allow write: if request.auth != null && 
+        request.auth.uid == userId &&
+        request.time < resource.timeCreated + duration.value(24, 'h');
+    }
+    
+    // ========================================
+    // HELPER FUNCTIONS
+    // ========================================
+    
+    // Check if user is admin
+    function isAdmin() {
+      return request.auth != null && 
+        (request.auth.token.role == 'admin' || request.auth.token.admin == true);
+    }
+    
+    // Check if user is assignment participant
+    function isAssignmentParticipant(assignmentId) {
+      return request.auth != null && 
+        (firestore.get(/databases/(default)/documents/assignments/$(assignmentId)).data.student_id == request.auth.uid ||
+         firestore.get(/databases/(default)/documents/assignments/$(assignmentId)).data.tutor_id == request.auth.uid);
+    }
+    
+    // Check if user is assignment student
+    function isAssignmentStudent(assignmentId) {
+      return request.auth != null && 
+        firestore.get(/databases/(default)/documents/assignments/$(assignmentId)).data.student_id == request.auth.uid;
+    }
+    
+    // Check if user is assignment tutor
+    function isAssignmentTutor(assignmentId) {
+      return request.auth != null && 
+        firestore.get(/databases/(default)/documents/assignments/$(assignmentId)).data.tutor_id == request.auth.uid;
+    }
+    
+    // Check if user owns query
+    function isQueryOwner(queryId) {
+      return request.auth != null && 
+        firestore.get(/databases/(default)/documents/queries/$(queryId)).data.student_id == request.auth.uid;
+    }
+    
+    // Check if user is query tutor
+    function isQueryTutor(queryId) {
+      return request.auth != null && 
+        firestore.get(/databases/(default)/documents/queries/$(queryId)).data.tutor_id == request.auth.uid;
+    }
+    
+    // Check if user is article author
+    function isArticleAuthor(articleId) {
+      return request.auth != null && 
+        firestore.get(/databases/(default)/documents/articles/$(articleId)).data.author_id == request.auth.uid;
+    }
+    
+    // Check if article is published
+    function isArticlePublished(articleId) {
+      return request.auth != null && 
+        firestore.get(/databases/(default)/documents/articles/$(articleId)).data.status == 'published';
+    }
+    
+    // Check if user is message participant
+    function isMessageParticipant(conversationId) {
+      return request.auth != null && 
+        (firestore.get(/databases/(default)/documents/conversations/$(conversationId)).data.student_id == request.auth.uid ||
+         firestore.get(/databases/(default)/documents/conversations/$(conversationId)).data.tutor_id == request.auth.uid);
+    }
+    
+    // Check if category contains educational content
+    function isEducationalContent(category) {
+      return category in ['tutorials', 'guides', 'examples', 'resources'];
+    }
+    
+    // Validate assignment attachment
+    function validateAssignmentAttachment() {
+      return request.resource.size < 10 * 1024 * 1024 && // 10MB limit
+        request.resource.contentType.matches('(image/.*|application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document|text/.*)');
+    }
+    
+    // Validate query attachment
+    function validateQueryAttachment() {
+      return request.resource.size < 5 * 1024 * 1024 && // 5MB limit
+        request.resource.contentType.matches('(image/.*|text/.*|application/pdf)');
+    }
+    
+    // Validate article attachment
+    function validateArticleAttachment() {
+      return request.resource.size < 20 * 1024 * 1024 && // 20MB limit for educational content
+        request.resource.contentType.matches('(image/.*|application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document|video/.*|audio/.*)');
+    }
+    
+    // Validate message attachment
+    function validateMessageAttachment() {
+      return request.resource.size < 3 * 1024 * 1024 && // 3MB limit for chat
+        request.resource.contentType.matches('(image/.*|audio/.*|video/.*|application/pdf)');
+    }
+    
+    // Validate document upload
+    function validateDocumentUpload(category) {
+      if (category == 'certificates') {
+        return request.resource.size < 5 * 1024 * 1024 &&
+          request.resource.contentType.matches('(image/.*|application/pdf)');
+      } else if (category == 'homework') {
+        return request.resource.size < 10 * 1024 * 1024 &&
+          request.resource.contentType.matches('(image/.*|application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document)');
+      }
+      return false;
+    }
+  }
+}
