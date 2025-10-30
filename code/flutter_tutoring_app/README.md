@@ -1,6 +1,6 @@
-# Flutter Tutoring App - Comprehensive Supabase Authentication System
+# pharmaT - Premium Pharmacy Tutoring Platform
 
-A complete, production-ready authentication system built with Flutter and Supabase, featuring advanced security, role-based access control, and multiple authentication methods.
+A comprehensive pharmacy tutoring platform with PhD-level expertise, featuring real-time messaging, video calling, assignment management, and global student support.
 
 ## 🔐 Features Implemented
 

@@ -73,7 +73,7 @@ PHASE 3: BUILD PROCESS
 PHASE 4: PLAY CONSOLE SETUP
 ---------------------------
 1. Create app in Play Console
-   App name: PharmTutor Pro
+   App name: pharmaT
    Category: Education
    Target: Students 18+
 
@@ -83,7 +83,7 @@ PHASE 4: PLAY CONSOLE SETUP
    Full description:
    Master pharmacy studies with PhD-level expertise
    
-   Join PharmTutor Pro, the premier global platform connecting you with 
+   Join pharmaT, the premier global platform connecting you with 
    world-class pharmacy tutors. Our PhD Pharmacology expert with 20+ years 
    of experience provides personalized tutoring for:
    

@@ -220,7 +220,7 @@ android {
 **Create `lib/config/production_config.dart`:**
 ```dart
 class ProductionConfig {
-  static const String appName = 'PharmTutor Pro';
+  static const String appName = 'pharmaT';
   static const String supabaseUrl = 'YOUR_SUPABASE_URL';
   static const String supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
   static const String firebaseProjectId = 'YOUR_FIREBASE_PROJECT_ID';
@@ -241,7 +241,7 @@ class ProductionConfig {
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     
     <application
-        android:label="PharmTutor Pro"
+        android:label="pharmaT"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher"
         android:allowBackup="false"
@@ -296,7 +296,7 @@ adb install build/app/outputs/flutter-apk/app-release.apk
 
 1. **Login to Google Play Console**: https://play.google.com/console
 2. **Create New App**:
-   - **App name**: "PharmTutor Pro" (or your chosen name)
+   - **App name**: "pharmaT" (or your chosen name)
    - **Default language**: English (United States)
    - **App or game**: App
    - **Free or paid**: Free (if you want freemium model) or Paid
@@ -305,12 +305,12 @@ adb install build/app/outputs/flutter-apk/app-release.apk
 
 **Store Listing:**
 ```
-App name: PharmTutor Pro
+App name: pharmaT
 Short description: Premium pharmacy tutoring with PhD expertise
 Full description: 
 "🌟 Master pharmacy studies with PhD-level expertise
 
-Join PharmTutor Pro, the premier global platform connecting you with world-class pharmacy tutors. Our PhD Pharmacology expert with 20+ years of experience provides personalized tutoring for:
+Join pharmaT, the premier global platform connecting you with world-class pharmacy tutors. Our PhD Pharmacology expert with 20+ years of experience provides personalized tutoring for:
 
 📚 Comprehensive support for:
 • Pharmacy licensing exams (NAPLEX, PEBC, OSPAP, GPhC)
@@ -353,7 +353,7 @@ Contains advertising: No
 
 **Privacy Policy Template:**
 ```
-# PharmTutor Pro - Privacy Policy
+# pharmaT - Privacy Policy
 
 ## Data Collection
 We collect:

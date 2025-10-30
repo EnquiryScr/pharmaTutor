@@ -40,7 +40,7 @@ flutter build appbundle --release --obfuscate
 
 ### 📱 **App Store Submission Details**
 
-**App Name**: PharmTutor Pro  
+**App Name**: pharmaT  
 **Category**: Education  
 **Target Audience**: Students 18+  
 **Pricing**: Freemium (free download + in-app purchases)
