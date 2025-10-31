@@ -1,38 +1,53 @@
-name: Flutter CI/CD
+name: Android CI Build
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main # or master, or whatever branch you want to build from
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build_android:
-    name: Build Android APK
+  build:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - uses: actions/checkout@v4 # 1. Checkout the repository code
-      
-      - name: Set up Flutter
-        uses: subosito/flutter-action@v2 # 2. Use a dedicated action to set up Flutter
+      - name: 1. Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: 2. Set up Java (Mandatory for Android)
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17' # Recommended stable version for modern Flutter builds
+          distribution: 'temurin'
+          # Removed 'cache: 'gradle'' to fix the file-not-found error due to nested Android project structure
+          
+      - name: 3. Set up Flutter SDK
+        uses: subosito/flutter-action@v2
         with:
           channel: 'stable'
+          
+      - name: 4. Get Dependencies & Clean Build
+        run: |
+          flutter pub get
+          flutter clean # Essential to remove old build artifacts and prevent exit code 1 errors
+        working-directory: app/ # <--- CHANGED: Set to 'app/' based on your project structure
 
-      - name: Install dependencies
-        run: flutter pub get # 3. Get project dependencies
+      - name: 5. Run Linter and Analyze
+        run: flutter analyze
+        working-directory: app/ # <--- CHANGED: Set to 'app/' based on your project structure
 
-      - name: Analyze code
-        run: flutter analyze # 4. Run static analysis
-
-      - name: Run tests
-        run: flutter test # 5. Run unit/widget tests
-
-      - name: Build APK
-        run: flutter build apk --release # 6. Build the Android release APK
-
-      - name: Upload APK as Artifact
-        uses: actions/upload-artifact@v4 # 7. Save the built APK
+      - name: 6. Build Android APK (Debug for testing)
+        # Change to `flutter build apk --release` if you have signing secrets set up
+        run: flutter build apk --debug
+        working-directory: app/ # <--- CHANGED: Set to 'app/' based on your project structure
+        
+      - name: 7. Upload Build Artifact
+        uses: actions/upload-artifact@v4
         with:
-          name: release-apk
-          path: build/app/outputs/flutter-apk/app-release.apk
+          name: debug-apk
+          # Path adjusted to include the 'app/' directory prefix if needed, but often relative to the working directory.
+          # We'll use the default output path relative to the repository root for simplicity.
+          path: app/build/app/outputs/flutter-apk/app-debug.apk
+

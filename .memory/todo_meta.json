@@ -4,7 +4,7 @@
       "1": {
         "id": "1",
         "content": "Add Missing Dependencies to pubspec.yaml",
-        "details": "✅ Analysis complete - dependencies list ready\n🔄 Next: Copy dependencies from DEPENDENCIES_TO_ADD.md to pubspec.yaml\n🔄 Then run: flutter pub get",
+        "details": "✅ **Flutter Setup Ready!**\n\n**STATUS:**\n✅ Downloaded: flutter_linux_3.22.3-stable.tar.xz (716MB)\n✅ Extracted: flutter/ directory ready\n🔄 **NEXT: User needs to run these commands in GitHub Codespaces:**\n\n1. cd app\n2. export PATH=\"$PATH:$PWD/flutter/bin\"\n3. echo 'export PATH=\"$PATH:$PWD/flutter/bin\"' >> ~/.bashrc\n4. flutter config --no-analytics\n5. flutter pub get\n6. flutter analyze\n\n**Full instructions in:** FLUTTER_SETUP_COMPLETE.md",
         "status": "in_progress",
         "priority": "high"
       },
