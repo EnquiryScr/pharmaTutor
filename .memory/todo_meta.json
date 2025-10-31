@@ -3,52 +3,45 @@
     "Coordinator": {
       "1": {
         "id": "1",
-        "content": "Design Flutter MVVM architecture and project structure",
-        "details": "Set up Flutter project with MVVM pattern, repository pattern, dependency injection, and API Gateway architecture. Include folder structure, core utilities, and base classes.",
-        "status": "completed",
+        "content": "Analyze existing data models and determine database schema",
+        "details": "Review all models in lib/data/models/ (user, course, session, payment, message, notification) to understand structure and relationships",
+        "status": "pending",
         "priority": "high"
       },
       "2": {
         "id": "2",
-        "content": "Implement Supabase authentication integration",
-        "details": "Set up Supabase client, implement all authentication features: email/password signup, email verification, password reset, JWT tokens, social login (Google, Apple, Facebook), 2FA, role-based access control, session management",
-        "status": "completed",
+        "content": "Create database helper class with SQLite initialization",
+        "details": "Create lib/core/database/database_helper.dart with:\n- Database creation and versioning\n- Table creation SQL statements\n- Open/close database methods\n- Migration system",
+        "status": "pending",
         "priority": "high"
       },
       "3": {
         "id": "3",
-        "content": "Set up Firebase integration for backend services",
-        "details": "Configure Firebase for database, crashlytics, analytics, cloud messaging, and other backend features. Set up Firestore database structure for tutoring platform",
-        "status": "completed",
+        "content": "Create DAO (Data Access Object) classes for each model",
+        "details": "Create CRUD operations for:\n- UserDAO (insert, update, delete, query users)\n- CourseDAO (manage courses)\n- SessionDAO (manage tutoring sessions)\n- PaymentDAO (payment records)\n- MessageDAO (chat messages)\n- NotificationDAO (user notifications)",
+        "status": "pending",
         "priority": "high"
       },
       "4": {
         "id": "4",
-        "content": "Build Node.js monolithic backend API",
-        "details": "Create Express.js or similar monolithic backend with API Gateway, middleware for JWT verification, CRUD operations for tutoring features, and integration with Firebase and Supabase",
-        "status": "completed",
+        "content": "Update main.dart to initialize SQLite database",
+        "details": "Add database initialization before app starts:\n- Import DatabaseHelper\n- Initialize database in main() function\n- Ensure proper initialization order with Hive",
+        "status": "pending",
         "priority": "high"
       },
       "5": {
         "id": "5",
-        "content": "Implement core tutoring platform features",
-        "details": "Build assignment management, query system, chat/messaging, article library, scheduling, payment processing, student-tutor communication features based on previous research",
-        "status": "completed",
-        "priority": "high"
+        "content": "Create database migration system",
+        "details": "Implement onUpgrade callback for future schema changes and version management",
+        "status": "pending",
+        "priority": "medium"
       },
       "6": {
         "id": "6",
-        "content": "Implement Flutter UI with MVVM architecture",
-        "details": "Create Flutter screens, viewmodels, widgets for all tutoring features. Implement responsive design, navigation, state management, and user experience",
-        "status": "completed",
+        "content": "Test database implementation",
+        "details": "Verify:\n- Database file is created\n- Tables are created successfully\n- CRUD operations work correctly\n- App runs without errors",
+        "status": "pending",
         "priority": "high"
-      },
-      "7": {
-        "id": "7",
-        "content": "Add testing, deployment and final optimizations",
-        "details": "Unit tests, integration tests, performance optimization, security hardening, deployment setup, and final debugging",
-        "status": "completed",
-        "priority": "medium"
       }
     }
   }
