@@ -5,28 +5,28 @@
         "id": "1",
         "content": "Get Supabase credentials and initialize project",
         "details": "1. Load supabase_auth toolkit\n2. Ask user for Supabase credentials (URL, anon key, service role key)\n3. Add supabase_flutter package to pubspec.yaml\n4. Initialize Supabase in main.dart",
-        "status": "in_progress",
+        "status": "completed",
         "priority": "high"
       },
       "2": {
         "id": "2",
         "content": "Design and create Supabase database schema",
         "details": "1. Migrate PostgreSQL schema to Supabase\n2. Create users table with RLS policies\n3. Create courses, sessions, payments, messages, notifications tables\n4. Set up foreign key relationships\n5. Configure Row Level Security (RLS) policies",
-        "status": "pending",
+        "status": "completed",
         "priority": "high"
       },
       "3": {
         "id": "3",
         "content": "Implement Supabase Authentication",
         "details": "1. Create SupabaseAuthService\n2. Replace AuthApiClient with Supabase Auth\n3. Implement sign up, sign in, sign out\n4. Implement password reset\n5. Update AuthProvider to use Supabase",
-        "status": "pending",
+        "status": "completed",
         "priority": "high"
       },
       "4": {
         "id": "4",
         "content": "Create Supabase data sources for each model",
         "details": "1. Create UserSupabaseDataSource\n2. Create CourseSupabaseDataSource\n3. Create SessionSupabaseDataSource\n4. Create PaymentSupabaseDataSource\n5. Create MessageSupabaseDataSource\n6. Create NotificationSupabaseDataSource",
-        "status": "pending",
+        "status": "in_progress",
         "priority": "high"
       },
       "5": {
