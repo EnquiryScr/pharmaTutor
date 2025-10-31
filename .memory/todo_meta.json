@@ -3,31 +3,66 @@
     "Coordinator": {
       "1": {
         "id": "1",
-        "content": "Update Providers to Use New Repositories",
-        "details": "1. Update AuthProvider to use UserRepositoryImpl\n2. Update CourseProvider to use CourseRepositoryImpl\n3. Update SessionProvider to use SessionRepositoryImpl\n4. Update MessageProvider to use MessageRepositoryImpl\n5. Update NotificationProvider to use NotificationRepositoryImpl\n6. Remove old API client dependencies",
-        "status": "completed",
+        "content": "Add Missing Dependencies to pubspec.yaml",
+        "details": "✅ Analysis complete - dependencies list ready\n🔄 Next: Copy dependencies from DEPENDENCIES_TO_ADD.md to pubspec.yaml\n🔄 Then run: flutter pub get",
+        "status": "in_progress",
         "priority": "high"
       },
       "2": {
         "id": "2",
-        "content": "Implement Offline Write Queue",
-        "details": "1. Create OfflineQueueManager class\n2. Add queue operations (add, process, retry)\n3. Integrate queue with repositories\n4. Add conflict resolution logic\n5. Test queue persistence",
-        "status": "completed",
+        "content": "Create Core Constants and Models",
+        "details": "Create app_constants.dart and all missing entity models (User, Tutor, Course, Session, Message, etc.) with proper JSON serialization.",
+        "status": "pending",
         "priority": "high"
       },
       "3": {
         "id": "3",
-        "content": "Create Comprehensive Test Suite",
-        "details": "1. Unit tests for repositories\n2. Unit tests for data sources\n3. Integration tests for offline flow\n4. Widget tests for providers\n5. Test authentication flow\n6. Test real-time updates\n7. Performance benchmarks",
-        "status": "completed",
+        "content": "Implement API Client Infrastructure",
+        "details": "Create ApiClient base class and all specific API clients (AuthApiClient, UserApiClient, TutorApiClient, etc.) with proper HTTP handling.",
+        "status": "pending",
         "priority": "high"
       },
       "4": {
         "id": "4",
-        "content": "Create Testing Documentation",
-        "details": "1. Manual testing guide\n2. Test scenarios documentation\n3. Performance testing guide\n4. Troubleshooting guide\n5. Phase 7 completion report",
-        "status": "completed",
+        "content": "Build Repository Layer",
+        "details": "Create repository interfaces and implementations following Clean Architecture pattern for all entities.",
+        "status": "pending",
+        "priority": "high"
+      },
+      "5": {
+        "id": "5",
+        "content": "Create Use Cases and Services",
+        "details": "Implement all business logic use cases and application services for authentication, user management, tutoring, etc.",
+        "status": "pending",
         "priority": "medium"
+      },
+      "6": {
+        "id": "6",
+        "content": "Implement State Management Providers",
+        "details": "Create all Riverpod/Provider state management classes for managing app state across the application.",
+        "status": "pending",
+        "priority": "medium"
+      },
+      "7": {
+        "id": "7",
+        "content": "Build UI Page Components",
+        "details": "Create all missing page widgets (SplashPage, LoginPage, HomePage, DashboardPage, etc.) with proper routing.",
+        "status": "pending",
+        "priority": "medium"
+      },
+      "8": {
+        "id": "8",
+        "content": "Fix Import Paths and Dependencies",
+        "details": "Resolve all import path errors, fix ambiguous imports, and ensure proper module dependencies.",
+        "status": "pending",
+        "priority": "low"
+      },
+      "9": {
+        "id": "9",
+        "content": "Test and Validate Application",
+        "details": "Run flutter analyze, flutter doctor, and test app compilation to ensure all errors are resolved.",
+        "status": "pending",
+        "priority": "low"
       }
     }
   }
