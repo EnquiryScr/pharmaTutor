@@ -1,0 +1,30 @@
+# CODEOWNERS
+
+# These owners will be the default owners for everything in
+# the repo. Unless a later match takes precedence
+
+# Global owners
+* @EnquiryScr
+
+# Application team
+/app/ @EnquiryScr
+
+# Backend team
+/backend/ @EnquiryScr
+
+# Documentation team
+/docs/ @EnquiryScr
+
+# Configuration and scripts
+/scripts/ @EnquiryScr
+/.github/ @EnquiryScr
+
+# Flutter-specific
+/app/lib/ @EnquiryScr
+/app/pubspec.yaml @EnquiryScr
+/app/test/ @EnquiryScr
+
+# CI/CD
+/.github/workflows/ @EnquiryScr
+/.github/ISSUE_TEMPLATE/ @EnquiryScr
+/.github/PULL_REQUEST_TEMPLATE.md @EnquiryScr
