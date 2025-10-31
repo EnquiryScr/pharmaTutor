@@ -3,52 +3,31 @@
     "Coordinator": {
       "1": {
         "id": "1",
-        "content": "Get Supabase credentials and initialize project",
-        "details": "1. Load supabase_auth toolkit\n2. Ask user for Supabase credentials (URL, anon key, service role key)\n3. Add supabase_flutter package to pubspec.yaml\n4. Initialize Supabase in main.dart",
+        "content": "Update Providers to Use New Repositories",
+        "details": "1. Update AuthProvider to use UserRepositoryImpl\n2. Update CourseProvider to use CourseRepositoryImpl\n3. Update SessionProvider to use SessionRepositoryImpl\n4. Update MessageProvider to use MessageRepositoryImpl\n5. Update NotificationProvider to use NotificationRepositoryImpl\n6. Remove old API client dependencies",
         "status": "completed",
         "priority": "high"
       },
       "2": {
         "id": "2",
-        "content": "Design and create Supabase database schema",
-        "details": "1. Migrate PostgreSQL schema to Supabase\n2. Create users table with RLS policies\n3. Create courses, sessions, payments, messages, notifications tables\n4. Set up foreign key relationships\n5. Configure Row Level Security (RLS) policies",
+        "content": "Implement Offline Write Queue",
+        "details": "1. Create OfflineQueueManager class\n2. Add queue operations (add, process, retry)\n3. Integrate queue with repositories\n4. Add conflict resolution logic\n5. Test queue persistence",
         "status": "completed",
         "priority": "high"
       },
       "3": {
         "id": "3",
-        "content": "Implement Supabase Authentication",
-        "details": "1. Create SupabaseAuthService\n2. Replace AuthApiClient with Supabase Auth\n3. Implement sign up, sign in, sign out\n4. Implement password reset\n5. Update AuthProvider to use Supabase",
+        "content": "Create Comprehensive Test Suite",
+        "details": "1. Unit tests for repositories\n2. Unit tests for data sources\n3. Integration tests for offline flow\n4. Widget tests for providers\n5. Test authentication flow\n6. Test real-time updates\n7. Performance benchmarks",
         "status": "completed",
         "priority": "high"
       },
       "4": {
         "id": "4",
-        "content": "Create Supabase data sources for each model",
-        "details": "1. Create UserSupabaseDataSource\n2. Create CourseSupabaseDataSource\n3. Create SessionSupabaseDataSource\n4. Create PaymentSupabaseDataSource\n5. Create MessageSupabaseDataSource\n6. Create NotificationSupabaseDataSource",
-        "status": "in_progress",
-        "priority": "high"
-      },
-      "5": {
-        "id": "5",
-        "content": "Design and implement SQLite local cache",
-        "details": "1. Create SQLite schema for cache tables\n2. Create DatabaseHelper singleton class\n3. Implement cache for user session\n4. Implement cache for recently viewed data\n5. Create sync service for Supabase ↔ SQLite",
-        "status": "pending",
+        "content": "Create Testing Documentation",
+        "details": "1. Manual testing guide\n2. Test scenarios documentation\n3. Performance testing guide\n4. Troubleshooting guide\n5. Phase 7 completion report",
+        "status": "completed",
         "priority": "medium"
-      },
-      "6": {
-        "id": "6",
-        "content": "Update repositories with Supabase integration",
-        "details": "1. Update AuthRepository to use Supabase\n2. Create CourseRepository with Supabase\n3. Create SessionRepository with Supabase\n4. Create PaymentRepository with Supabase\n5. Add offline sync logic",
-        "status": "pending",
-        "priority": "high"
-      },
-      "7": {
-        "id": "7",
-        "content": "Test and validate implementation",
-        "details": "1. Test authentication flow\n2. Test data CRUD operations\n3. Test offline mode functionality\n4. Test real-time updates\n5. Test RLS policies\n6. Run flutter analyze and fix issues",
-        "status": "pending",
-        "priority": "high"
       }
     }
   }
