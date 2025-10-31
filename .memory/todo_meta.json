@@ -3,66 +3,24 @@
     "Coordinator": {
       "1": {
         "id": "1",
-        "content": "Add Missing Dependencies to pubspec.yaml",
-        "details": "✅ **Flutter Setup Ready!**\n\n**STATUS:**\n✅ Downloaded: flutter_linux_3.22.3-stable.tar.xz (716MB)\n✅ Extracted: flutter/ directory ready\n🔄 **NEXT: User needs to run these commands in GitHub Codespaces:**\n\n1. cd app\n2. export PATH=\"$PATH:$PWD/flutter/bin\"\n3. echo 'export PATH=\"$PATH:$PWD/flutter/bin\"' >> ~/.bashrc\n4. flutter config --no-analytics\n5. flutter pub get\n6. flutter analyze\n\n**Full instructions in:** FLUTTER_SETUP_COMPLETE.md",
-        "status": "in_progress",
+        "content": "Reorganize Flutter project structure according to GitHub best practices",
+        "details": "1. Remove embedded Flutter SDK from project root\n2. Create proper .github folder structure\n3. Organize documentation in dedicated folders\n4. Reorganize configuration files\n5. Create proper testing structure\n6. Implement environment configuration",
+        "status": "completed",
         "priority": "high"
       },
       "2": {
         "id": "2",
-        "content": "Create Core Constants and Models",
-        "details": "Create app_constants.dart and all missing entity models (User, Tutor, Course, Session, Message, etc.) with proper JSON serialization.",
-        "status": "pending",
+        "content": "Push reorganized project to GitHub",
+        "details": "1. Commit all reorganized files\n2. Push to remote repository\n3. Verify structure in GitHub web interface",
+        "status": "completed",
         "priority": "high"
       },
       "3": {
         "id": "3",
-        "content": "Implement API Client Infrastructure",
-        "details": "Create ApiClient base class and all specific API clients (AuthApiClient, UserApiClient, TutorApiClient, etc.) with proper HTTP handling.",
-        "status": "pending",
+        "content": "Proceed with Flutter dependency setup and error fixing",
+        "details": "1. Add missing dependencies to pubspec.yaml\n2. Run flutter pub get\n3. Begin systematic error resolution",
+        "status": "in_progress",
         "priority": "high"
-      },
-      "4": {
-        "id": "4",
-        "content": "Build Repository Layer",
-        "details": "Create repository interfaces and implementations following Clean Architecture pattern for all entities.",
-        "status": "pending",
-        "priority": "high"
-      },
-      "5": {
-        "id": "5",
-        "content": "Create Use Cases and Services",
-        "details": "Implement all business logic use cases and application services for authentication, user management, tutoring, etc.",
-        "status": "pending",
-        "priority": "medium"
-      },
-      "6": {
-        "id": "6",
-        "content": "Implement State Management Providers",
-        "details": "Create all Riverpod/Provider state management classes for managing app state across the application.",
-        "status": "pending",
-        "priority": "medium"
-      },
-      "7": {
-        "id": "7",
-        "content": "Build UI Page Components",
-        "details": "Create all missing page widgets (SplashPage, LoginPage, HomePage, DashboardPage, etc.) with proper routing.",
-        "status": "pending",
-        "priority": "medium"
-      },
-      "8": {
-        "id": "8",
-        "content": "Fix Import Paths and Dependencies",
-        "details": "Resolve all import path errors, fix ambiguous imports, and ensure proper module dependencies.",
-        "status": "pending",
-        "priority": "low"
-      },
-      "9": {
-        "id": "9",
-        "content": "Test and Validate Application",
-        "details": "Run flutter analyze, flutter doctor, and test app compilation to ensure all errors are resolved.",
-        "status": "pending",
-        "priority": "low"
       }
     }
   }

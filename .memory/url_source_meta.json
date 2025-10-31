@@ -1,5 +1,5 @@
 {
-  "_source_id": 82,
+  "_source_id": 92,
   "sources": {
     "Major Tutoring Platforms Analysis 2024": {
       "https://www.tutor.com/": {
@@ -591,6 +591,78 @@
         "url": "https://www.ahpra.gov.au",
         "title": "Australian Pharmacy Registration Requirements",
         "info": "KAPS examination system for international graduates, supervised practice requirements, five registration standards including CPD, criminal history, professional indemnity insurance, English language skills, and mentorship programs"
+      }
+    },
+    "GitHub Repository File Organization Best Practices for 2025": {
+      "https://medium.com/code-factory-berlin/github-repository-structure-best-practices-248e6effc405": {
+        "id": 83,
+        "publisher": "Medium - Code Factory Berlin",
+        "url": "https://medium.com/code-factory-berlin/github-repository-structure-best-practices-248e6effc405",
+        "title": "GitHub Repository Structure Best Practices",
+        "info": "Comprehensive guide covering basic folder structure, Git special files, GitHub-specific files and folders, and .github folder organization patterns"
+      },
+      "https://dart.dev/tools/pub/package-layout": {
+        "id": 84,
+        "publisher": "Dart Official Documentation",
+        "url": "https://dart.dev/tools/pub/package-layout",
+        "title": "Package layout conventions - Dart",
+        "info": "Official Dart package layout conventions including directory organization, file structure recommendations, and naming standards for Dart packages"
+      },
+      "https://docs.flutter.dev/app-architecture/guide": {
+        "id": 85,
+        "publisher": "Flutter Official Documentation",
+        "url": "https://docs.flutter.dev/app-architecture/guide",
+        "title": "Guide to app architecture - Flutter",
+        "info": "Flutter app architecture recommendations based on MVVM pattern, project structure guidelines, and layer organization best practices"
+      },
+      "https://medium.com/@vortj/leveling-up-your-flutter-project-structure-fcb7099a3930": {
+        "id": 86,
+        "publisher": "Medium - Flutter Daily",
+        "url": "https://medium.com/@vortj/leveling-up-your-flutter-project-structure-fcb7099a3930",
+        "title": "Leveling Up Your Flutter Project Structure",
+        "info": "Six different Flutter project structure approaches: Layered, Feature-First, Clean Architecture, Modular Architecture, Atomic Design, and Hybrid patterns"
+      },
+      "https://codewithandrea.com/articles/flutter-project-structure/": {
+        "id": 87,
+        "publisher": "Code with Andrea",
+        "url": "https://codewithandrea.com/articles/flutter-project-structure/",
+        "title": "Flutter Project Structure: Feature-first or Layer-first?",
+        "info": "Detailed comparison of layer-first vs feature-first organization patterns, scalability considerations, and implementation strategies for Flutter applications"
+      },
+      "https://checkmarx.com/supply-chain-security/repository-health-monitoring-part-2-essential-practices-for-secure-repositories/": {
+        "id": 88,
+        "publisher": "Checkmarx",
+        "url": "https://checkmarx.com/supply-chain-security/repository-health-monitoring-part-2-essential-practices-for-secure-repositories/",
+        "title": "12 Best Practices for Secure Code Repositories (2025 Guide)",
+        "info": "Essential repository security practices for 2025 including branch protection, dependency management, CI pipeline testing, and supply chain security measures"
+      },
+      "https://techdynasty.medium.com/managing-assets-in-flutter-images-fonts-and-data-2fa944fe4b40": {
+        "id": 89,
+        "publisher": "Medium - TechDynasty",
+        "url": "https://techdynasty.medium.com/managing-assets-in-flutter-images-fonts-and-data-2fa944fe4b40",
+        "title": "Managing Assets in Flutter: Images, Fonts, and Data",
+        "info": "Comprehensive guide to Flutter asset management including folder structure, pubspec.yaml configuration, and best practices for organizing assets"
+      },
+      "https://stackoverflow.com/questions/13640292/pros-and-cons-for-keeping-code-and-data-in-separate-repositories": {
+        "id": 90,
+        "publisher": "Stack Overflow",
+        "url": "https://stackoverflow.com/questions/13640292/pros-and-cons-for-keeping-code-and-data-in-separate-repositories",
+        "title": "Pros and cons for keeping code and data in separate repositories",
+        "info": "Strategic considerations for separating code and data files, including unified vs separate repository approaches and their pros and cons"
+      },
+      "https://stackoverflow.com/questions/40548141/managing-project-config-files-in-repository": {
+        "id": 91,
+        "publisher": "Stack Overflow",
+        "url": "https://stackoverflow.com/questions/40548141/managing-project-config-files-in-repository",
+        "title": "Managing project config files in repository",
+        "info": "Configuration file management strategies including .env.sample patterns and best practices for handling environment-specific configurations"
+      },
+      "https://stackoverflow.com/questions/62288443/where-should-you-put-the-git-hub-workflow-directory-for-actions-in-a-full-stack": {
+        "id": 92,
+        "publisher": "Stack Overflow",
+        "url": "https://stackoverflow.com/questions/62288443/where-should-you-put-the-git-hub-workflow-directory-for-actions-in-a-full-stack",
+        "title": "Where should you put the git hub workflow directory for actions in a full-stack repository",
+        "info": "GitHub Actions workflow organization requirements, directory structure, and naming conventions for multiple workflows"
       }
     }
   }
