@@ -895,3 +895,48 @@
 # uploads/
 # downloads/
 
+# ==============================================================================
+# FLUTTER/DART SPECIFIC
+# ==============================================================================
+# Flutter/Dart
+.dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+/web/
+
+# iOS related
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Flutter.podspec
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/ephemeral/
+/ios/Flutter/app.flx
+/ios/Flutter/app.zip
+/ios/Flutter/flutter_assets/
+/ios/ServiceDefinitions.json
+/ios/Runner/GeneratedPluginRegistrant.*
+
+# Android related
+/android/app/debug
+/android/app/profile
+/android/app/release
+/android/.gradle
+
+# macOS related
+/Flutter/Flutter-Debug.xcconfig
+/Flutter/Flutter-Internationalization.xcconfig
+/Flutter/Flutter-Prod.xcconfig
+
+# Windows related
+/windows/
+
+# Linux related
+/linux/
+
+# Supabase specific
+.supabase/
+.sbtrc
+
