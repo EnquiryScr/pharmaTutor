@@ -152,6 +152,18 @@
       "languageVersion": "2.18"
     },
     {
+      "name": "connectivity_plus",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/connectivity_plus-5.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "connectivity_plus_platform_interface",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/connectivity_plus_platform_interface-1.2.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "convert",
       "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/convert-3.1.1",
       "packageUri": "lib/",
@@ -168,6 +180,18 @@
       "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/dart_style-2.3.6",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "dartz",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/dartz-0.10.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "dbus",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/dbus-0.7.11",
+      "packageUri": "lib/",
+      "languageVersion": "2.17"
     },
     {
       "name": "dio",
@@ -213,9 +237,9 @@
     },
     {
       "name": "flutter",
-      "rootUri": "file:///workspace/flutter-sdk/flutter/packages/flutter",
+      "rootUri": "file:///workspace/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "flutter_cache_manager",
@@ -243,13 +267,13 @@
     },
     {
       "name": "flutter_test",
-      "rootUri": "file:///workspace/flutter-sdk/flutter/packages/flutter_test",
+      "rootUri": "file:///workspace/flutter/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "3.2"
+      "languageVersion": "3.3"
     },
     {
       "name": "flutter_web_plugins",
-      "rootUri": "file:///workspace/flutter-sdk/flutter/packages/flutter_web_plugins",
+      "rootUri": "file:///workspace/flutter/packages/flutter_web_plugins",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -339,9 +363,9 @@
     },
     {
       "name": "js",
-      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/js-0.7.1",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "2.19"
     },
     {
       "name": "json_annotation",
@@ -363,21 +387,21 @@
     },
     {
       "name": "leak_tracker",
-      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/leak_tracker-10.0.0",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/leak_tracker-10.0.4",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_flutter_testing",
-      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-2.0.1",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/leak_tracker_flutter_testing-3.0.3",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "leak_tracker_testing",
-      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/leak_tracker_testing-2.0.1",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/leak_tracker_testing-3.0.1",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "3.2"
     },
     {
       "name": "lints",
@@ -405,7 +429,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/meta-1.11.0",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/meta-1.12.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -424,6 +448,12 @@
     {
       "name": "nested",
       "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/nested-1.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "nm",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/nm-0.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -478,6 +508,12 @@
     {
       "name": "path_provider_windows",
       "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/petitparser-6.0.2",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -615,7 +651,7 @@
     },
     {
       "name": "sky_engine",
-      "rootUri": "file:///workspace/flutter-sdk/flutter/bin/cache/pkg/sky_engine",
+      "rootUri": "file:///workspace/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
@@ -717,7 +753,7 @@
     },
     {
       "name": "test_api",
-      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/test_api-0.6.1",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/test_api-0.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -795,9 +831,9 @@
     },
     {
       "name": "vm_service",
-      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/vm_service-13.0.0",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/vm_service-14.2.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "watcher",
@@ -824,6 +860,12 @@
       "languageVersion": "3.3"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/xml-6.5.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.2"
+    },
+    {
       "name": "yaml",
       "rootUri": "file:///home/minimax/.pub-cache/hosted/pub.dev/yaml-3.1.2",
       "packageUri": "lib/",
@@ -842,7 +884,10 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-10-31T09:27:18.256774Z",
+  "generated": "2025-10-31T13:11:35.664705Z",
   "generator": "pub",
-  "generatorVersion": "3.3.0"
+  "generatorVersion": "3.4.0",
+  "flutterRoot": "file:///workspace/flutter",
+  "flutterVersion": "3.22.0",
+  "pubCache": "file:///home/minimax/.pub-cache"
 }
