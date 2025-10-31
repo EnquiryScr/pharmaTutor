@@ -44,7 +44,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   local_auth: ^2.1.7
   device_info_plus: ^9.1.1
-  biometric_storage: ^4.0.0
+  biometric_storage: ^5.0.1
   permission_handler: ^11.1.0
   
   # Dependency Injection
