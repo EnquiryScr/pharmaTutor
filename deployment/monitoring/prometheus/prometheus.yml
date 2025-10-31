@@ -1,0 +1,239 @@
+# Monitoring and Alerting Configuration
+
+# Prometheus Configuration
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+rule_files:
+  - "alert_rules.yml"
+
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+
+scrape_configs:
+  # API metrics
+  - job_name: 'tutoring-api'
+    static_configs:
+      - targets: ['tutoring-api-service:3000']
+    metrics_path: /metrics
+    scrape_interval: 15s
+    scrape_timeout: 5s
+
+  # PostgreSQL metrics
+  - job_name: 'postgres'
+    static_configs:
+      - targets: ['postgres-exporter:9187']
+    scrape_interval: 30s
+
+  # Redis metrics
+  - job_name: 'redis'
+    static_configs:
+      - targets: ['redis-exporter:9121']
+    scrape_interval: 30s
+
+  # Elasticsearch metrics
+  - job_name: 'elasticsearch'
+    static_configs:
+      - targets: ['elasticsearch-exporter:9104']
+    scrape_interval: 30s
+
+  # Node metrics
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+    scrape_interval: 30s
+
+  # Kubernetes API server
+  - job_name: 'kubernetes-apiservers'
+    kubernetes_sd_configs:
+    - role: endpoints
+    scheme: https
+    tls_config:
+      ca_file: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+    bearer_token_file: /var/run/secrets/kubernetes.io/serviceaccount/token
+    relabel_configs:
+    - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+      action: keep
+      regex: default;kubernetes;https
+
+  # Kubernetes pods
+  - job_name: 'kubernetes-pods'
+    kubernetes_sd_configs:
+    - role: pod
+    relabel_configs:
+    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+      action: keep
+      regex: true
+    - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+      action: replace
+      target_label: __metrics_path__
+      regex: (.+)
+    - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+      action: replace
+      regex: ([^:]+)(?::\d+)?;(\d+)
+      replacement: $1:$2
+      target_label: __address__
+    - action: labelmap
+      regex: __meta_kubernetes_pod_label_(.+)
+    - source_labels: [__meta_kubernetes_namespace]
+      action: replace
+      target_label: kubernetes_namespace
+    - source_labels: [__meta_kubernetes_pod_name]
+      action: replace
+      target_label: kubernetes_pod_name
+
+# Alert Rules
+groups:
+- name: tutoring-platform.rules
+  rules:
+  
+  # High-level application alerts
+  - alert: ApplicationDown
+    expr: up{job="tutoring-api"} == 0
+    for: 1m
+    labels:
+      severity: critical
+      service: tutoring-api
+    annotations:
+      summary: "Tutoring API is down"
+      description: "Tutoring API has been down for more than 1 minute"
+      runbook_url: "https://wiki.tutoring-platform.com/runbooks/application-down"
+
+  - alert: HighErrorRate
+    expr: rate(http_requests_total{job="tutoring-api",status=~"5.."}[5m]) > 0.1
+    for: 5m
+    labels:
+      severity: warning
+      service: tutoring-api
+    annotations:
+      summary: "High error rate detected"
+      description: "Error rate is {{ $value }} errors per second for tutoring API"
+
+  - alert: HighResponseTime
+    expr: histogram_quantile(0.95, rate(http_request_duration_seconds_bucket{job="tutoring-api"}[5m])) > 2
+    for: 10m
+    labels:
+      severity: warning
+      service: tutoring-api
+    annotations:
+      summary: "High response time"
+      description: "95th percentile response time is {{ $value }}s for tutoring API"
+
+  # Database alerts
+  - alert: DatabaseDown
+    expr: up{job="postgres"} == 0
+    for: 1m
+    labels:
+      severity: critical
+      service: database
+    annotations:
+      summary: "PostgreSQL database is down"
+      description: "PostgreSQL database has been down for more than 1 minute"
+
+  - alert: DatabaseConnectionsHigh
+    expr: pg_stat_database_numbackends / pg_settings_max_connections > 0.8
+    for: 5m
+    labels:
+      severity: warning
+      service: database
+    annotations:
+      summary: "Database connections high"
+      description: "Database is using {{ $value | humanizePercentage }} of max connections"
+
+  # Redis alerts
+  - alert: RedisDown
+    expr: up{job="redis"} == 0
+    for: 1m
+    labels:
+      severity: critical
+      service: redis
+    annotations:
+      summary: "Redis is down"
+      description: "Redis cache has been down for more than 1 minute"
+
+  - alert: RedisMemoryUsageHigh
+    expr: redis_memory_used_bytes / redis_memory_max_bytes > 0.9
+    for: 5m
+    labels:
+      severity: warning
+      service: redis
+    annotations:
+      summary: "Redis memory usage high"
+      description: "Redis is using {{ $value | humanizePercentage }} of max memory"
+
+  # Infrastructure alerts
+  - alert: HighCPUUsage
+    expr: 100 - (avg by(instance) (irate(node_cpu_seconds_total{mode="idle"}[5m])) * 100) > 80
+    for: 10m
+    labels:
+      severity: warning
+      service: infrastructure
+    annotations:
+      summary: "High CPU usage"
+      description: "CPU usage is above 80% for node {{ $labels.instance }}"
+
+  - alert: HighMemoryUsage
+    expr: (1 - (node_memory_MemAvailable_bytes / node_memory_MemTotal_bytes)) * 100 > 80
+    for: 5m
+    labels:
+      severity: warning
+      service: infrastructure
+    annotations:
+      summary: "High memory usage"
+      description: "Memory usage is above 80% for node {{ $labels.instance }}"
+
+  - alert: DiskSpaceLow
+    expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+    for: 5m
+    labels:
+      severity: critical
+      service: infrastructure
+    annotations:
+      summary: "Disk space low"
+      description: "Disk space is below 10% for node {{ $labels.instance }}"
+
+  # Security alerts
+  - alert: HighRequestRate
+    expr: rate(http_requests_total[1m]) > 100
+    for: 2m
+    labels:
+      severity: warning
+      service: security
+    annotations:
+      summary: "High request rate detected"
+      description: "Request rate is {{ $value }} requests/second"
+
+  - alert: UnusualAuthFailures
+    expr: rate(http_requests_total{job="tutoring-api",status="401"}[5m]) > 10
+    for: 5m
+    labels:
+      severity: warning
+      service: security
+    annotations:
+      summary: "Unusual authentication failures"
+      description: "Authentication failure rate is {{ $value }} failures/second"
+
+  # Business metrics
+  - alert: NoActiveTutoringSessions
+    expr: tutoring_active_sessions < 1
+    for: 15m
+    labels:
+      severity: warning
+      service: business
+    annotations:
+      summary: "No active tutoring sessions"
+      description: "No active tutoring sessions detected for 15 minutes"
+
+  - alert: QueueBacklogHigh
+    expr: redis_queue_length > 1000
+    for: 10m
+    labels:
+      severity: warning
+      service: business
+    annotations:
+      summary: "High queue backlog"
+      description: "Queue backlog has {{ $value }} messages pending"
