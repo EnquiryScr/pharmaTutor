@@ -17,7 +17,7 @@
 
 ## 🎯 Overview
 
-pharmaT is a comprehensive mobile tutoring platform specifically designed for pharmacy students preparing for **NAPLEX** and **MPJE** examinations. Built with Flutter and powered by Supabase, it delivers personalized learning experiences with offline-first architecture, ensuring uninterrupted access to educational content.
+pharmaT is a comprehensive mobile tutoring platform specifically  designed for pharmacy students preparing for **NAPLEX** and **MPJE** examinations. Built with Flutter and powered by Supabase, it delivers personalized learning experiences with offline-first architecture, ensuring uninterrupted access to educational content.
 
 ## ✨ Features
 
