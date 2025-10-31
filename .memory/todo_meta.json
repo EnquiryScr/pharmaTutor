@@ -3,43 +3,50 @@
     "Coordinator": {
       "1": {
         "id": "1",
-        "content": "Analyze existing data models and determine database schema",
-        "details": "Review all models in lib/data/models/ (user, course, session, payment, message, notification) to understand structure and relationships",
+        "content": "Get Supabase credentials and initialize project",
+        "details": "1. Load supabase_auth toolkit\n2. Ask user for Supabase credentials (URL, anon key, service role key)\n3. Add supabase_flutter package to pubspec.yaml\n4. Initialize Supabase in main.dart",
         "status": "in_progress",
         "priority": "high"
       },
       "2": {
         "id": "2",
-        "content": "Create database helper class with SQLite initialization",
-        "details": "Create lib/core/database/database_helper.dart with:\n- Database creation and versioning\n- Table creation SQL statements\n- Open/close database methods\n- Migration system",
+        "content": "Design and create Supabase database schema",
+        "details": "1. Migrate PostgreSQL schema to Supabase\n2. Create users table with RLS policies\n3. Create courses, sessions, payments, messages, notifications tables\n4. Set up foreign key relationships\n5. Configure Row Level Security (RLS) policies",
         "status": "pending",
         "priority": "high"
       },
       "3": {
         "id": "3",
-        "content": "Create DAO (Data Access Object) classes for each model",
-        "details": "Create CRUD operations for:\n- UserDAO (insert, update, delete, query users)\n- CourseDAO (manage courses)\n- SessionDAO (manage tutoring sessions)\n- PaymentDAO (payment records)\n- MessageDAO (chat messages)\n- NotificationDAO (user notifications)",
+        "content": "Implement Supabase Authentication",
+        "details": "1. Create SupabaseAuthService\n2. Replace AuthApiClient with Supabase Auth\n3. Implement sign up, sign in, sign out\n4. Implement password reset\n5. Update AuthProvider to use Supabase",
         "status": "pending",
         "priority": "high"
       },
       "4": {
         "id": "4",
-        "content": "Update main.dart to initialize SQLite database",
-        "details": "Add database initialization before app starts:\n- Import DatabaseHelper\n- Initialize database in main() function\n- Ensure proper initialization order with Hive",
+        "content": "Create Supabase data sources for each model",
+        "details": "1. Create UserSupabaseDataSource\n2. Create CourseSupabaseDataSource\n3. Create SessionSupabaseDataSource\n4. Create PaymentSupabaseDataSource\n5. Create MessageSupabaseDataSource\n6. Create NotificationSupabaseDataSource",
         "status": "pending",
         "priority": "high"
       },
       "5": {
         "id": "5",
-        "content": "Create database migration system",
-        "details": "Implement onUpgrade callback for future schema changes and version management",
+        "content": "Design and implement SQLite local cache",
+        "details": "1. Create SQLite schema for cache tables\n2. Create DatabaseHelper singleton class\n3. Implement cache for user session\n4. Implement cache for recently viewed data\n5. Create sync service for Supabase ↔ SQLite",
         "status": "pending",
         "priority": "medium"
       },
       "6": {
         "id": "6",
-        "content": "Test database implementation",
-        "details": "Verify:\n- Database file is created\n- Tables are created successfully\n- CRUD operations work correctly\n- App runs without errors",
+        "content": "Update repositories with Supabase integration",
+        "details": "1. Update AuthRepository to use Supabase\n2. Create CourseRepository with Supabase\n3. Create SessionRepository with Supabase\n4. Create PaymentRepository with Supabase\n5. Add offline sync logic",
+        "status": "pending",
+        "priority": "high"
+      },
+      "7": {
+        "id": "7",
+        "content": "Test and validate implementation",
+        "details": "1. Test authentication flow\n2. Test data CRUD operations\n3. Test offline mode functionality\n4. Test real-time updates\n5. Test RLS policies\n6. Run flutter analyze and fix issues",
         "status": "pending",
         "priority": "high"
       }
