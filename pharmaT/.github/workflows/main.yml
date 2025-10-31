@@ -1,0 +1,38 @@
+name: Flutter CI/CD
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build_android:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    
+    steps:
+      - uses: actions/checkout@v4 # 1. Checkout the repository code
+      
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2 # 2. Use a dedicated action to set up Flutter
+        with:
+          channel: 'stable'
+
+      - name: Install dependencies
+        run: flutter pub get # 3. Get project dependencies
+
+      - name: Analyze code
+        run: flutter analyze # 4. Run static analysis
+
+      - name: Run tests
+        run: flutter test # 5. Run unit/widget tests
+
+      - name: Build APK
+        run: flutter build apk --release # 6. Build the Android release APK
+
+      - name: Upload APK as Artifact
+        uses: actions/upload-artifact@v4 # 7. Save the built APK
+        with:
+          name: release-apk
+          path: build/app/outputs/flutter-apk/app-release.apk
