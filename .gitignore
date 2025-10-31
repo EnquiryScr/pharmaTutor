@@ -895,3 +895,109 @@
 # uploads/
 # downloads/
 
+# ==============================================================================
+# FLUTTER SPECIFIC
+# ==============================================================================
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.buildlog/
+.history
+.svn/
+migrate_working_dir/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+.flutter-plugins
+.flutter-plugins-dependencies
+.packages
+.pub-cache/
+.pub/
+/build/
+
+# Web related
+lib/generated_plugin_registrant.dart
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# iOS
+/ios/Flutter/Flutter.framework
+/ios/Flutter/Generated.xcconfig
+/ios/Flutter/derived-data/
+/ios/Flutter/Flutter.app/
+/ios/Flutter/Flutter-Info.plist
+/ios/Flutter/Flutter.podspec
+/ios/Flutter/GeneratedManifest.lock.podspec
+/ios/Flutter/ServiceDefinitions.json
+/ios/Flutter/app.flx
+/ios/Flutter/app.zip
+/ios/Flutter/flutter_assets/
+/ios/Flutter/vao_bplist.m
+/ios/ServiceDefinitions.json
+/ios/Runner/GeneratedPluginRegistrant.*
+/ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+/ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
+
+# Environment variables
+.env
+.env.local
+.env.production
+.env.staging
+
+# Backend and deployment
+backend/nodejs_backend/node_modules/
+backend/nodejs_backend/.env
+deployment/*.env
+backend/logs/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Coverage directory used by tools like istanbul
+coverage/
+*.lcov
+
+# Flutter build artifacts
+.flutter_build/
+.flutter_build_cache/
+
+# Temporary files
+.tmp/
+temp/
+
+# IDE files
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
