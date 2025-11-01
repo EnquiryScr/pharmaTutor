@@ -1034,10 +1034,10 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-11-01T09:35:51.029296Z",
+  "generated": "2025-11-01T16:37:29.808936Z",
   "generator": "pub",
   "generatorVersion": "3.5.3",
   "flutterRoot": "file:///workspace/flutter",
-  "flutterVersion": "3.24.3",
+  "flutterVersion": "3.24.4-0.0.pre.1",
   "pubCache": "file:///home/minimax/.pub-cache"
 }
