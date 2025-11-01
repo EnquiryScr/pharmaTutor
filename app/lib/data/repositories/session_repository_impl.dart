@@ -44,7 +44,7 @@ class SessionRepositoryImpl implements IOfflineFirstRepository<SessionModel> {
 
       if (await _isOnline) {
         final remoteSession = await _remoteDataSource.getSession(id);
-        await _cacheDataSource.insertSession(remoteSession);
+        await _cacheDataSource.cacheSession(remoteSession);
         
         return Right(SessionModel.fromJson(remoteSession));
       } else {
@@ -77,7 +77,7 @@ class SessionRepositoryImpl implements IOfflineFirstRepository<SessionModel> {
         final sessionData = entity.toJson();
         final createdSession = await _remoteDataSource.createSession(sessionData);
         
-        await _cacheDataSource.insertSession(createdSession);
+        await _cacheDataSource.cacheSession(createdSession);
         
         return Right(SessionModel.fromJson(createdSession));
       } else {
@@ -162,7 +162,7 @@ class SessionRepositoryImpl implements IOfflineFirstRepository<SessionModel> {
         final remoteSessions = await _remoteDataSource.getTutorSessions(tutorId, status: status);
         
         for (final session in remoteSessions) {
-          await _cacheDataSource.insertSession(session);
+          await _cacheDataSource.cacheSession(session);
         }
         
         return Right(remoteSessions.map((data) => SessionModel.fromJson(data)).toList());
@@ -212,7 +212,7 @@ class SessionRepositoryImpl implements IOfflineFirstRepository<SessionModel> {
         final remoteSessions = await _remoteDataSource.getStudentSessions(studentId, status: status);
         
         for (final session in remoteSessions) {
-          await _cacheDataSource.insertSession(session);
+          await _cacheDataSource.cacheSession(session);
         }
         
         return Right(remoteSessions.map((data) => SessionModel.fromJson(data)).toList());
@@ -244,7 +244,7 @@ class SessionRepositoryImpl implements IOfflineFirstRepository<SessionModel> {
     String role,
   ) async {
     try {
-      final cachedSessions = await _cacheDataSource.getUpcomingSessions(userId, role);
+      final cachedSessions = await _cacheDataSource.getUpcomingSessions(userId);
       
       if (cachedSessions.isNotEmpty) {
         final sessionModels = cachedSessions
@@ -259,10 +259,10 @@ class SessionRepositoryImpl implements IOfflineFirstRepository<SessionModel> {
       }
 
       if (await _isOnline) {
-        final remoteSessions = await _remoteDataSource.getUpcomingSessions(userId, role);
+        final remoteSessions = await _remoteDataSource.getUpcomingSessions(userId: userId);
         
         for (final session in remoteSessions) {
-          await _cacheDataSource.insertSession(session);
+          await _cacheDataSource.cacheSession(session);
         }
         
         return Right(remoteSessions.map((data) => SessionModel.fromJson(data)).toList());
@@ -279,7 +279,7 @@ class SessionRepositoryImpl implements IOfflineFirstRepository<SessionModel> {
 
   Future<void> _updateUpcomingSessionsInBackground(String userId, String role) async {
     try {
-      final remoteSessions = await _remoteDataSource.getUpcomingSessions(userId, role);
+      final remoteSessions = await _remoteDataSource.getUpcomingSessions(userId: userId);
       for (final session in remoteSessions) {
         await _cacheDataSource.updateSession(session['session_id'], session);
       }
@@ -387,7 +387,7 @@ class SessionRepositoryImpl implements IOfflineFirstRepository<SessionModel> {
   Future<Either<Failure, void>> saveOfflineData(List<SessionModel> data) async {
     try {
       for (final session in data) {
-        await _cacheDataSource.insertSession(session.toJson());
+        await _cacheDataSource.cacheSession(session.toJson());
       }
       
       return const Right(null);

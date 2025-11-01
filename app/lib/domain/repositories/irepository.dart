@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:dartz/dartz.dart';
-import '../utils/base_model.dart';
+import '../../core/utils/base_model.dart';
 
 /// Failure class for error handling in repositories
 class Failure {

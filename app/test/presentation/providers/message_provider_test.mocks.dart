@@ -3,16 +3,50 @@
 // Do not manually edit this file.
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:async' as _i5;
+import 'dart:async' as _i21;
 
 import 'package:dartz/dartz.dart' as _i2;
-import 'package:flutter_tutoring_app/data/models/message_model.dart' as _i7;
+import 'package:flutter_tutoring_app/core/utils/supabase_dependencies.dart'
+    as _i24;
+import 'package:flutter_tutoring_app/data/datasources/local/cache_sync_service.dart'
+    as _i18;
+import 'package:flutter_tutoring_app/data/datasources/local/course_cache_data_source.dart'
+    as _i14;
+import 'package:flutter_tutoring_app/data/datasources/local/message_cache_data_source.dart'
+    as _i16;
+import 'package:flutter_tutoring_app/data/datasources/local/notification_cache_data_source.dart'
+    as _i17;
+import 'package:flutter_tutoring_app/data/datasources/local/offline_queue_manager.dart'
+    as _i19;
+import 'package:flutter_tutoring_app/data/datasources/local/session_cache_data_source.dart'
+    as _i15;
+import 'package:flutter_tutoring_app/data/datasources/local/user_cache_data_source.dart'
+    as _i13;
+import 'package:flutter_tutoring_app/data/datasources/remote/course_supabase_data_source.dart'
+    as _i9;
+import 'package:flutter_tutoring_app/data/datasources/remote/message_supabase_data_source.dart'
+    as _i11;
+import 'package:flutter_tutoring_app/data/datasources/remote/notification_supabase_data_source.dart'
+    as _i12;
+import 'package:flutter_tutoring_app/data/datasources/remote/session_supabase_data_source.dart'
+    as _i10;
+import 'package:flutter_tutoring_app/data/datasources/remote/user_supabase_data_source.dart'
+    as _i8;
+import 'package:flutter_tutoring_app/data/models/message_model.dart' as _i23;
+import 'package:flutter_tutoring_app/data/repositories/course_repository_impl.dart'
+    as _i4;
 import 'package:flutter_tutoring_app/data/repositories/message_repository_impl.dart'
+    as _i6;
+import 'package:flutter_tutoring_app/data/repositories/notification_repository_impl.dart'
+    as _i7;
+import 'package:flutter_tutoring_app/data/repositories/session_repository_impl.dart'
+    as _i5;
+import 'package:flutter_tutoring_app/data/repositories/user_repository_impl.dart'
     as _i3;
 import 'package:flutter_tutoring_app/domain/repositories/irepository.dart'
-    as _i6;
+    as _i22;
 import 'package:mockito/mockito.dart' as _i1;
-import 'package:mockito/src/dummies.dart' as _i4;
+import 'package:mockito/src/dummies.dart' as _i20;
 
 // ignore_for_file: type=lint
 // ignore_for_file: avoid_redundant_argument_values
@@ -37,11 +71,198 @@ class _FakeEither_0<L, R> extends _i1.SmartFake implements _i2.Either<L, R> {
         );
 }
 
+class _FakeUserRepositoryImpl_1 extends _i1.SmartFake
+    implements _i3.UserRepositoryImpl {
+  _FakeUserRepositoryImpl_1(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCourseRepositoryImpl_2 extends _i1.SmartFake
+    implements _i4.CourseRepositoryImpl {
+  _FakeCourseRepositoryImpl_2(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSessionRepositoryImpl_3 extends _i1.SmartFake
+    implements _i5.SessionRepositoryImpl {
+  _FakeSessionRepositoryImpl_3(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeMessageRepositoryImpl_4 extends _i1.SmartFake
+    implements _i6.MessageRepositoryImpl {
+  _FakeMessageRepositoryImpl_4(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeNotificationRepositoryImpl_5 extends _i1.SmartFake
+    implements _i7.NotificationRepositoryImpl {
+  _FakeNotificationRepositoryImpl_5(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeUserSupabaseDataSource_6 extends _i1.SmartFake
+    implements _i8.UserSupabaseDataSource {
+  _FakeUserSupabaseDataSource_6(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCourseSupabaseDataSource_7 extends _i1.SmartFake
+    implements _i9.CourseSupabaseDataSource {
+  _FakeCourseSupabaseDataSource_7(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSessionSupabaseDataSource_8 extends _i1.SmartFake
+    implements _i10.SessionSupabaseDataSource {
+  _FakeSessionSupabaseDataSource_8(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeMessageSupabaseDataSource_9 extends _i1.SmartFake
+    implements _i11.MessageSupabaseDataSource {
+  _FakeMessageSupabaseDataSource_9(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeNotificationSupabaseDataSource_10 extends _i1.SmartFake
+    implements _i12.NotificationSupabaseDataSource {
+  _FakeNotificationSupabaseDataSource_10(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeUserCacheDataSource_11 extends _i1.SmartFake
+    implements _i13.UserCacheDataSource {
+  _FakeUserCacheDataSource_11(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCourseCacheDataSource_12 extends _i1.SmartFake
+    implements _i14.CourseCacheDataSource {
+  _FakeCourseCacheDataSource_12(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeSessionCacheDataSource_13 extends _i1.SmartFake
+    implements _i15.SessionCacheDataSource {
+  _FakeSessionCacheDataSource_13(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeMessageCacheDataSource_14 extends _i1.SmartFake
+    implements _i16.MessageCacheDataSource {
+  _FakeMessageCacheDataSource_14(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeNotificationCacheDataSource_15 extends _i1.SmartFake
+    implements _i17.NotificationCacheDataSource {
+  _FakeNotificationCacheDataSource_15(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeCacheSyncService_16 extends _i1.SmartFake
+    implements _i18.CacheSyncService {
+  _FakeCacheSyncService_16(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
+class _FakeOfflineQueueManager_17 extends _i1.SmartFake
+    implements _i19.OfflineQueueManager {
+  _FakeOfflineQueueManager_17(
+    Object parent,
+    Invocation parentInvocation,
+  ) : super(
+          parent,
+          parentInvocation,
+        );
+}
+
 /// A class which mocks [MessageRepositoryImpl].
 ///
 /// See the documentation for Mockito's code generation for more information.
 class MockMessageRepositoryImpl extends _i1.Mock
-    implements _i3.MessageRepositoryImpl {
+    implements _i6.MessageRepositoryImpl {
   MockMessageRepositoryImpl() {
     _i1.throwOnMissingStub(this);
   }
@@ -49,76 +270,77 @@ class MockMessageRepositoryImpl extends _i1.Mock
   @override
   String get repositoryName => (super.noSuchMethod(
         Invocation.getter(#repositoryName),
-        returnValue: _i4.dummyValue<String>(
+        returnValue: _i20.dummyValue<String>(
           this,
           Invocation.getter(#repositoryName),
         ),
       ) as String);
 
   @override
-  _i5.Future<
-      _i2.Either<_i6.Failure, List<_i7.MessageModel>>> getConversationMessages(
+  _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>
+      getConversationMessages(
     String? conversationId, {
-    int? limit = 50,
-    int? offset = 0,
-  }) =>
-      (super.noSuchMethod(
-        Invocation.method(
-          #getConversationMessages,
-          [conversationId],
-          {
-            #limit: limit,
-            #offset: offset,
-          },
-        ),
-        returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i7.MessageModel>>(
-          this,
-          Invocation.method(
-            #getConversationMessages,
-            [conversationId],
-            {
-              #limit: limit,
-              #offset: offset,
-            },
-          ),
-        )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>);
-
-  @override
-  _i5.Future<_i2.Either<_i6.Failure, List<Map<String, dynamic>>>>
-      getUserConversations(
-    String? userId, {
     int? limit = 50,
     int? offset = 0,
   }) =>
           (super.noSuchMethod(
             Invocation.method(
-              #getUserConversations,
-              [userId],
+              #getConversationMessages,
+              [conversationId],
               {
                 #limit: limit,
                 #offset: offset,
               },
             ),
-            returnValue: _i5.Future<
-                    _i2.Either<_i6.Failure, List<Map<String, dynamic>>>>.value(
-                _FakeEither_0<_i6.Failure, List<Map<String, dynamic>>>(
+            returnValue: _i21.Future<
+                    _i2.Either<_i22.Failure, List<_i23.MessageModel>>>.value(
+                _FakeEither_0<_i22.Failure, List<_i23.MessageModel>>(
               this,
               Invocation.method(
-                #getUserConversations,
-                [userId],
+                #getConversationMessages,
+                [conversationId],
                 {
                   #limit: limit,
                   #offset: offset,
                 },
               ),
             )),
-          ) as _i5.Future<_i2.Either<_i6.Failure, List<Map<String, dynamic>>>>);
+          ) as _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>> sendMessage({
+  _i21.Future<
+      _i2
+      .Either<_i22.Failure, List<Map<String, dynamic>>>> getUserConversations(
+    String? userId, {
+    int? limit = 50,
+    int? offset = 0,
+  }) =>
+      (super.noSuchMethod(
+        Invocation.method(
+          #getUserConversations,
+          [userId],
+          {
+            #limit: limit,
+            #offset: offset,
+          },
+        ),
+        returnValue: _i21
+            .Future<_i2.Either<_i22.Failure, List<Map<String, dynamic>>>>.value(
+            _FakeEither_0<_i22.Failure, List<Map<String, dynamic>>>(
+          this,
+          Invocation.method(
+            #getUserConversations,
+            [userId],
+            {
+              #limit: limit,
+              #offset: offset,
+            },
+          ),
+        )),
+      ) as _i21.Future<_i2.Either<_i22.Failure, List<Map<String, dynamic>>>>);
+
+  @override
+  _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>> sendMessage({
     required String? conversationId,
     required String? senderId,
     required String? text,
@@ -136,8 +358,8 @@ class MockMessageRepositoryImpl extends _i1.Mock
           },
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>>.value(
-                _FakeEither_0<_i6.Failure, _i7.MessageModel>(
+            _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>>.value(
+                _FakeEither_0<_i22.Failure, _i23.MessageModel>(
           this,
           Invocation.method(
             #sendMessage,
@@ -150,44 +372,44 @@ class MockMessageRepositoryImpl extends _i1.Mock
             },
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, void>> markAsRead(String? messageId) =>
+  _i21.Future<_i2.Either<_i22.Failure, void>> markAsRead(String? messageId) =>
       (super.noSuchMethod(
         Invocation.method(
           #markAsRead,
           [messageId],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, void>>.value(
-            _FakeEither_0<_i6.Failure, void>(
+        returnValue: _i21.Future<_i2.Either<_i22.Failure, void>>.value(
+            _FakeEither_0<_i22.Failure, void>(
           this,
           Invocation.method(
             #markAsRead,
             [messageId],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, void>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, void>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, int>> getUnreadCount(String? userId) =>
+  _i21.Future<_i2.Either<_i22.Failure, int>> getUnreadCount(String? userId) =>
       (super.noSuchMethod(
         Invocation.method(
           #getUnreadCount,
           [userId],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, int>>.value(
-            _FakeEither_0<_i6.Failure, int>(
+        returnValue: _i21.Future<_i2.Either<_i22.Failure, int>>.value(
+            _FakeEither_0<_i22.Failure, int>(
           this,
           Invocation.method(
             #getUnreadCount,
             [userId],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, int>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, int>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>> searchMessages(
+  _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>> searchMessages(
     String? conversationId,
     String? query,
   ) =>
@@ -199,9 +421,9 @@ class MockMessageRepositoryImpl extends _i1.Mock
             query,
           ],
         ),
-        returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i7.MessageModel>>(
+        returnValue: _i21
+            .Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>.value(
+            _FakeEither_0<_i22.Failure, List<_i23.MessageModel>>(
           this,
           Invocation.method(
             #searchMessages,
@@ -211,122 +433,123 @@ class MockMessageRepositoryImpl extends _i1.Mock
             ],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i6.SyncResult<_i7.MessageModel>>>
+  _i21.Future<_i2.Either<_i22.Failure, _i22.SyncResult<_i23.MessageModel>>>
       syncData() => (super.noSuchMethod(
             Invocation.method(
               #syncData,
               [],
             ),
-            returnValue: _i5.Future<
-                    _i2.Either<_i6.Failure,
-                        _i6.SyncResult<_i7.MessageModel>>>.value(
-                _FakeEither_0<_i6.Failure, _i6.SyncResult<_i7.MessageModel>>(
+            returnValue: _i21.Future<
+                    _i2.Either<_i22.Failure,
+                        _i22.SyncResult<_i23.MessageModel>>>.value(
+                _FakeEither_0<_i22.Failure, _i22.SyncResult<_i23.MessageModel>>(
               this,
               Invocation.method(
                 #syncData,
                 [],
               ),
             )),
-          ) as _i5.Future<
-              _i2.Either<_i6.Failure, _i6.SyncResult<_i7.MessageModel>>>);
+          ) as _i21.Future<
+              _i2.Either<_i22.Failure, _i22.SyncResult<_i23.MessageModel>>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>
+  _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>
       getOfflineData() => (super.noSuchMethod(
             Invocation.method(
               #getOfflineData,
               [],
             ),
-            returnValue: _i5
-                .Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i7.MessageModel>>(
+            returnValue: _i21.Future<
+                    _i2.Either<_i22.Failure, List<_i23.MessageModel>>>.value(
+                _FakeEither_0<_i22.Failure, List<_i23.MessageModel>>(
               this,
               Invocation.method(
                 #getOfflineData,
                 [],
               ),
             )),
-          ) as _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>);
+          ) as _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, void>> saveOfflineData(
-          List<_i7.MessageModel>? data) =>
+  _i21.Future<_i2.Either<_i22.Failure, void>> saveOfflineData(
+          List<_i23.MessageModel>? data) =>
       (super.noSuchMethod(
         Invocation.method(
           #saveOfflineData,
           [data],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, void>>.value(
-            _FakeEither_0<_i6.Failure, void>(
+        returnValue: _i21.Future<_i2.Either<_i22.Failure, void>>.value(
+            _FakeEither_0<_i22.Failure, void>(
           this,
           Invocation.method(
             #saveOfflineData,
             [data],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, void>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, void>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, bool>> isDataSynced() =>
+  _i21.Future<_i2.Either<_i22.Failure, bool>> isDataSynced() =>
       (super.noSuchMethod(
         Invocation.method(
           #isDataSynced,
           [],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i21.Future<_i2.Either<_i22.Failure, bool>>.value(
+            _FakeEither_0<_i22.Failure, bool>(
           this,
           Invocation.method(
             #isDataSynced,
             [],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, bool>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>> getById(String? id) =>
+  _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>> getById(
+          String? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #getById,
           [id],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>>.value(
-                _FakeEither_0<_i6.Failure, _i7.MessageModel>(
+            _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>>.value(
+                _FakeEither_0<_i22.Failure, _i23.MessageModel>(
           this,
           Invocation.method(
             #getById,
             [id],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>> create(
-          _i7.MessageModel? entity) =>
+  _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>> create(
+          _i23.MessageModel? entity) =>
       (super.noSuchMethod(
         Invocation.method(
           #create,
           [entity],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>>.value(
-                _FakeEither_0<_i6.Failure, _i7.MessageModel>(
+            _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>>.value(
+                _FakeEither_0<_i22.Failure, _i23.MessageModel>(
           this,
           Invocation.method(
             #create,
             [entity],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>> update(
+  _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>> update(
     String? id,
-    _i7.MessageModel? entity,
+    _i23.MessageModel? entity,
   ) =>
       (super.noSuchMethod(
         Invocation.method(
@@ -337,8 +560,8 @@ class MockMessageRepositoryImpl extends _i1.Mock
           ],
         ),
         returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>>.value(
-                _FakeEither_0<_i6.Failure, _i7.MessageModel>(
+            _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>>.value(
+                _FakeEither_0<_i22.Failure, _i23.MessageModel>(
           this,
           Invocation.method(
             #update,
@@ -348,27 +571,27 @@ class MockMessageRepositoryImpl extends _i1.Mock
             ],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, _i7.MessageModel>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, _i23.MessageModel>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, bool>> delete(String? id) =>
+  _i21.Future<_i2.Either<_i22.Failure, bool>> delete(String? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #delete,
           [id],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i21.Future<_i2.Either<_i22.Failure, bool>>.value(
+            _FakeEither_0<_i22.Failure, bool>(
           this,
           Invocation.method(
             #delete,
             [id],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, bool>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>> getAll({
+  _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>> getAll({
     int? page,
     int? limit,
     Map<String, dynamic>? filters,
@@ -383,9 +606,9 @@ class MockMessageRepositoryImpl extends _i1.Mock
             #filters: filters,
           },
         ),
-        returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i7.MessageModel>>(
+        returnValue: _i21
+            .Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>.value(
+            _FakeEither_0<_i22.Failure, List<_i23.MessageModel>>(
           this,
           Invocation.method(
             #getAll,
@@ -397,41 +620,268 @@ class MockMessageRepositoryImpl extends _i1.Mock
             },
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>> search(
+  _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>> search(
           String? query) =>
       (super.noSuchMethod(
         Invocation.method(
           #search,
           [query],
         ),
-        returnValue:
-            _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>.value(
-                _FakeEither_0<_i6.Failure, List<_i7.MessageModel>>(
+        returnValue: _i21
+            .Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>.value(
+            _FakeEither_0<_i22.Failure, List<_i23.MessageModel>>(
           this,
           Invocation.method(
             #search,
             [query],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, List<_i7.MessageModel>>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, List<_i23.MessageModel>>>);
 
   @override
-  _i5.Future<_i2.Either<_i6.Failure, bool>> exists(String? id) =>
+  _i21.Future<_i2.Either<_i22.Failure, bool>> exists(String? id) =>
       (super.noSuchMethod(
         Invocation.method(
           #exists,
           [id],
         ),
-        returnValue: _i5.Future<_i2.Either<_i6.Failure, bool>>.value(
-            _FakeEither_0<_i6.Failure, bool>(
+        returnValue: _i21.Future<_i2.Either<_i22.Failure, bool>>.value(
+            _FakeEither_0<_i22.Failure, bool>(
           this,
           Invocation.method(
             #exists,
             [id],
           ),
         )),
-      ) as _i5.Future<_i2.Either<_i6.Failure, bool>>);
+      ) as _i21.Future<_i2.Either<_i22.Failure, bool>>);
+}
+
+/// A class which mocks [SupabaseDependencies].
+///
+/// See the documentation for Mockito's code generation for more information.
+class MockSupabaseDependencies extends _i1.Mock
+    implements _i24.SupabaseDependencies {
+  MockSupabaseDependencies() {
+    _i1.throwOnMissingStub(this);
+  }
+
+  @override
+  _i3.UserRepositoryImpl get userRepository => (super.noSuchMethod(
+        Invocation.getter(#userRepository),
+        returnValue: _FakeUserRepositoryImpl_1(
+          this,
+          Invocation.getter(#userRepository),
+        ),
+      ) as _i3.UserRepositoryImpl);
+
+  @override
+  _i4.CourseRepositoryImpl get courseRepository => (super.noSuchMethod(
+        Invocation.getter(#courseRepository),
+        returnValue: _FakeCourseRepositoryImpl_2(
+          this,
+          Invocation.getter(#courseRepository),
+        ),
+      ) as _i4.CourseRepositoryImpl);
+
+  @override
+  _i5.SessionRepositoryImpl get sessionRepository => (super.noSuchMethod(
+        Invocation.getter(#sessionRepository),
+        returnValue: _FakeSessionRepositoryImpl_3(
+          this,
+          Invocation.getter(#sessionRepository),
+        ),
+      ) as _i5.SessionRepositoryImpl);
+
+  @override
+  _i6.MessageRepositoryImpl get messageRepository => (super.noSuchMethod(
+        Invocation.getter(#messageRepository),
+        returnValue: _FakeMessageRepositoryImpl_4(
+          this,
+          Invocation.getter(#messageRepository),
+        ),
+      ) as _i6.MessageRepositoryImpl);
+
+  @override
+  _i7.NotificationRepositoryImpl get notificationRepository =>
+      (super.noSuchMethod(
+        Invocation.getter(#notificationRepository),
+        returnValue: _FakeNotificationRepositoryImpl_5(
+          this,
+          Invocation.getter(#notificationRepository),
+        ),
+      ) as _i7.NotificationRepositoryImpl);
+
+  @override
+  _i8.UserSupabaseDataSource get userRemoteDataSource => (super.noSuchMethod(
+        Invocation.getter(#userRemoteDataSource),
+        returnValue: _FakeUserSupabaseDataSource_6(
+          this,
+          Invocation.getter(#userRemoteDataSource),
+        ),
+      ) as _i8.UserSupabaseDataSource);
+
+  @override
+  _i9.CourseSupabaseDataSource get courseRemoteDataSource =>
+      (super.noSuchMethod(
+        Invocation.getter(#courseRemoteDataSource),
+        returnValue: _FakeCourseSupabaseDataSource_7(
+          this,
+          Invocation.getter(#courseRemoteDataSource),
+        ),
+      ) as _i9.CourseSupabaseDataSource);
+
+  @override
+  _i10.SessionSupabaseDataSource get sessionRemoteDataSource =>
+      (super.noSuchMethod(
+        Invocation.getter(#sessionRemoteDataSource),
+        returnValue: _FakeSessionSupabaseDataSource_8(
+          this,
+          Invocation.getter(#sessionRemoteDataSource),
+        ),
+      ) as _i10.SessionSupabaseDataSource);
+
+  @override
+  _i11.MessageSupabaseDataSource get messageRemoteDataSource =>
+      (super.noSuchMethod(
+        Invocation.getter(#messageRemoteDataSource),
+        returnValue: _FakeMessageSupabaseDataSource_9(
+          this,
+          Invocation.getter(#messageRemoteDataSource),
+        ),
+      ) as _i11.MessageSupabaseDataSource);
+
+  @override
+  _i12.NotificationSupabaseDataSource get notificationRemoteDataSource =>
+      (super.noSuchMethod(
+        Invocation.getter(#notificationRemoteDataSource),
+        returnValue: _FakeNotificationSupabaseDataSource_10(
+          this,
+          Invocation.getter(#notificationRemoteDataSource),
+        ),
+      ) as _i12.NotificationSupabaseDataSource);
+
+  @override
+  _i13.UserCacheDataSource get userCacheDataSource => (super.noSuchMethod(
+        Invocation.getter(#userCacheDataSource),
+        returnValue: _FakeUserCacheDataSource_11(
+          this,
+          Invocation.getter(#userCacheDataSource),
+        ),
+      ) as _i13.UserCacheDataSource);
+
+  @override
+  _i14.CourseCacheDataSource get courseCacheDataSource => (super.noSuchMethod(
+        Invocation.getter(#courseCacheDataSource),
+        returnValue: _FakeCourseCacheDataSource_12(
+          this,
+          Invocation.getter(#courseCacheDataSource),
+        ),
+      ) as _i14.CourseCacheDataSource);
+
+  @override
+  _i15.SessionCacheDataSource get sessionCacheDataSource => (super.noSuchMethod(
+        Invocation.getter(#sessionCacheDataSource),
+        returnValue: _FakeSessionCacheDataSource_13(
+          this,
+          Invocation.getter(#sessionCacheDataSource),
+        ),
+      ) as _i15.SessionCacheDataSource);
+
+  @override
+  _i16.MessageCacheDataSource get messageCacheDataSource => (super.noSuchMethod(
+        Invocation.getter(#messageCacheDataSource),
+        returnValue: _FakeMessageCacheDataSource_14(
+          this,
+          Invocation.getter(#messageCacheDataSource),
+        ),
+      ) as _i16.MessageCacheDataSource);
+
+  @override
+  _i17.NotificationCacheDataSource get notificationCacheDataSource =>
+      (super.noSuchMethod(
+        Invocation.getter(#notificationCacheDataSource),
+        returnValue: _FakeNotificationCacheDataSource_15(
+          this,
+          Invocation.getter(#notificationCacheDataSource),
+        ),
+      ) as _i17.NotificationCacheDataSource);
+
+  @override
+  _i18.CacheSyncService get cacheSyncService => (super.noSuchMethod(
+        Invocation.getter(#cacheSyncService),
+        returnValue: _FakeCacheSyncService_16(
+          this,
+          Invocation.getter(#cacheSyncService),
+        ),
+      ) as _i18.CacheSyncService);
+
+  @override
+  _i19.OfflineQueueManager get offlineQueueManager => (super.noSuchMethod(
+        Invocation.getter(#offlineQueueManager),
+        returnValue: _FakeOfflineQueueManager_17(
+          this,
+          Invocation.getter(#offlineQueueManager),
+        ),
+      ) as _i19.OfflineQueueManager);
+
+  @override
+  _i21.Future<void> initialize() => (super.noSuchMethod(
+        Invocation.method(
+          #initialize,
+          [],
+        ),
+        returnValue: _i21.Future<void>.value(),
+        returnValueForMissingStub: _i21.Future<void>.value(),
+      ) as _i21.Future<void>);
+
+  @override
+  _i21.Future<void> startBackgroundSync(String? userId) => (super.noSuchMethod(
+        Invocation.method(
+          #startBackgroundSync,
+          [userId],
+        ),
+        returnValue: _i21.Future<void>.value(),
+        returnValueForMissingStub: _i21.Future<void>.value(),
+      ) as _i21.Future<void>);
+
+  @override
+  void stopBackgroundSync() => super.noSuchMethod(
+        Invocation.method(
+          #stopBackgroundSync,
+          [],
+        ),
+        returnValueForMissingStub: null,
+      );
+
+  @override
+  _i21.Future<void> syncNow(String? userId) => (super.noSuchMethod(
+        Invocation.method(
+          #syncNow,
+          [userId],
+        ),
+        returnValue: _i21.Future<void>.value(),
+        returnValueForMissingStub: _i21.Future<void>.value(),
+      ) as _i21.Future<void>);
+
+  @override
+  _i21.Future<void> processOfflineQueue() => (super.noSuchMethod(
+        Invocation.method(
+          #processOfflineQueue,
+          [],
+        ),
+        returnValue: _i21.Future<void>.value(),
+        returnValueForMissingStub: _i21.Future<void>.value(),
+      ) as _i21.Future<void>);
+
+  @override
+  _i21.Future<int> getOfflineQueueSize() => (super.noSuchMethod(
+        Invocation.method(
+          #getOfflineQueueSize,
+          [],
+        ),
+        returnValue: _i21.Future<int>.value(0),
+      ) as _i21.Future<int>);
 }

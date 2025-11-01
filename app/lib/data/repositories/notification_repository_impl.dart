@@ -40,12 +40,25 @@ class NotificationRepositoryImpl implements IOfflineFirstRepository<Notification
         userId,
         limit: limit,
         offset: offset,
-        type: type,
-        isRead: isRead,
       );
       
-      if (cachedNotifications.isNotEmpty) {
-        final notificationModels = cachedNotifications
+      // Filter by type and isRead in memory since cache data source doesn't support these parameters
+      var filteredNotifications = cachedNotifications;
+      if (type != null) {
+        filteredNotifications = filteredNotifications
+            .where((notification) => notification['type'] == type)
+            .toList();
+      }
+      if (isRead != null) {
+        final isReadValue = isRead ? 1 : 0;
+        filteredNotifications = filteredNotifications
+            .where((notification) => 
+                (notification['is_read'] as int? ?? 0) == isReadValue)
+            .toList();
+      }
+      
+      if (filteredNotifications.isNotEmpty) {
+        final notificationModels = filteredNotifications
             .map((data) => NotificationModel.fromJson(data))
             .toList();
         
@@ -53,7 +66,11 @@ class NotificationRepositoryImpl implements IOfflineFirstRepository<Notification
           _updateNotificationsInBackground(userId, type: type, isRead: isRead);
         }
         
-        return Right(notificationModels);
+        return Right(notificationModels.where((notification) {
+          if (type != null && notification.type != type) return false;
+          if (isRead != null && notification.isRead != isRead) return false;
+          return true;
+        }).toList());
       }
 
       if (await _isOnline) {
@@ -66,7 +83,7 @@ class NotificationRepositoryImpl implements IOfflineFirstRepository<Notification
         );
         
         for (final notification in remoteNotifications) {
-          await _cacheDataSource.insertNotification(notification);
+          await _cacheDataSource.cacheNotification(notification.toJson());
         }
         
         return Right(remoteNotifications.map((data) => NotificationModel.fromJson(data)).toList());
@@ -94,10 +111,7 @@ class NotificationRepositoryImpl implements IOfflineFirstRepository<Notification
       );
       
       for (final notification in remoteNotifications) {
-        await _cacheDataSource.updateNotification(
-          notification['notification_id'],
-          notification,
-        );
+        await _cacheDataSource.cacheNotification(notification.toJson());
       }
     } catch (e) {
       // Silent fail
@@ -124,7 +138,7 @@ class NotificationRepositoryImpl implements IOfflineFirstRepository<Notification
 
   Future<void> _updateUnreadCountInBackground(String userId) async {
     try {
-      final remoteCount = await _remoteDataSource.getUnreadCount(userId);
+      final remoteCount = await _remoteDataSource.getUnreadNotificationsCount(userId);
       // Count will be updated when notifications are synced
     } catch (e) {
       // Silent fail
@@ -172,7 +186,7 @@ class NotificationRepositoryImpl implements IOfflineFirstRepository<Notification
   /// Get notification statistics
   Future<Either<Failure, Map<String, dynamic>>> getNotificationStats(String userId) async {
     try {
-      final stats = await _cacheDataSource.getNotificationStats(userId);
+      final stats = await _cacheDataSource.getUserStats(userId);
       
       if (await _isOnline) {
         _updateStatsInBackground(userId);
@@ -189,13 +203,10 @@ class NotificationRepositoryImpl implements IOfflineFirstRepository<Notification
 
   Future<void> _updateStatsInBackground(String userId) async {
     try {
-      final remoteNotifications = await _remoteDataSource.getUserNotifications(userId);
+      final remoteNotifications = await _remoteDataSource.getUserNotifications(userId: userId);
       
       for (final notification in remoteNotifications) {
-        await _cacheDataSource.updateNotification(
-          notification['notification_id'],
-          notification,
-        );
+        await _cacheDataSource.cacheNotification(notification.toJson());
       }
     } catch (e) {
       // Silent fail
@@ -220,7 +231,7 @@ class NotificationRepositoryImpl implements IOfflineFirstRepository<Notification
           data: data,
         );
         
-        await _cacheDataSource.insertNotification(notificationData);
+        await _cacheDataSource.cacheNotification(notificationData);
         
         return Right(NotificationModel.fromJson(notificationData));
       } else {
@@ -284,7 +295,7 @@ class NotificationRepositoryImpl implements IOfflineFirstRepository<Notification
   Future<Either<Failure, void>> saveOfflineData(List<NotificationModel> data) async {
     try {
       for (final notification in data) {
-        await _cacheDataSource.insertNotification(notification.toJson());
+        await _cacheDataSource.cacheNotification(notification.toJson());
       }
       
       return const Right(null);

@@ -52,7 +52,7 @@ class UserRepositoryImpl implements IOfflineFirstRepository<UserModel> {
         final remoteUser = await _remoteDataSource.getProfile(id);
         
         // Cache the result
-        await _cacheDataSource.insertProfile(remoteUser);
+        await _cacheDataSource.cacheProfile(remoteUser);
         
         return Right(UserModel.fromJson(remoteUser));
       } else {
@@ -120,9 +120,9 @@ class UserRepositoryImpl implements IOfflineFirstRepository<UserModel> {
       // Try cache first
       final cachedTutors = await _cacheDataSource.searchTutors(
         query: query,
-        subjects: subjects,
+        subject: subjects?.isNotEmpty == true ? subjects!.first : null,
         minRating: minRating,
-        maxHourlyRate: maxHourlyRate,
+        maxPrice: maxHourlyRate,
       );
 
       if (cachedTutors.isNotEmpty) {
@@ -154,7 +154,7 @@ class UserRepositoryImpl implements IOfflineFirstRepository<UserModel> {
         
         // Cache the results
         for (final tutor in remoteTutors) {
-          await _cacheDataSource.insertProfile(tutor);
+          await _cacheDataSource.cacheProfile(tutor);
         }
         
         return Right(remoteTutors.map((data) => UserModel.fromJson(data)).toList());
@@ -310,7 +310,7 @@ class UserRepositoryImpl implements IOfflineFirstRepository<UserModel> {
   Future<Either<Failure, void>> saveOfflineData(List<UserModel> data) async {
     try {
       for (final user in data) {
-        await _cacheDataSource.insertProfile(user.toJson());
+        await _cacheDataSource.cacheProfile(user.toJson());
       }
       
       return const Right(null);

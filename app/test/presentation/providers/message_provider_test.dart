@@ -11,7 +11,7 @@ import 'package:flutter_tutoring_app/data/models/conversation_model.dart';
 import 'package:flutter_tutoring_app/data/models/failure.dart';
 
 // Generate mocks with: flutter pub run build_runner build
-@GenerateMocks([MessageRepositoryImpl])
+@GenerateMocks([MessageRepositoryImpl, SupabaseDependencies])
 import 'message_provider_test.mocks.dart';
 
 void main() {
