@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../../core/navigation/app_router.dart';
-import '../../core/constants/colors.dart';
+import '../../core/constants/app_constants.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
@@ -28,11 +28,11 @@ class SplashPage extends StatelessWidget {
               width: 120,
               height: 120,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: AppColors.white,
                 borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.1),
+                    color: AppColors.black.withOpacity(0.1),
                     blurRadius: 20,
                     offset: const Offset(0, 10),
                   ),
@@ -53,7 +53,7 @@ class SplashPage extends StatelessWidget {
               style: TextStyle(
                 fontSize: 32,
                 fontWeight: FontWeight.bold,
-                color: Colors.white,
+                color: AppColors.white,
                 letterSpacing: 1.2,
               ),
             ),
@@ -65,7 +65,7 @@ class SplashPage extends StatelessWidget {
               'Learn. Grow. Succeed.',
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.white,
+                color: AppColors.white,
                 fontWeight: FontWeight.w300,
               ),
             ),
@@ -74,7 +74,7 @@ class SplashPage extends StatelessWidget {
             
             // Loading Indicator
             const CircularProgressIndicator(
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              valueColor: AlwaysStoppedAnimation<Color>(AppColors.white),
             ),
           ],
         ),

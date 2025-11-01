@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:flutter_tutoring_app/data/models/failure.dart';
 
 /// Abstract base class for all use cases
 abstract class BaseUseCase<T, R> {

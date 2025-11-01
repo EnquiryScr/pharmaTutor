@@ -54,9 +54,9 @@ class CourseState {
 
 /// Course state notifier for Riverpod
 class CourseNotifier extends StateNotifier<CourseState> {
-  final SupabaseDependencies _dependencies = SupabaseDependencies();
-
   CourseNotifier() : super(const CourseState());
+
+  SupabaseDependencies get _dependencies => ProviderBindings().dependencies;
 
   int _currentPage = 0;
   static const int _pageSize = 20;
