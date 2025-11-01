@@ -12,7 +12,7 @@ class DatabaseHelper {
   /// Get database instance (lazy initialization)
   Future<Database> get database async {
     if (_database != null) return _database!;
-    _database = await _initDB('pharmaT_cache.db');
+    _database = await _initDB('flutter_tutoring_app_cache.db');
     return _database!;
   }
 

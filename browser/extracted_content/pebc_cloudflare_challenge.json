@@ -1,0 +1,21 @@
+📄 Extracted from page: Just a moment...
+URL: https://pebc.ca/
+
+Extracted content:
+```json
+{
+    "title": "Just a moment...",
+    "url": "https://pebc.ca/",
+    "summary": "The provided page is a Cloudflare security challenge page. It states 'Just a moment...', 'Verify you are human by completing the action below', and 'pebc.ca needs to review the security of your connection before proceeding.' It then indicates 'Verification successful' and 'Waiting for pebc.ca to respond...' followed by a prompt to 'Enable JavaScript and cookies to continue'. No content related to pharmacy certification requirements, the Pharmacist Qualifying Examination (PQE), eligibility criteria, or requirements for international pharmacy graduates is present on this page.",
+    "key_points": [
+        "The page is a Cloudflare security check.",
+        "No actual content from pebc.ca is displayed.",
+        "Verification for human status is required to proceed.",
+        "Instructions to enable JavaScript and cookies are provided."
+    ],
+    "relevant_links": [
+        "https://www.cloudflare.com?utm_source=challenge&utm_campaign=m"
+    ],
+    "file_name": "pebc_cloudflare_challenge.json"
+}
+```

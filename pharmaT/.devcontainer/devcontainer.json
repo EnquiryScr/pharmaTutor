@@ -1,0 +1,31 @@
+{
+    "name": "Flutter Pharmacy Tutor",
+    "image": "mcr.microsoft.com/devcontainers/flutter:0-3.22",
+    
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "dart-code.dart-code",
+                "dart-code.flutter",
+                "ms-vscode.vscode-typescript-next",
+                "bradlc.vscode-tailwindcss",
+                "ms-vscode.vscode-json",
+                "ms-vscode.vscode-yaml"
+            ]
+        }
+    },
+    
+    "postCreateCommand": "cd app && flutter pub get",
+    
+    "forwardPorts": [8080, 3000, 5000],
+    
+    "mounts": [
+        "source=/var/run/docker.sock,target=/var/run/docker.sock,type=bind"
+    ],
+    
+    "remoteUser": "vscode",
+    
+    "workspaceFolder": "/workspaces/pharmaTutor",
+    
+    "workspaceMount": "source=${localWorkspaceFolder},target=/workspaces/pharmaTutor,type=bind,consistency=cached"
+}

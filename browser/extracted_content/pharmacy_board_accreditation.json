@@ -1,0 +1,27 @@
+📄 Extracted from page: Pharmacy Board of Australia - Accreditation
+URL: https://www.pharmacyboard.gov.au/Accreditation.aspx
+
+Extracted content:
+```json
+{
+  "title": "Pharmacy Board of Australia - Accreditation",
+  "url": "https://www.pharmacyboard.gov.au/Accreditation.aspx",
+  "summary": "This page from the Pharmacy Board of Australia details the accreditation process for pharmacy programs in Australia, outlining the role of the Australian Pharmacy Council (APC) as the accreditation authority. It provides links to comprehensive lists of approved and inactive programs of study necessary for general pharmacist registration. The page also specifies certain New Zealand qualifications that are deemed substantially equivalent to Australian approved qualifications, allowing graduates to qualify for general registration. Furthermore, it mentions the Board's engagement with an independent review of accreditation systems.",
+  "key_points": [
+    "The Australian Pharmacy Council (APC) is the designated accreditation authority for pharmacy education providers and programs in Australia.",
+    "Approved programs of study for general pharmacist registration are available through an online search on the Ahpra website and a specific list provided by the Board.",
+    "Qualifications from the University of Auckland (Bachelor of Pharmacy, Bachelor of Pharmacy (Honours)) and University of Otago (Bachelor of Pharmacy, Bachelor of Pharmacy (Honours)) in New Zealand are recognized as substantially equivalent to Australian approved qualifications for general registration.",
+    "A separate list for 'Inactive Programs of Study' is available for programs no longer delivered or approved.",
+    "The Pharmacy Board has submitted a response to the draft report of an Independent Review of Accreditation Systems within the National Registration and Accreditation Scheme for health professions."
+  ],
+  "relevant_links": [
+    "http://www.pharmacycouncil.org.au/ (Australian Pharmacy Council)",
+    "https://www.ahpra.gov.au/Accreditation/Accreditation-Authorities.aspx (Ahpra Accreditation Authorities)",
+    "https://www.ahpra.gov.au/Accreditation/Approved-Programs-of-Study.aspx?ns=1 (Approved Programs of Study - all professions)",
+    "https://www.ahpra.gov.au/Accreditation/Approved-Programs-of-Study.aspx?ref=Pharmacist (Pharmacy Approved Programs of Study)",
+    "https://www.ahpra.gov.au/Accreditation/Approved-Programs-of-Study/Inactive-Programs-of-Study.aspx (Inactive Programs of Study)",
+    "/documents/default.aspx?record=WD17%2f24226&dbid=AP&chksum=m9ps44xna47m1bVy6Ycs1w%3d%3d (Submission to the draft report - PDF)"
+  ],
+  "file_name": "pharmacy_board_accreditation.json"
+}
+```

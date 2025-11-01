@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 extension StringExtensions on String? {
   /// Check if string is null or empty
   bool get isNullOrEmpty => this == null || this!.isEmpty;

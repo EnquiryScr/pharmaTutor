@@ -1,0 +1,20 @@
+📄 Extracted from page: Just a moment...
+URL: https://ocpinfo.com/applicants/registration-requirements/pebc/
+
+Extracted content:
+```json
+{
+    "title": "Just a moment...",
+    "url": "https://ocpinfo.com/applicants/registration-requirements/pebc/",
+    "summary": "The page content is currently unavailable as it is displaying a Cloudflare security challenge. It requests verification to ensure the user is human before proceeding. Therefore, no information regarding PEBC requirements, examination processes, or certification procedures for pharmacists in Ontario could be extracted.",
+    "key_points": [
+        "Page is behind a Cloudflare security challenge.",
+        "Requires human verification to proceed.",
+        "Actual content related to PEBC requirements is not accessible."
+    ],
+    "relevant_links": [
+        "https://www.cloudflare.com?utm_source=challenge&utm_campaign=m"
+    ],
+    "file_name": "ocpinfo_pebc_requirements_unavailable.json"
+}
+```

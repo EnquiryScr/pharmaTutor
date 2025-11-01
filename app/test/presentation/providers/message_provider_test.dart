@@ -3,15 +3,15 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:dartz/dartz.dart';
 
-import 'package:pharmaT/presentation/providers/message_provider.dart';
-import 'package:pharmaT/core/utils/supabase_dependencies.dart';
-import 'package:pharmaT/data/repositories/message_repository_impl.dart';
-import 'package:pharmaT/data/models/message_model.dart';
-import 'package:pharmaT/data/models/conversation_model.dart';
-import 'package:pharmaT/data/models/failure.dart';
+import 'package:flutter_tutoring_app/presentation/providers/message_provider.dart';
+import 'package:flutter_tutoring_app/core/utils/supabase_dependencies.dart';
+import 'package:flutter_tutoring_app/data/repositories/message_repository_impl.dart';
+import 'package:flutter_tutoring_app/data/models/message_model.dart';
+import 'package:flutter_tutoring_app/data/models/conversation_model.dart';
+import 'package:flutter_tutoring_app/data/models/failure.dart';
 
 // Generate mocks with: flutter pub run build_runner build
-@GenerateMocks([SupabaseDependencies, MessageRepositoryImpl])
+@GenerateMocks([MessageRepositoryImpl, SupabaseDependencies])
 import 'message_provider_test.mocks.dart';
 
 void main() {

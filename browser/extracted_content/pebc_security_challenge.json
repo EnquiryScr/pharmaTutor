@@ -1,0 +1,21 @@
+📄 Extracted from page: Just a moment...
+URL: https://pebc.ca/pharmacists/qualifying-examination/general-information/
+
+Extracted content:
+```json
+{
+    "title": "Just a moment...",
+    "url": "https://pebc.ca/pharmacists/qualifying-examination/general-information/",
+    "summary": "The page is currently displaying a Cloudflare security challenge, preventing access to its actual content. It prompts the user to verify they are human and states that pebc.ca needs to review the security of the connection before proceeding. No information regarding the PEBC Pharmacist Qualifying Examination is available on this page.",
+    "key_points": [
+        "Page is a Cloudflare security challenge.",
+        "Requires human verification to proceed.",
+        "Actual content of the page is not accessible.",
+        "No information about the PEBC Pharmacist Qualifying Examination can be extracted."
+    ],
+    "relevant_links": [
+        "https://www.cloudflare.com?utm_source=challenge&utm_campaign=m"
+    ],
+    "file_name": "pebc_security_challenge.json"
+}
+```

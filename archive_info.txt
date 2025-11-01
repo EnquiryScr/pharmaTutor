@@ -1,0 +1,1 @@
+-rw-r-xr--+ 1 minimax minimax 3.3M Oct 30 19:59 /workspace/pharmaT-github-ready.tar.gz

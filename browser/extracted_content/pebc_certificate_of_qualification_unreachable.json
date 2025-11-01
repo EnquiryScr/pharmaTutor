@@ -1,0 +1,20 @@
+📄 Extracted from page: Just a moment...
+URL: https://www.pharmacistsgatewaycanada.ca/before-you-start/pebc-certificate-of-qualification/
+
+Extracted content:
+```json
+{
+    "title": "Just a moment...",
+    "url": "https://www.pharmacistsgatewaycanada.ca/before-you-start/pebc-certificate-of-qualification/",
+    "summary": "The page displays a security challenge from Cloudflare ('Just a moment...', 'Verify you are human...') and does not contain any accessible content related to the PEBC Certificate of Qualification requirements, examination processes, eligibility criteria, or requirements for international pharmacy graduates. The actual content of the page is blocked by this security check.",
+    "key_points": [
+        "The page is a Cloudflare security check.",
+        "No content about PEBC Certificate of Qualification is available on this page.",
+        "The page prompts the user to verify they are human before proceeding."
+    ],
+    "relevant_links": [
+        "https://www.cloudflare.com?utm_source=challenge&utm_campaign=m"
+    ],
+    "file_name": "pebc_certificate_of_qualification_unreachable.json"
+}
+```

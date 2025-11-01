@@ -1,0 +1,34 @@
+📄 Extracted from page: Pharmacy Board of Australia - Home
+URL: https://www.pharmacyboard.gov.au/
+
+Extracted content:
+```json
+{
+  "title": "Pharmacy Board of Australia - Home",
+  "url": "https://www.pharmacyboard.gov.au/",
+  "summary": "The Pharmacy Board of Australia's homepage serves as a central hub for information on pharmacy registration, regulation, and professional standards in Australia. Its primary goal is to ensure pharmacists are suitably trained, qualified, and safe to practice. The page provides quick access and navigation to comprehensive details regarding various registration pathways, including specific requirements for Australian graduates and international pharmacists, examination procedures, and essential professional standards such as codes of conduct and registration guidelines.",
+  "key_points": [
+    "The Pharmacy Board of Australia regulates pharmacists to ensure public safety, qualifications, and competence.",
+    "Detailed information on registration pathways is available for: Australian graduates, students, interns, and overseas practitioners.",
+    "Degree requirements are implicitly covered through links to 'Approved programs of study' and 'Graduates of Australian programs'.",
+    "Specific pathways and requirements for international pharmacists are outlined under 'Overseas practitioners' and general 'International practitioners' information.",
+    "The 'Registration Examination' is a key component of the registration process, with links to examination details and oral exam dates.",
+    "Professional standards are maintained through 'Registration standards', 'Codes, guidelines and policies', and specific documents like the 'Code of conduct' and information on 'Professional indemnity insurance'."
+  ],
+  "relevant_links": [
+    "https://www.pharmacyboard.gov.au/Registration.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Graduates-of-Australian-programs.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Overseas.aspx",
+    "https://www.ahpra.gov.au/Registration/International-practitioners.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Registration-Examination.aspx",
+    "https://www.pharmacyboard.gov.au/Registration-Standards.aspx",
+    "https://www.pharmacyboard.gov.au/Codes-Guidelines.aspx",
+    "https://www.ahpra.gov.au/Resources/Code-of-conduct/Shared-Code-of-conduct.aspx",
+    "https://www.ahpra.gov.au/Registration/Registration-Standards/PII.aspx",
+    "https://www.pharmacyboard.gov.au/Accreditation.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Internships.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Provisional-to-General-Registration.aspx"
+  ],
+  "file_name": "pharmacy_board_australia_overview.json"
+}
+```

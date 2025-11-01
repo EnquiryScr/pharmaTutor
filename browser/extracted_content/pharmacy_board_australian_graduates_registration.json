@@ -1,0 +1,31 @@
+📄 Extracted from page: Pharmacy Board of Australia - Graduates of Australian programs
+URL: https://www.pharmacyboard.gov.au/Registration/Graduates-of-Australian-programs.aspx
+
+Extracted content:
+```json
+{
+  "title": "Pharmacy Board of Australia - Graduates of Australian programs",
+  "url": "https://www.pharmacyboard.gov.au/Registration/Graduates-of-Australian-programs.aspx",
+  "summary": "This page outlines the detailed requirements and pathways for graduates of Australian pharmacy programs to obtain registration with the Pharmacy Board of Australia. It differentiates between programs approved for provisional registration (requiring an internship) and those approved directly for general registration, specifying the registration standards applicable at each stage of the process.",
+  "key_points": [
+    "Graduates must complete an 'approved program of study' in Australia to be qualified for pharmacist registration.",
+    "All applicants must be suitable persons and meet specific registration standards.",
+    "The type of registration applied for depends on whether the program is approved for provisional registration (to complete an internship) or general registration.",
+    "For graduates of programs approved for provisional registration, the following standards apply for provisional registration: Criminal history, English language skills, Professional indemnity insurance arrangements.",
+    "For graduates applying for general registration after completing an internship, the following standards apply: Criminal history, Supervised practice arrangements, Examinations for eligibility for general registration, Professional indemnity insurance arrangements, Recency of practice, Continuing professional development.",
+    "For graduates of programs approved directly for general registration, the following standards apply: Criminal history, English language skills, Examinations for eligibility for general registration (must pass the Board's registration examination), Professional indemnity insurance arrangements, Recency of practice.",
+    "Graduates of programs approved for general registration do not require provisional registration or an internship but must pass the Board's registration examination.",
+    "All applicants must formally apply for registration.",
+    "Renewal of provisional or general registration requires applicants to declare meeting standards for criminal history, professional indemnity insurance arrangements, recency of practice, and continuing professional development."
+  ],
+  "relevant_links": [
+    "https://www.pharmacyboard.gov.au/Accreditation.aspx",
+    "https://www.pharmacyboard.gov.au/Registration.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Internships.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Registration-Standards.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Registration-Examination.aspx",
+    "https://www.pharmacyboard.gov.au/Registration/Forms.aspx"
+  ],
+  "file_name": "pharmacy_board_australian_graduates_registration.json"
+}
+```

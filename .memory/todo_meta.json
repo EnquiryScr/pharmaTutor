@@ -1,0 +1,55 @@
+{
+  "todos": {
+    "Coordinator": {
+      "1": {
+        "id": "1",
+        "content": "Fix package naming inconsistencies across codebase",
+        "details": "1. Update all remaining references from 'pharmaT' to 'flutter_tutoring_app' in imports\n2. Fix test file imports and mock generation\n3. Update pubspec.yaml and any configuration files",
+        "status": "pending",
+        "priority": "high"
+      },
+      "2": {
+        "id": "2",
+        "content": "Implement missing data source interfaces and methods",
+        "details": "1. Add missing methods to UserSupabaseDataSource (getProfile, updateProfile, searchTutors)\n2. Add missing methods to UserCacheDataSource (insertProfile)\n3. Add missing methods to SessionSupabaseDataSource (getTutorSessions, getStudentSessions)\n4. Add missing methods to SessionCacheDataSource (insertSession)\n5. Add missing methods to NotificationCacheDataSource (insertNotification, updateNotification, getNotificationStats)\n6. Fix method signatures to match repository implementations",
+        "status": "pending",
+        "priority": "high"
+      },
+      "3": {
+        "id": "3",
+        "content": "Fix missing model classes and interfaces",
+        "details": "1. Implement missing BaseModel class and fix import path in irepository.dart\n2. Create missing model classes: FileInfo, StudentAnalytics, TutorAnalytics, PlatformAnalytics, RevenueAnalytics\n3. Fix IRepository interface definitions and inheritance\n4. Implement ApiListResponse, Failure, AuthResult classes\n5. Fix model property accessors (getters/setters)",
+        "status": "pending",
+        "priority": "high"
+      },
+      "4": {
+        "id": "4",
+        "content": "Fix repository implementation method signatures",
+        "details": "1. Fix method parameters to match expected signatures\n2. Correct return types and async/await usage\n3. Fix JSON serialization/deserialization issues\n4. Update method calls to data sources with correct parameters",
+        "status": "pending",
+        "priority": "high"
+      },
+      "5": {
+        "id": "5",
+        "content": "Fix presentation layer and UI components",
+        "details": "1. Fix missing viewmodel imports and class bindings\n2. Add missing UI extensions (h, w, sp, r for responsive design)\n3. Fix color references and theme issues\n4. Implement missing provider methods and bindings\n5. Fix import paths for providers and viewmodels",
+        "status": "pending",
+        "priority": "medium"
+      },
+      "6": {
+        "id": "6",
+        "content": "Fix test files and mock implementations",
+        "details": "1. Update test file imports to use correct package name\n2. Fix @GenerateMocks annotations for all test files\n3. Regenerate mock files with correct class references\n4. Fix test implementations to match actual API",
+        "status": "pending",
+        "priority": "medium"
+      },
+      "7": {
+        "id": "7",
+        "content": "Add missing domain layer components",
+        "details": "1. Implement missing use case classes\n2. Create missing service classes (AuthService)\n3. Fix domain repository interfaces\n4. Implement missing analytics classes",
+        "status": "pending",
+        "priority": "medium"
+      }
+    }
+  }
+}

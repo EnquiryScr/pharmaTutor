@@ -1,0 +1,35 @@
+📄 Extracted from page: Pharmacy Board of Australia - Registration
+URL: https://www.pharmacyboard.gov.au/Registration.aspx
+
+Extracted content:
+```json
+{
+    "title": "Pharmacy Board of Australia - Registration",
+    "url": "https://www.pharmacyboard.gov.au/Registration.aspx",
+    "summary": "This page from the Pharmacy Board of Australia is the central hub for information regarding pharmacist registration in Australia. It outlines that all pharmacists must be registered with the Board and meet its registration standards to practice. The site provides various registration pathways and details for different applicant groups, including Australian graduates and overseas practitioners. It also points to key requirements such as registration standards, examinations, and applicable codes and guidelines, with options for online application and renewal.",
+    "key_points": [
+        "Pharmacists must be registered with the Pharmacy Board of Australia to practice in the country.",
+        "Registration requires meeting specific standards set by the Board.",
+        "Online applications for registration and renewals are available.",
+        "Different registration pathways exist for various applicants, including Australian graduates, overseas practitioners, and students.",
+        "Key requirements for registration include meeting registration standards and potentially passing oral examinations.",
+        "The site provides links to detailed information on specific registration types, fees, and application processes."
+    ],
+    "relevant_links": [
+        "https://www.pharmacyboard.gov.au/Registration/Student-Registration.aspx",
+        "https://www.pharmacyboard.gov.au/Registration/Graduates-of-Australian-programs.aspx",
+        "https://www.pharmacyboard.gov.au/Registration/Internships.aspx",
+        "https://www.pharmacyboard.gov.au/Registration/Registration-Examination.aspx",
+        "https://www.pharmacyboard.gov.au/Registration/Provisional-to-General-Registration.aspx",
+        "https://www.pharmacyboard.gov.au/Registration/Overseas.aspx",
+        "https://www.pharmacyboard.gov.au/Registration/Registration-Renewal.aspx",
+        "https://www.pharmacyboard.gov.au/Registration/Fees.aspx",
+        "https://www.pharmacyboard.gov.au/Registration/Forms.aspx",
+        "https://www.pharmacyboard.gov.au/Registration/Audit.aspx",
+        "https://www.pharmacyboard.gov.au/Registration-Standards.aspx",
+        "https://www.pharmacyboard.gov.au/Codes-Guidelines.aspx",
+        "https://www.pharmacyboard.gov.au/Accreditation.aspx"
+    ],
+    "file_name": "australian_pharmacy_registration_requirements.json"
+}
+```

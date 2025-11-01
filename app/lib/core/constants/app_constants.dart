@@ -135,7 +135,8 @@ class ApiStatusCodes {
   static const int serviceUnavailable = 503;
 }
 
-class Colors {
+/// App Colors extending Flutter's Colors to avoid ambiguity
+class AppColors {
   // Primary Colors
   static const Color primary = Color(0xFF4F46E5);
   static const Color primaryLight = Color(0xFF6366F1);

@@ -3,8 +3,8 @@ import 'package:mockito/mockito.dart';
 import 'package:mockito/annotations.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 
-import 'package:pharmaT/data/datasources/local/offline_queue_manager.dart';
-import 'package:pharmaT/data/datasources/local/database_helper.dart';
+import 'package:flutter_tutoring_app/data/datasources/local/offline_queue_manager.dart';
+import 'package:flutter_tutoring_app/data/datasources/local/database_helper.dart';
 
 void main() {
   late OfflineQueueManager queueManager;
