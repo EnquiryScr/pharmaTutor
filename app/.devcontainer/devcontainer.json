@@ -1,0 +1,27 @@
+{
+  "name": "Flutter & Android Development Environment",
+  
+  // Use the Dockerfile for building the custom environment
+  "build": {
+    "dockerfile": "Dockerfile",
+    "context": "."
+  },
+
+  // Environment variables are now set within the Dockerfile itself (ENV instructions).
+
+  // Install recommended VS Code extensions for a good Flutter experience
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dart-code.dart-code",
+        "dart-code.flutter",
+        "eamodio.gitlens"
+      ]
+    }
+  },
+
+  // Command to run after the container is created.
+  // We run this command inside the project's 'app/' directory to ensure
+  // any project-specific environment variables are correctly finalized.
+  "postCreateCommand": "cd app && flutter doctor"
+}
