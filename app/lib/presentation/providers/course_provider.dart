@@ -1,4 +1,4 @@
-import 'package:flutter/foundation.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/utils/supabase_dependencies.dart';
 import '../../data/models/course_model.dart';
 import '../../data/models/course_content_model.dart';
@@ -7,32 +7,59 @@ import '../../data/models/course_progress_model.dart';
 import 'package:dartz/dartz.dart';
 import '../../data/models/failure.dart';
 
-/// Provider for course management
-/// Uses CourseRepositoryImpl with cache-first pattern
-class CourseProvider extends ChangeNotifier {
+/// Course state for Riverpod
+class CourseState {
+  final List<CourseModel> courses;
+  final CourseModel? currentCourse;
+  final List<CourseContentModel> courseContent;
+  final List<EnrollmentModel> enrollments;
+  final List<CourseProgressModel> progress;
+  final bool isLoading;
+  final String? errorMessage;
+  final bool hasMore;
+
+  const CourseState({
+    this.courses = const [],
+    this.currentCourse,
+    this.courseContent = const [],
+    this.enrollments = const [],
+    this.progress = const [],
+    this.isLoading = false,
+    this.errorMessage,
+    this.hasMore = true,
+  });
+
+  CourseState copyWith({
+    List<CourseModel>? courses,
+    CourseModel? currentCourse,
+    List<CourseContentModel>? courseContent,
+    List<EnrollmentModel>? enrollments,
+    List<CourseProgressModel>? progress,
+    bool? isLoading,
+    String? errorMessage,
+    bool? hasMore,
+  }) {
+    return CourseState(
+      courses: courses ?? this.courses,
+      currentCourse: currentCourse ?? this.currentCourse,
+      courseContent: courseContent ?? this.courseContent,
+      enrollments: enrollments ?? this.enrollments,
+      progress: progress ?? this.progress,
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: errorMessage,
+      hasMore: hasMore ?? this.hasMore,
+    );
+  }
+}
+
+/// Course state notifier for Riverpod
+class CourseNotifier extends StateNotifier<CourseState> {
   final SupabaseDependencies _dependencies = SupabaseDependencies();
 
-  List<CourseModel> _courses = [];
-  CourseModel? _currentCourse;
-  List<CourseContentModel> _courseContent = [];
-  List<EnrollmentModel> _enrollments = [];
-  List<CourseProgressModel> _progress = [];
-  
-  bool _isLoading = false;
-  String? _errorMessage;
-  bool _hasMore = true;
+  CourseNotifier() : super(const CourseState());
+
   int _currentPage = 0;
   static const int _pageSize = 20;
-
-  // Getters
-  List<CourseModel> get courses => _courses;
-  CourseModel? get currentCourse => _currentCourse;
-  List<CourseContentModel> get courseContent => _courseContent;
-  List<EnrollmentModel> get enrollments => _enrollments;
-  List<CourseProgressModel> get progress => _progress;
-  bool get isLoading => _isLoading;
-  String? get errorMessage => _errorMessage;
-  bool get hasMore => _hasMore;
 
   /// Load courses with pagination
   Future<void> loadCourses({
@@ -41,17 +68,19 @@ class CourseProvider extends ChangeNotifier {
     String? subject,
     bool loadMore = false,
   }) async {
-    if (_isLoading) return;
-    if (loadMore && !_hasMore) return;
-
-    _setLoading(true);
-    _clearError();
+    if (state.isLoading) return;
+    if (loadMore && !state.hasMore) return;
 
     if (!loadMore) {
       _currentPage = 0;
-      _courses = [];
-      _hasMore = true;
+      state = state.copyWith(
+        courses: [],
+        hasMore: true,
+        errorMessage: null,
+      );
     }
+
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.searchCourses(
@@ -63,65 +92,87 @@ class CourseProvider extends ChangeNotifier {
       );
 
       result.fold(
-        (failure) => _setError(failure.message),
+        (failure) => state = state.copyWith(
+          isLoading: false,
+          errorMessage: failure.message,
+        ),
         (newCourses) {
           if (newCourses.length < _pageSize) {
-            _hasMore = false;
+            state = state.copyWith(
+              courses: [...state.courses, ...newCourses],
+              hasMore: false,
+              isLoading: false,
+            );
+          } else {
+            state = state.copyWith(
+              courses: [...state.courses, ...newCourses],
+              isLoading: false,
+            );
           }
-          _courses.addAll(newCourses);
           _currentPage++;
         },
       );
-    } finally {
-      _setLoading(false);
-      notifyListeners();
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
     }
   }
 
   /// Get course details
   Future<void> loadCourseDetails(String courseId) async {
-    _setLoading(true);
-    _clearError();
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.getCourse(courseId);
       
       result.fold(
-        (failure) => _setError(failure.message),
-        (course) {
-          _currentCourse = course;
-        },
+        (failure) => state = state.copyWith(
+          isLoading: false,
+          errorMessage: failure.message,
+        ),
+        (course) => state = state.copyWith(
+          currentCourse: course,
+          isLoading: false,
+        ),
       );
-    } finally {
-      _setLoading(false);
-      notifyListeners();
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
     }
   }
 
   /// Get course content/lessons
   Future<void> loadCourseContent(String courseId) async {
-    _setLoading(true);
-    _clearError();
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.getCourseContent(courseId);
       
       result.fold(
-        (failure) => _setError(failure.message),
-        (content) {
-          _courseContent = content;
-        },
+        (failure) => state = state.copyWith(
+          isLoading: false,
+          errorMessage: failure.message,
+        ),
+        (content) => state = state.copyWith(
+          courseContent: content,
+          isLoading: false,
+        ),
       );
-    } finally {
-      _setLoading(false);
-      notifyListeners();
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
     }
   }
 
   /// Enroll in course
   Future<bool> enrollInCourse(String courseId, String studentId) async {
-    _setLoading(true);
-    _clearError();
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.enrollInCourse(
@@ -131,57 +182,76 @@ class CourseProvider extends ChangeNotifier {
 
       return result.fold(
         (failure) {
-          _setError(failure.message);
+          state = state.copyWith(
+            isLoading: false,
+            errorMessage: failure.message,
+          );
           return false;
         },
         (enrollment) {
-          _enrollments.add(enrollment);
-          notifyListeners();
+          state = state.copyWith(
+            enrollments: [...state.enrollments, enrollment],
+            isLoading: false,
+          );
           return true;
         },
       );
-    } finally {
-      _setLoading(false);
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
+      return false;
     }
   }
 
   /// Get student enrollments
   Future<void> loadStudentEnrollments(String studentId) async {
-    _setLoading(true);
-    _clearError();
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.getStudentEnrollments(studentId);
       
       result.fold(
-        (failure) => _setError(failure.message),
-        (enrollments) {
-          _enrollments = enrollments;
-        },
+        (failure) => state = state.copyWith(
+          isLoading: false,
+          errorMessage: failure.message,
+        ),
+        (enrollments) => state = state.copyWith(
+          enrollments: enrollments,
+          isLoading: false,
+        ),
       );
-    } finally {
-      _setLoading(false);
-      notifyListeners();
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
     }
   }
 
   /// Get course progress
   Future<void> loadCourseProgress(String enrollmentId) async {
-    _setLoading(true);
-    _clearError();
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.getCourseProgress(enrollmentId);
       
       result.fold(
-        (failure) => _setError(failure.message),
-        (progress) {
-          _progress = progress;
-        },
+        (failure) => state = state.copyWith(
+          isLoading: false,
+          errorMessage: failure.message,
+        ),
+        (progress) => state = state.copyWith(
+          progress: progress,
+          isLoading: false,
+        ),
       );
-    } finally {
-      _setLoading(false);
-      notifyListeners();
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
     }
   }
 
@@ -190,8 +260,7 @@ class CourseProvider extends ChangeNotifier {
     String progressId,
     Map<String, dynamic> updates,
   ) async {
-    _setLoading(true);
-    _clearError();
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.updateProgress(
@@ -201,76 +270,108 @@ class CourseProvider extends ChangeNotifier {
 
       return result.fold(
         (failure) {
-          _setError(failure.message);
+          state = state.copyWith(
+            isLoading: false,
+            errorMessage: failure.message,
+          );
           return false;
         },
         (updatedProgress) {
           // Update in list
-          final index = _progress.indexWhere((p) => p.progressId == progressId);
+          final index = state.progress.indexWhere((p) => p.progressId == progressId);
+          final updatedProgressList = [...state.progress];
           if (index != -1) {
-            _progress[index] = updatedProgress;
-            notifyListeners();
+            updatedProgressList[index] = updatedProgress;
           }
+          state = state.copyWith(
+            progress: updatedProgressList,
+            isLoading: false,
+          );
           return true;
         },
       );
-    } finally {
-      _setLoading(false);
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
+      return false;
     }
   }
 
   /// Create new course (tutor only)
   Future<bool> createCourse(Map<String, dynamic> courseData) async {
-    _setLoading(true);
-    _clearError();
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.createCourse(courseData);
 
       return result.fold(
         (failure) {
-          _setError(failure.message);
+          state = state.copyWith(
+            isLoading: false,
+            errorMessage: failure.message,
+          );
           return false;
         },
         (course) {
-          _courses.insert(0, course);
-          notifyListeners();
+          state = state.copyWith(
+            courses: [course, ...state.courses],
+            isLoading: false,
+          );
           return true;
         },
       );
-    } finally {
-      _setLoading(false);
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
+      return false;
     }
   }
 
   /// Update course (tutor only)
   Future<bool> updateCourse(String courseId, Map<String, dynamic> updates) async {
-    _setLoading(true);
-    _clearError();
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.updateCourse(courseId, updates);
 
       return result.fold(
         (failure) {
-          _setError(failure.message);
+          state = state.copyWith(
+            isLoading: false,
+            errorMessage: failure.message,
+          );
           return false;
         },
         (course) {
           // Update in list
-          final index = _courses.indexWhere((c) => c.courseId == courseId);
+          final index = state.courses.indexWhere((c) => c.courseId == courseId);
+          final updatedCourses = [...state.courses];
           if (index != -1) {
-            _courses[index] = course;
+            updatedCourses[index] = course;
           }
-          if (_currentCourse?.courseId == courseId) {
-            _currentCourse = course;
-          }
-          notifyListeners();
+          
+          final updatedCurrentCourse = state.currentCourse?.courseId == courseId 
+            ? course 
+            : state.currentCourse;
+
+          state = state.copyWith(
+            courses: updatedCourses,
+            currentCourse: updatedCurrentCourse,
+            isLoading: false,
+          );
           return true;
         },
       );
-    } finally {
-      _setLoading(false);
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
+      return false;
     }
   }
 
@@ -280,8 +381,7 @@ class CourseProvider extends ChangeNotifier {
     List<int> fileBytes,
     String fileName,
   ) async {
-    _setLoading(true);
-    _clearError();
+    state = state.copyWith(isLoading: true, errorMessage: null);
 
     try {
       final result = await _dependencies.courseRepository.uploadCourseMaterial(
@@ -292,49 +392,50 @@ class CourseProvider extends ChangeNotifier {
 
       return result.fold(
         (failure) {
-          _setError(failure.message);
+          state = state.copyWith(
+            isLoading: false,
+            errorMessage: failure.message,
+          );
           return null;
         },
-        (url) => url,
+        (url) {
+          state = state.copyWith(isLoading: false);
+          return url;
+        },
       );
-    } finally {
-      _setLoading(false);
+    } catch (e) {
+      state = state.copyWith(
+        isLoading: false,
+        errorMessage: e.toString(),
+      );
+      return null;
     }
   }
 
   /// Refresh courses (force update from Supabase)
   Future<void> refreshCourses() async {
     _currentPage = 0;
-    _courses = [];
-    _hasMore = true;
+    state = state.copyWith(
+      courses: [],
+      hasMore: true,
+      errorMessage: null,
+    );
     await loadCourses();
   }
 
   /// Clear all data
   void clear() {
-    _courses = [];
-    _currentCourse = null;
-    _courseContent = [];
-    _enrollments = [];
-    _progress = [];
-    _errorMessage = null;
-    _hasMore = true;
     _currentPage = 0;
-    notifyListeners();
+    state = const CourseState();
   }
 
-  // Private helper methods
-  void _setLoading(bool value) {
-    _isLoading = value;
-    notifyListeners();
-  }
-
-  void _setError(String message) {
-    _errorMessage = message;
-    notifyListeners();
-  }
-
-  void _clearError() {
-    _errorMessage = null;
+  /// Clear error message
+  void clearError() {
+    state = state.copyWith(errorMessage: null);
   }
 }
+
+/// Course provider for Riverpod
+final courseProvider = StateNotifierProvider<CourseNotifier, CourseState>(
+  (ref) => CourseNotifier(),
+);

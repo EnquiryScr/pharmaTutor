@@ -7,7 +7,13 @@ export 'course_model.dart';
 export 'message_model.dart';
 
 // Payment models
-export 'payment_model.dart';
+export 'payment_models.dart';
 
 // Notification models
-export 'notification_model.dart';
+export 'notification_file_models.dart';
+
+// Additional models
+export 'additional_models.dart';
+
+// Failure model
+export 'failure.dart';

@@ -1,193 +1,117 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../viewmodels/auth_viewmodel.dart';
+import '../../domain/repositories/i_auth_repository.dart';
 import '../../domain/usecases/auth/login_usecase.dart';
 import '../../domain/usecases/auth/register_usecase.dart';
 import '../../domain/usecases/auth/logout_usecase.dart';
 import '../../domain/usecases/auth/get_current_user_usecase.dart';
-import '../../domain/services/auth_service.dart';
-import '../../core/utils/base_viewmodel.dart';
 
-/// Auth provider for state management
-class AuthProvider extends BaseViewModel {
-  final LoginUseCase _loginUseCase;
-  final RegisterUseCase _registerUseCase;
-  final LogoutUseCase _logoutUseCase;
-  final GetCurrentUserUseCase _getCurrentUserUseCase;
-  final AuthService _authService;
+/// Auth Provider using Riverpod
+final authProvider = StateNotifierProvider<AuthViewModel, AuthState>(
+  (ref) {
+    // For now, use a mock implementation
+    final mockAuthRepository = MockAuthRepository();
+    final loginUseCase = LoginUseCase(mockAuthRepository);
+    return AuthViewModel(loginUseCase);
+  },
+);
 
-  AuthProvider({
-    required LoginUseCase loginUseCase,
-    required RegisterUseCase registerUseCase,
-    required LogoutUseCase logoutUseCase,
-    required GetCurrentUserUseCase getCurrentUserUseCase,
-    required AuthService authService,
-  }) 
-  : _loginUseCase = loginUseCase,
-    _registerUseCase = registerUseCase,
-    _logoutUseCase = logoutUseCase,
-    _getCurrentUserUseCase = getCurrentUserUseCase,
-    _authService = authService;
-
-  // User state
-  UserModel? _user;
-  UserModel? get user => _user;
-  bool get isLoggedIn => _user != null;
-
-  // Authentication methods
-  Future<bool> login(String email, String password) async {
-    return await executeAsync(
-      () async {
-        final result = await _loginUseCase.execute(
-          LoginParams(email: email, password: password),
-        );
-        
-        return result.fold(
-          (failure) => throw Exception(failure.message),
-          (authResult) {
-            _user = authResult.user;
-            return true;
-          },
-        );
-      },
-      loadingMessage: 'Signing in...',
-    ) ?? false;
+/// Mock Auth Repository for testing
+class MockAuthRepository implements IAuthRepository {
+  @override
+  Future<Either<Failure, AuthResult>> login({
+    required String email,
+    required String password,
+  }) async {
+    // Simulate network delay
+    await Future.delayed(const Duration(seconds: 1));
+    
+    // Mock successful login
+    if (email.isNotEmpty && password.length >= 6) {
+      return Right(AuthResult(
+        token: 'mock_token_${DateTime.now().millisecondsSinceEpoch}',
+        user: const UserModel(
+          id: '1',
+          email: 'user@example.com',
+          name: 'Test User',
+          avatar: 'https://example.com/avatar.jpg',
+        ),
+        refreshToken: 'mock_refresh_token',
+      ));
+    } else {
+      return Left(Failure('Invalid email or password'));
+    }
   }
 
-  Future<bool> register({
+  @override
+  Future<Either<Failure, AuthResult>> register({
     required String email,
     required String password,
     required String name,
   }) async {
-    return await executeAsync(
-      () async {
-        final result = await _registerUseCase.execute(
-          RegisterParams(
-            email: email,
-            password: password,
-            name: name,
-          ),
-        );
-        
-        return result.fold(
-          (failure) => throw Exception(failure.message),
-          (authResult) {
-            _user = authResult.user;
-            return true;
-          },
-        );
-      },
-      loadingMessage: 'Creating account...',
-    ) ?? false;
-  }
-
-  Future<void> logout() async {
-    await executeAsync(
-      () async {
-        final result = await _logoutUseCase.execute(NoParams());
-        result.fold(
-          (failure) => throw Exception(failure.message),
-          (_) {
-            _user = null;
-          },
-        );
-      },
-      loadingMessage: 'Signing out...',
-    );
-  }
-
-  Future<void> checkAuthStatus() async {
-    await executeAsync(
-      () async {
-        final result = await _getCurrentUserUseCase.execute(NoParams());
-        result.fold(
-          (failure) {
-            _user = null;
-          },
-          (user) {
-            _user = user;
-          },
-        );
-      },
-      showLoading: false,
-    );
-  }
-
-  Future<void> refreshUser() async {
-    if (_user != null) {
-      await checkAuthStatus();
+    // Simulate network delay
+    await Future.delayed(const Duration(seconds: 1));
+    
+    // Mock successful registration
+    if (email.isNotEmpty && password.length >= 6 && name.isNotEmpty) {
+      return Right(AuthResult(
+        token: 'mock_token_${DateTime.now().millisecondsSinceEpoch}',
+        user: UserModel(
+          id: DateTime.now().millisecondsSinceEpoch.toString(),
+          email: email,
+          name: name,
+        ),
+        refreshToken: 'mock_refresh_token',
+      ));
+    } else {
+      return Left(Failure('Invalid registration data'));
     }
   }
-}
 
-/// Auth provider state notifier for Riverpod
-final authProvider = StateNotifierProvider<AuthProvider, AsyncValue<AuthProvider?>>(
-  (ref) {
-    final loginUseCase = ref.read(loginUseCaseProvider);
-    final registerUseCase = ref.read(registerUseCaseProvider);
-    final logoutUseCase = ref.read(logoutUseCaseProvider);
-    final getCurrentUserUseCase = ref.read(getCurrentUserUseCaseProvider);
-    final authService = ref.read(authServiceProvider);
+  @override
+  Future<Either<Failure, void>> logout() async {
+    // Simulate logout
+    await Future.delayed(const Duration(milliseconds: 500));
+    return const Right(null);
+  }
 
-    return AuthProvider(
-      loginUseCase: loginUseCase,
-      registerUseCase: registerUseCase,
-      logoutUseCase: logoutUseCase,
-      getCurrentUserUseCase: getCurrentUserUseCase,
-      authService: authService,
-    );
-  },
-);
+  @override
+  Future<Either<Failure, UserModel>> getCurrentUser() async {
+    // Mock current user
+    return const Right(UserModel(
+      id: '1',
+      email: 'user@example.com',
+      name: 'Test User',
+    ));
+  }
 
-// Provider for use cases
-final loginUseCaseProvider = Provider<LoginUseCase>((ref) {
-  final authRepository = ref.read(authRepositoryProvider);
-  return LoginUseCase(authRepository);
-});
+  @override
+  Future<Either<Failure, AuthResult>> refreshToken(String refreshToken) async {
+    return Left(Failure('Not implemented'));
+  }
 
-final registerUseCaseProvider = Provider<RegisterUseCase>((ref) {
-  final authRepository = ref.read(authRepositoryProvider);
-  return RegisterUseCase(authRepository);
-});
+  @override
+  Future<Either<Failure, void>> sendPasswordResetEmail(String email) async {
+    return Left(Failure('Not implemented'));
+  }
 
-final logoutUseCaseProvider = Provider<LogoutUseCase>((ref) {
-  final authRepository = ref.read(authRepositoryProvider);
-  return LogoutUseCase(authRepository);
-});
+  @override
+  Future<Either<Failure, UserModel>> updateProfile(UserModel user) async {
+    return Left(Failure('Not implemented'));
+  }
 
-final getCurrentUserUseCaseProvider = Provider<GetCurrentUserUseCase>((ref) {
-  final authRepository = ref.read(authRepositoryProvider);
-  return GetCurrentUserUseCase(authRepository);
-});
+  @override
+  bool isAuthenticated() {
+    return false;
+  }
 
-final authRepositoryProvider = Provider<IAuthRepository>((ref) {
-  // This would be injected via dependency injection
-  throw UnimplementedError('AuthRepository should be injected via DI');
-});
+  @override
+  String? getAuthToken() {
+    return null;
+  }
 
-final authServiceProvider = Provider<AuthService>((ref) {
-  // This would be injected via dependency injection
-  throw UnimplementedError('AuthService should be injected via DI');
-});
-
-// User model placeholder
-class UserModel {
-  final String id;
-  final String email;
-  final String name;
-  final String? avatar;
-
-  const UserModel({
-    required this.id,
-    required this.email,
-    required this.name,
-    this.avatar,
-  });
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'email': email,
-      'name': name,
-      'avatar': avatar,
-    };
+  @override
+  void clearAuthData() {
+    // Clear any stored auth data
   }
 }

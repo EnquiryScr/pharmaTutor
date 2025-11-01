@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'package:dio/dio.dart';
-import '../utils/base_model.dart';
-import 'api_client.dart';
+import '../../core/utils/base_model.dart';
+import '../../core/network/api_client.dart';
 
 /// Authentication API client for handling auth-related requests
 class AuthApiClient {

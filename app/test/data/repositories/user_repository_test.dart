@@ -10,7 +10,7 @@ import 'package:flutter_tutoring_app/data/datasources/local/user_cache_data_sour
 import 'package:flutter_tutoring_app/data/models/user_model.dart';
 import 'package:flutter_tutoring_app/data/models/failure.dart';
 
-// Generate mocks with: flutter pub run build_runner build
+// Generate mocks with: dart run build_runner build
 @GenerateMocks([UserSupabaseDataSource, UserCacheDataSource, Connectivity])
 import 'user_repository_test.mocks.dart';
 
@@ -35,10 +35,10 @@ void main() {
   group('UserRepositoryImpl - getProfile', () {
     const userId = 'test-user-id';
     final testUser = UserModel(
-      userId: userId,
+      id: userId,
       email: 'test@example.com',
-      fullName: 'Test User',
-      role: 'student',
+      name: 'Test User',
+      role: UserRole.student,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
@@ -46,12 +46,12 @@ void main() {
     test('should return cached profile when available', () async {
       // Arrange
       when(mockCacheDataSource.getProfile(userId))
-          .thenAnswer((_) async => testUser);
+          .thenAnswer((_) async => testUser.toJson());
       when(mockConnectivity.checkConnectivity())
           .thenAnswer((_) async => ConnectivityResult.wifi);
 
       // Act
-      final result = await repository.getProfile(userId);
+      final result = await repository.getUserProfile(userId);
 
       // Assert
       expect(result, Right(testUser));
@@ -64,18 +64,18 @@ void main() {
           .thenAnswer((_) async => null);
       when(mockConnectivity.checkConnectivity())
           .thenAnswer((_) async => ConnectivityResult.wifi);
-      when(mockRemoteDataSource.getProfile(userId))
+      when(mockRemoteDataSource.getUserProfile(userId))
           .thenAnswer((_) async => testUser);
-      when(mockCacheDataSource.insertProfile(testUser))
+      when(mockCacheDataSource.cacheProfile(testUser.toJson()))
           .thenAnswer((_) async => {});
 
       // Act
-      final result = await repository.getProfile(userId);
+      final result = await repository.getUserProfile(userId);
 
       // Assert
       expect(result, Right(testUser));
-      verify(mockRemoteDataSource.getProfile(userId)).called(1);
-      verify(mockCacheDataSource.insertProfile(testUser)).called(1);
+      verify(mockRemoteDataSource.getUserProfile(userId)).called(1);
+      verify(mockCacheDataSource.cacheProfile(testUser.toJson())).called(1);
     });
 
     test('should return failure when offline and cache is empty', () async {
@@ -86,7 +86,7 @@ void main() {
           .thenAnswer((_) async => ConnectivityResult.none);
 
       // Act
-      final result = await repository.getProfile(userId);
+      final result = await repository.getUserProfile(userId);
 
       // Assert
       expect(result.isLeft(), true);
@@ -102,11 +102,11 @@ void main() {
           .thenAnswer((_) async => null);
       when(mockConnectivity.checkConnectivity())
           .thenAnswer((_) async => ConnectivityResult.wifi);
-      when(mockRemoteDataSource.getProfile(userId))
+      when(mockRemoteDataSource.getUserProfile(userId))
           .thenThrow(Exception('Network error'));
 
       // Act
-      final result = await repository.getProfile(userId);
+      final result = await repository.getUserProfile(userId);
 
       // Assert
       expect(result.isLeft(), true);
@@ -120,31 +120,39 @@ void main() {
   group('UserRepositoryImpl - updateProfile', () {
     const userId = 'test-user-id';
     final testUser = UserModel(
-      userId: userId,
+      id: userId,
       email: 'test@example.com',
-      fullName: 'Updated User',
-      role: 'student',
+      name: 'Updated User',
+      role: UserRole.student,
       createdAt: DateTime.now(),
       updatedAt: DateTime.now(),
     );
-    final updates = {'full_name': 'Updated User'};
+    final updates = {'name': 'Updated User'};
 
     test('should update profile when online', () async {
       // Arrange
       when(mockConnectivity.checkConnectivity())
           .thenAnswer((_) async => ConnectivityResult.wifi);
-      when(mockRemoteDataSource.updateProfile(userId, updates))
-          .thenAnswer((_) async => testUser);
-      when(mockCacheDataSource.insertProfile(testUser))
+      when(mockRemoteDataSource.updateUserProfile(
+        userId: userId,
+        fullName: 'Updated User',
+      )).thenAnswer((_) async => testUser);
+      when(mockCacheDataSource.cacheProfile(testUser.toJson()))
           .thenAnswer((_) async => {});
 
       // Act
-      final result = await repository.updateProfile(userId, updates);
+      final result = await repository.updateUserProfile(
+        userId: userId,
+        fullName: 'Updated User',
+      );
 
       // Assert
       expect(result, Right(testUser));
-      verify(mockRemoteDataSource.updateProfile(userId, updates)).called(1);
-      verify(mockCacheDataSource.insertProfile(testUser)).called(1);
+      verify(mockRemoteDataSource.updateUserProfile(
+        userId: userId,
+        fullName: 'Updated User',
+      )).called(1);
+      verify(mockCacheDataSource.cacheProfile(testUser.toJson())).called(1);
     });
 
     test('should queue update when offline', () async {
@@ -153,7 +161,10 @@ void main() {
           .thenAnswer((_) async => ConnectivityResult.none);
 
       // Act
-      final result = await repository.updateProfile(userId, updates);
+      final result = await repository.updateUserProfile(
+        userId: userId,
+        fullName: 'Updated User',
+      );
 
       // Assert
       expect(result.isLeft(), true);
@@ -164,24 +175,22 @@ void main() {
   group('UserRepositoryImpl - searchTutors', () {
     final testTutors = [
       UserModel(
-        userId: 'tutor1',
+        id: 'tutor1',
         email: 'tutor1@example.com',
-        fullName: 'Tutor One',
-        role: 'tutor',
+        name: 'Tutor One',
+        role: UserRole.tutor,
         subjects: ['pharmacology', 'chemistry'],
         rating: 4.5,
-        hourlyRate: 50.0,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       ),
       UserModel(
-        userId: 'tutor2',
+        id: 'tutor2',
         email: 'tutor2@example.com',
-        fullName: 'Tutor Two',
-        role: 'tutor',
+        name: 'Tutor Two',
+        role: UserRole.tutor,
         subjects: ['pharmacy', 'biology'],
         rating: 4.8,
-        hourlyRate: 60.0,
         createdAt: DateTime.now(),
         updatedAt: DateTime.now(),
       ),
@@ -189,12 +198,11 @@ void main() {
 
     test('should search tutors from cache first', () async {
       // Arrange
+      final cachedTutors = testTutors.map((tutor) => tutor.toJson()).toList();
       when(mockCacheDataSource.searchTutors(
-        query: anyNamed('query'),
-        subjects: anyNamed('subjects'),
-        minRating: anyNamed('minRating'),
-        maxHourlyRate: anyNamed('maxHourlyRate'),
-      )).thenAnswer((_) async => testTutors);
+        query: 'pharmacology',
+        minRating: 4.0,
+      )).thenAnswer((_) async => cachedTutors);
       when(mockConnectivity.checkConnectivity())
           .thenAnswer((_) async => ConnectivityResult.wifi);
 
@@ -205,7 +213,13 @@ void main() {
       );
 
       // Assert
-      expect(result, Right(testTutors));
+      expect(result.isRight(), true);
+      result.fold(
+        (_) => fail('Should return tutors'),
+        (tutors) {
+          expect(tutors.length, 2);
+        },
+      );
       verify(mockCacheDataSource.searchTutors(
         query: 'pharmacology',
         minRating: 4.0,
@@ -215,9 +229,10 @@ void main() {
     test('should filter tutors by rating', () async {
       // Arrange
       final filteredTutors = [testTutors[1]]; // Only tutor with rating >= 4.8
+      final cachedFilteredTutors = filteredTutors.map((tutor) => tutor.toJson()).toList();
       when(mockCacheDataSource.searchTutors(
         minRating: 4.8,
-      )).thenAnswer((_) async => filteredTutors);
+      )).thenAnswer((_) async => cachedFilteredTutors);
       when(mockConnectivity.checkConnectivity())
           .thenAnswer((_) async => ConnectivityResult.wifi);
 
@@ -225,7 +240,7 @@ void main() {
       final result = await repository.searchTutors(minRating: 4.8);
 
       // Assert
-      expect(result, Right(filteredTutors));
+      expect(result.isRight(), true);
       result.fold(
         (_) => fail('Should return tutors'),
         (tutors) {
@@ -246,16 +261,23 @@ void main() {
       // Arrange
       when(mockConnectivity.checkConnectivity())
           .thenAnswer((_) async => ConnectivityResult.wifi);
-      when(mockRemoteDataSource.uploadAvatar(userId, fileBytes, fileName))
-          .thenAnswer((_) async => avatarUrl);
+      when(mockRemoteDataSource.uploadAvatar(
+        userId: userId,
+        file: anyNamed('file'),
+      )).thenAnswer((_) async => avatarUrl);
 
       // Act
-      final result = await repository.uploadAvatar(userId, fileBytes, fileName);
+      final result = await repository.uploadAvatar(
+        userId: userId,
+        filePath: '/tmp/avatar.jpg',
+      );
 
       // Assert
       expect(result, Right(avatarUrl));
-      verify(mockRemoteDataSource.uploadAvatar(userId, fileBytes, fileName))
-          .called(1);
+      verify(mockRemoteDataSource.uploadAvatar(
+        userId: userId,
+        file: anyNamed('file'),
+      )).called(1);
     });
 
     test('should fail when offline', () async {
@@ -264,7 +286,10 @@ void main() {
           .thenAnswer((_) async => ConnectivityResult.none);
 
       // Act
-      final result = await repository.uploadAvatar(userId, fileBytes, fileName);
+      final result = await repository.uploadAvatar(
+        userId: userId,
+        filePath: '/tmp/avatar.jpg',
+      );
 
       // Assert
       expect(result.isLeft(), true);

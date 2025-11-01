@@ -37,11 +37,9 @@ class FlutterSecurityManager {
     aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
       keyCipherAlgorithm: KeyCipherAlgorithm.RSA_ECB_PKCS1Padding,
-      storageCipherAlgorithm: StorageCipherAlgorithm.AES_GCM_NoPadding,
     ),
     iOptions: IOSOptions(
       accessibility: KeychainAccessibility.first_unlock_this_device,
-      accountName: 'tutoring_secure_storage',
     ),
   );
 
@@ -134,7 +132,6 @@ class FlutterSecurityManager {
           _biometricKey,
           biometricOnly: true,
           authenticatePrompt: 'Authenticate to access secure data',
-          biometricHint: 'Use your fingerprint or face to unlock',
         );
 
         // Check if biometric is enabled
@@ -305,11 +302,13 @@ class FlutterSecurityManager {
 
     try {
       final result = await _localAuth.authenticate(
-        localizedReason: 'Authenticate to access your secure data',
+        localizedTitle: 'Authenticate to access your secure data',
         options: AuthenticationOptions(
           biometricOnly: true,
           stickyAuth: true,
           sensitiveTransaction: true,
+          useErrorDialogs: true,
+          fallbackLabel: 'Use PIN instead',
         ),
       );
 

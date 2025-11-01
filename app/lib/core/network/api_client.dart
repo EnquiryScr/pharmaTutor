@@ -45,22 +45,22 @@ class ApiClient {
   void _handleDioError(DioException error) {
     switch (error.type) {
       case DioExceptionType.connectionTimeout:
-        throw ApiException('Connection timeout', ApiExceptionType.timeout);
+        throw ApiException('Connection timeout', type: ApiExceptionType.timeout);
       case DioExceptionType.sendTimeout:
-        throw ApiException('Send timeout', ApiExceptionType.timeout);
+        throw ApiException('Send timeout', type: ApiExceptionType.timeout);
       case DioExceptionType.receiveTimeout:
-        throw ApiException('Receive timeout', ApiExceptionType.timeout);
+        throw ApiException('Receive timeout', type: ApiExceptionType.timeout);
       case DioExceptionType.badResponse:
         throw ApiException(
           'Server error: ${error.response?.statusCode}',
-          ApiExceptionType.serverError,
+          type: ApiExceptionType.serverError,
         );
       case DioExceptionType.cancel:
-        throw ApiException('Request cancelled', ApiExceptionType.cancelled);
+        throw ApiException('Request cancelled', type: ApiExceptionType.cancelled);
       case DioExceptionType.connectionError:
-        throw ApiException('Connection error', ApiExceptionType.networkError);
+        throw ApiException('Connection error', type: ApiExceptionType.networkError);
       default:
-        throw ApiException('Unknown error', ApiExceptionType.unknown);
+        throw ApiException('Unknown error', type: ApiExceptionType.unknown);
     }
   }
 
@@ -82,7 +82,7 @@ class ApiClient {
     } on DioException catch (e) {
       throw ApiException(
         e.message ?? 'GET request failed',
-        _mapDioExceptionType(e.type),
+        type: _mapDioExceptionType(e.type),
       );
     }
   }
@@ -107,7 +107,7 @@ class ApiClient {
     } on DioException catch (e) {
       throw ApiException(
         e.message ?? 'POST request failed',
-        _mapDioExceptionType(e.type),
+        type: _mapDioExceptionType(e.type),
       );
     }
   }
@@ -132,7 +132,7 @@ class ApiClient {
     } on DioException catch (e) {
       throw ApiException(
         e.message ?? 'PUT request failed',
-        _mapDioExceptionType(e.type),
+        type: _mapDioExceptionType(e.type),
       );
     }
   }
@@ -157,7 +157,7 @@ class ApiClient {
     } on DioException catch (e) {
       throw ApiException(
         e.message ?? 'DELETE request failed',
-        _mapDioExceptionType(e.type),
+        type: _mapDioExceptionType(e.type),
       );
     }
   }
@@ -182,7 +182,7 @@ class ApiClient {
     } on DioException catch (e) {
       throw ApiException(
         e.message ?? 'PATCH request failed',
-        _mapDioExceptionType(e.type),
+        type: _mapDioExceptionType(e.type),
       );
     }
   }
@@ -203,9 +203,6 @@ class ApiClient {
         'file': await MultipartFile.fromFile(
           filePath,
           filename: fileNameToSend,
-          contentType: contentType != null 
-              ? ContentType.parse(contentType) 
-              : null,
         ),
         if (additionalData != null) ...additionalData,
       });
@@ -224,7 +221,7 @@ class ApiClient {
     } on DioException catch (e) {
       throw ApiException(
         e.message ?? 'File upload failed',
-        _mapDioExceptionType(e.type),
+        type: _mapDioExceptionType(e.type),
       );
     }
   }
@@ -251,13 +248,13 @@ class ApiClient {
       } else {
         throw ApiException(
           'Download failed with status: ${response.statusCode}',
-          ApiExceptionType.serverError,
+          type: ApiExceptionType.serverError,
         );
       }
     } on DioException catch (e) {
       throw ApiException(
         e.message ?? 'File download failed',
-        _mapDioExceptionType(e.type),
+        type: _mapDioExceptionType(e.type),
       );
     }
   }
@@ -288,7 +285,7 @@ class ApiClient {
     } else {
       throw ApiException(
         'Server error: ${response.statusCode}',
-        ApiExceptionType.serverError,
+        type: ApiExceptionType.serverError,
       );
     }
   }

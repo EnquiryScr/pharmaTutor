@@ -57,8 +57,8 @@ class TutorFlowApp extends ConsumerWidget {
         return MaterialApp.router(
           title: AppConstants.appName,
           debugShowCheckedModeBanner: false,
-          theme: AppTheme.lightTheme,
-          darkTheme: AppTheme.darkTheme,
+          theme: ThemeData.light(),
+          darkTheme: ThemeData.dark(),
           routerConfig: router,
           localizationsDelegates: const [
             // Add your localization delegates here

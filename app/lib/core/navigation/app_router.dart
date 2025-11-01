@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import '../core/constants/app_constants.dart';
+import '../routes/app_routes.dart';
 import '../presentation/pages/splash_page.dart';
 import '../presentation/pages/login_page.dart';
 import '../presentation/pages/register_page.dart';
 import '../presentation/pages/forgot_password_page.dart';
 import '../presentation/pages/home_page.dart';
-import '../presentation/pages/dashboard_page.dart';
+
 import '../presentation/pages/tutors/tutors_list_page.dart';
 import '../presentation/pages/tutors/tutor_profile_page.dart';
 import '../presentation/pages/sessions/sessions_list_page.dart';
@@ -54,7 +54,21 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: 'dashboard',
           name: 'dashboard',
-          builder: (context, state) => const DashboardPage(),
+          builder: (context, state) => Scaffold(
+            appBar: AppBar(title: const Text('Dashboard')),
+            body: const Center(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.dashboard, size: 64, color: Colors.blue),
+                  SizedBox(height: 16),
+                  Text('Dashboard', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+                  SizedBox(height: 8),
+                  Text('Your learning overview will be displayed here'),
+                ],
+              ),
+            ),
+          ),
         ),
 
         // Tutors

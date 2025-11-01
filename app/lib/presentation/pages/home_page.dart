@@ -1,95 +1,87 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../core/utils/base_view.dart';
-import '../../core/widgets/base_widgets.dart';
 import '../../core/navigation/app_router.dart';
-import '../../core/utils/service_locator.dart';
 import '../../core/constants/app_constants.dart';
-import '../viewmodels/home_viewmodel.dart';
 
-class HomePage extends BaseView<HomeViewModel> {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
-  HomeViewModel createViewModel() {
-    return serviceLocator<HomeViewModel>();
-  }
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  int _currentIndex = 0;
+
+  final List<Widget> _pages = [
+    const DashboardPage(),
+    const TutorsListPage(),
+    const SessionsListPage(),
+    const CoursesListPage(),
+    const MessagesListPage(),
+    const ProfilePage(),
+  ];
 
   @override
-  Widget buildView(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        final viewModel = serviceLocator<HomeViewModel>();
-        
-        return Scaffold(
-          body: IndexedStack(
-            index: viewModel.currentIndex,
-            children: [
-              const DashboardPage(),
-              const TutorsListPage(),
-              const SessionsListPage(),
-              const CoursesListPage(),
-              const MessagesListPage(),
-              const ProfilePage(),
-            ],
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _currentIndex,
+        onTap: (index) => setState(() {
+          _currentIndex = index;
+        }),
+        type: BottomNavigationBarType.fixed,
+        selectedItemColor: AppColors.primary,
+        unselectedItemColor: AppColors.textMuted,
+        selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dashboard_outlined),
+            activeIcon: Icon(Icons.dashboard),
+            label: 'Dashboard',
           ),
-          bottomNavigationBar: BottomNavigationBar(
-            currentIndex: viewModel.currentIndex,
-            onTap: (index) => viewModel.setIndex(index),
-            type: BottomNavigationBarType.fixed,
-            selectedItemColor: AppColors.primary,
-            unselectedItemColor: AppColors.textMuted,
-            selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.dashboard_outlined),
-                activeIcon: Icon(Icons.dashboard),
-                label: 'Dashboard',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.people_outline),
-                activeIcon: Icon(Icons.people),
-                label: 'Tutors',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.schedule_outlined),
-                activeIcon: Icon(Icons.schedule),
-                label: 'Sessions',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.book_outlined),
-                activeIcon: Icon(Icons.book),
-                label: 'Courses',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.message_outlined),
-                activeIcon: Icon(Icons.message),
-                label: 'Messages',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.person_outline),
-                activeIcon: Icon(Icons.person),
-                label: 'Profile',
-              ),
-            ],
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people_outline),
+            activeIcon: Icon(Icons.people),
+            label: 'Tutors',
           ),
-        );
-      },
+          BottomNavigationBarItem(
+            icon: Icon(Icons.schedule_outlined),
+            activeIcon: Icon(Icons.schedule),
+            label: 'Sessions',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.book_outlined),
+            activeIcon: Icon(Icons.book),
+            label: 'Courses',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.message_outline),
+            activeIcon: Icon(Icons.message),
+            label: 'Messages',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person_outline),
+            activeIcon: Icon(Icons.person),
+            label: 'Profile',
+          ),
+        ],
+      ),
     );
   }
 }
 
-// Placeholder pages for each tab
+// Simple Dashboard Page for Home Navigation
 class DashboardPage extends StatelessWidget {
   const DashboardPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        title: 'Dashboard',
-      ),
-      body: const Center(
+    return const Scaffold(
+      body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -126,39 +118,34 @@ class TutorsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        title: 'Tutors',
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              NavigationHelper.showSnackBar(
-                message: 'Search functionality to be implemented',
-              );
-            },
-          ),
-        ],
-      ),
-      floatingActionButton: BaseFAB(
-        onPressed: () {
-          NavigationHelper.showSnackBar(
-            message: 'Find tutors functionality to be implemented',
-          );
-        },
-        tooltip: 'Find Tutors',
-        child: const Icon(Icons.add),
-      ),
-      body: const BaseEmptyState(
-        icon: Icons.people,
-        title: 'No Tutors Found',
-        message: 'Start exploring our available tutors',
-        actionText: 'Browse Tutors',
-        onAction: () {
-          NavigationHelper.showSnackBar(
-            message: 'Tutor browsing to be implemented',
-          );
-        },
+    return const Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.people,
+              size: 64,
+              color: AppColors.primary,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Tutors',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Browse available tutors',
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.textSecondary,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -169,39 +156,34 @@ class SessionsListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        title: 'Sessions',
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.calendar_today),
-            onPressed: () {
-              NavigationHelper.showSnackBar(
-                message: 'Calendar view to be implemented',
-              );
-            },
-          ),
-        ],
-      ),
-      floatingActionButton: BaseFAB(
-        onPressed: () {
-          NavigationHelper.showSnackBar(
-            message: 'Book session functionality to be implemented',
-          );
-        },
-        tooltip: 'Book Session',
-        child: const Icon(Icons.add),
-      ),
-      body: const BaseEmptyState(
-        icon: Icons.schedule,
-        title: 'No Sessions',
-        message: 'Book your first tutoring session',
-        actionText: 'Book Session',
-        onAction: () {
-          NavigationHelper.showSnackBar(
-            message: 'Session booking to be implemented',
-          );
-        },
+    return const Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.schedule,
+              size: 64,
+              color: AppColors.primary,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Sessions',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Manage your tutoring sessions',
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.textSecondary,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -212,30 +194,34 @@ class CoursesListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        title: 'Courses',
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.search),
-            onPressed: () {
-              NavigationHelper.showSnackBar(
-                message: 'Search courses to be implemented',
-              );
-            },
-          ),
-        ],
-      ),
-      body: const BaseEmptyState(
-        icon: Icons.book,
-        title: 'No Courses',
-        message: 'Explore our course catalog',
-        actionText: 'Browse Courses',
-        onAction: () {
-          NavigationHelper.showSnackBar(
-            message: 'Course browsing to be implemented',
-          );
-        },
+    return const Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.book,
+              size: 64,
+              color: AppColors.primary,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Courses',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Explore our course catalog',
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.textSecondary,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -246,20 +232,34 @@ class MessagesListPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: BaseAppBar(
-        title: 'Messages',
-      ),
-      body: const BaseEmptyState(
-        icon: Icons.message,
-        title: 'No Messages',
-        message: 'Start a conversation with your tutors',
-        actionText: 'New Message',
-        onAction: () {
-          NavigationHelper.showSnackBar(
-            message: 'Messaging to be implemented',
-          );
-        },
+    return const Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.message,
+              size: 64,
+              color: AppColors.primary,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Messages',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Chat with your tutors',
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.textSecondary,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -271,8 +271,8 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: BaseAppBar(
-        title: 'Profile',
+      appBar: AppBar(
+        title: const Text('Profile'),
         actions: [
           IconButton(
             icon: const Icon(Icons.settings),
@@ -280,28 +280,35 @@ class ProfilePage extends StatelessWidget {
           ),
         ],
       ),
-      body: const BaseEmptyState(
-        icon: Icons.person,
-        title: 'Profile Settings',
-        message: 'Manage your profile and preferences',
-        actionText: 'Edit Profile',
-        onAction: () {
-          NavigationHelper.showSnackBar(
-            message: 'Profile editing to be implemented',
-          );
-        },
+      body: const Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.person,
+              size: 64,
+              color: AppColors.primary,
+            ),
+            SizedBox(height: 16),
+            Text(
+              'Profile',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 8),
+            Text(
+              'Manage your profile and preferences',
+              style: TextStyle(
+                fontSize: 16,
+                color: AppColors.textSecondary,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 }
 
-// Placeholder HomeViewModel
-class HomeViewModel {
-  int _currentIndex = 0;
-
-  int get currentIndex => _currentIndex;
-
-  void setIndex(int index) {
-    _currentIndex = index;
-  }
-}

@@ -1,0 +1,10 @@
+targets:
+  $default:
+    builders:
+      mockito:
+        generate_for:
+          - test/data/repositories/user_repository_test.dart
+          - test/presentation/providers/message_provider_test.dart
+          - test/data/datasources/offline_queue_manager_test.dart
+        options:
+          no_add_generated_annotation: true

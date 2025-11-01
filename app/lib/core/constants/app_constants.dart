@@ -212,13 +212,13 @@ class AppTheme {
   static ThemeData lightTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.primary,
+      seedColor: AppColors.primary,
       brightness: Brightness.light,
     ),
-    scaffoldBackgroundColor: Colors.white,
+    scaffoldBackgroundColor: AppColors.white,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.textPrimary,
+      backgroundColor: AppColors.white,
+      foregroundColor: AppColors.textPrimary,
       elevation: 0,
     ),
   );
@@ -226,13 +226,13 @@ class AppTheme {
   static ThemeData darkTheme = ThemeData(
     useMaterial3: true,
     colorScheme: ColorScheme.fromSeed(
-      seedColor: Colors.primary,
+      seedColor: AppColors.primary,
       brightness: Brightness.dark,
     ),
-    scaffoldBackgroundColor: Colors.gray900,
+    scaffoldBackgroundColor: AppColors.gray900,
     appBarTheme: const AppBarTheme(
-      backgroundColor: Colors.gray900,
-      foregroundColor: Colors.white,
+      backgroundColor: AppColors.gray900,
+      foregroundColor: AppColors.white,
       elevation: 0,
     ),
   );

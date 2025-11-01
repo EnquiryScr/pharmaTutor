@@ -1,29 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../core/utils/base_view.dart';
-import '../../core/widgets/base_widgets.dart';
-import '../../core/utils/validators.dart';
-import '../../core/navigation/app_router.dart';
-import '../../core/utils/service_locator.dart';
-import '../../core/utils/navigation_helper.dart';
-import '../../core/constants/app_constants.dart';
 import '../viewmodels/auth_viewmodel.dart';
+import '../../core/navigation/app_router.dart';
+import '../../core/constants/app_constants.dart';
 
-class LoginPage extends BaseView<AuthViewModel> {
+class LoginPage extends ConsumerWidget {
   const LoginPage({super.key});
 
   @override
-  AuthViewModel createViewModel() {
-    return AuthViewModel();
-  }
+  Widget build(BuildContext context, WidgetRef ref) {
+    final _emailController = TextEditingController();
+    final _passwordController = TextEditingController();
+    bool _obscurePassword = true;
 
-  @override
-  PreferredSizeWidget? buildAppBar(BuildContext context) {
-    return null; // No app bar for login
-  }
-
-  @override
-  Widget buildView(BuildContext context) {
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -31,76 +20,71 @@ class LoginPage extends BaseView<AuthViewModel> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              SizedBox(height: 60.h),
+              const SizedBox(height: 60),
               
               // Welcome Text
-              Text(
+              const Text(
                 'Welcome Back',
                 style: TextStyle(
-                  fontSize: 28.sp,
+                  fontSize: 28,
                   fontWeight: FontWeight.bold,
                   color: AppColors.textPrimary,
                 ),
                 textAlign: TextAlign.center,
               ),
               
-              SizedBox(height: 8.h),
+              const SizedBox(height: 8),
               
-              Text(
+              const Text(
                 'Sign in to continue learning',
                 style: TextStyle(
-                  fontSize: 16.sp,
+                  fontSize: 16,
                   color: AppColors.textSecondary,
                 ),
                 textAlign: TextAlign.center,
               ),
               
-              SizedBox(height: 48.h),
+              const SizedBox(height: 48),
               
               // Login Form
-              const _LoginForm(),
+              _buildLoginForm(context, ref, _emailController, _passwordController, _obscurePassword),
               
-              SizedBox(height: 24.h),
+              const SizedBox(height: 24),
               
               // Forgot Password
               Align(
                 alignment: Alignment.centerRight,
                 child: TextButton(
-                  onPressed: () => NavigationHelper.goToForgotPassword(),
-                  child: Text(
+                  onPressed: () => context.go(AppRoutes.forgotPassword),
+                  child: const Text(
                     'Forgot Password?',
                     style: TextStyle(
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       color: AppColors.primary,
                     ),
                   ),
                 ),
               ),
               
-              SizedBox(height: 32.h),
-              
-              // Social Login Options
-              const _SocialLoginDivider(),
-              
-              SizedBox(height: 32.h),
+              const SizedBox(height: 32),
               
               // Register Link
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
+                  const Text(
                     'Don\'t have an account? ',
                     style: TextStyle(
-                      fontSize: 14.sp,
+                      fontSize: 14,
                       color: AppColors.textSecondary,
                     ),
                   ),
                   TextButton(
-                    onPressed: () => NavigationHelper.goToRegister(),
-                    child: Text(
+                    onPressed: () => context.go(AppRoutes.register),
+                    child: const Text(
                       'Sign Up',
                       style: TextStyle(
-                        fontSize: 14.sp,
+                        fontSize: 14,
                         fontWeight: FontWeight.w600,
                         color: AppColors.primary,
                       ),
@@ -114,205 +98,85 @@ class LoginPage extends BaseView<AuthViewModel> {
       ),
     );
   }
-}
 
-class _LoginForm extends StatefulWidget {
-  const _LoginForm();
-
-  @override
-  State<_LoginForm> createState() => _LoginFormState();
-}
-
-class _LoginFormState extends State<_LoginForm> {
-  final _formKey = GlobalKey<FormState>();
-  final _emailController = TextEditingController();
-  final _passwordController = TextEditingController();
-  bool _obscurePassword = true;
-
-  @override
-  Widget build(BuildContext context) {
-    final viewModel = AuthViewModel();
-        
-        return Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              // Email Field
-              BaseInputField(
-                label: 'Email Address',
-                hint: 'Enter your email',
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                prefixIcon: const Icon(Icons.email_outlined),
-                validator: EmailValidator.validate,
-              ),
-              
-              SizedBox(height: 20.h),
-              
-              // Password Field
-              BaseInputField(
-                label: 'Password',
-                hint: 'Enter your password',
-                controller: _passwordController,
-                obscureText: _obscurePassword,
+  Widget _buildLoginForm(BuildContext context, WidgetRef ref, TextEditingController emailController, TextEditingController passwordController, bool obscurePassword) {
+    return Form(
+      child: Column(
+        children: [
+          // Email Field
+          TextFormField(
+            controller: emailController,
+            keyboardType: TextInputType.emailAddress,
+            decoration: const InputDecoration(
+              labelText: 'Email Address',
+              hintText: 'Enter your email',
+              prefixIcon: Icon(Icons.email_outlined),
+              border: OutlineInputBorder(),
+            ),
+          ),
+          
+          const SizedBox(height: 20),
+          
+          // Password Field
+          StatefulBuilder(
+            builder: (context, setState) => TextFormField(
+              controller: passwordController,
+              obscureText: obscurePassword,
+              decoration: InputDecoration(
+                labelText: 'Password',
+                hintText: 'Enter your password',
                 prefixIcon: const Icon(Icons.lock_outline),
                 suffixIcon: IconButton(
                   icon: Icon(
-                    _obscurePassword ? Icons.visibility : Icons.visibility_off,
+                    obscurePassword ? Icons.visibility : Icons.visibility_off,
                   ),
-                  onPressed: () {
-                    setState(() {
-                      _obscurePassword = !_obscurePassword;
-                    });
-                  },
+                  onPressed: () => setState(() => obscurePassword = !obscurePassword),
                 ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Password is required';
-                  }
-                  return null;
-                },
-              ),
-              
-              SizedBox(height: 32.h),
-              
-              // Login Button
-              BaseButton(
-                text: 'Sign In',
-                onPressed: () => _handleLogin(),
-                isLoading: viewModel.isLoading,
-                width: double.infinity,
-              ),
-              
-              // Error Message
-              if (viewModel.hasError) ...[
-                SizedBox(height: 16.h),
-                Container(
-                  padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(
-                    color: AppColors.error.withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: AppColors.error.withOpacity(0.3)),
-                  ),
-                  child: Row(
-                    children: [
-                      const Icon(
-                        Icons.error_outline,
-                        color: AppColors.error,
-                        size: 20,
-                      ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: Text(
-                          viewModel.error ?? 'An error occurred',
-                          style: const TextStyle(
-                            color: AppColors.error,
-                            fontSize: 14,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ],
-          ),
-  }
-
-  void _handleLogin() {
-    if (_formKey.currentState?.validate() ?? false) {
-      // Navigate to viewModel for login logic
-      NavigationHelper.showSnackBar(message: 'Login functionality to be implemented');
-    }
-  }
-
-  @override
-  void dispose() {
-    _emailController.dispose();
-    _passwordController.dispose();
-    super.dispose();
-  }
-}
-
-class _SocialLoginDivider extends StatelessWidget {
-  const _SocialLoginDivider();
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(
-          children: [
-            const Expanded(child: Divider()),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: Text(
-                'Or continue with',
-                style: TextStyle(
-                  fontSize: 14.sp,
-                  color: AppColors.textMuted,
-                ),
+                border: const OutlineInputBorder(),
               ),
             ),
-            const Expanded(child: Divider()),
-          ],
-        ),
-        
-        SizedBox(height: 20.h),
-        
-        // Google Login Button
-        BaseButton(
-          text: 'Continue with Google',
-          onPressed: () {
-            NavigationHelper.showSnackBar(
-              message: 'Google login to be implemented',
-            );
-          },
-          type: ButtonType.outline,
-          icon: Icons.g_mobiledata,
-          width: double.infinity,
-        ),
-        
-        SizedBox(height: 12.h),
-        
-        // Apple Login Button (iOS only)
-        if (Theme.of(context).platform == TargetPlatform.iOS) ...[
-          BaseButton(
-            text: 'Continue with Apple',
-            onPressed: () {
-              NavigationHelper.showSnackBar(
-                message: 'Apple login to be implemented',
-              );
-            },
-            type: ButtonType.outline,
-            icon: Icons.apple,
-            width: double.infinity,
           ),
+          
+          const SizedBox(height: 32),
+          
+          // Login Button
+          Consumer(builder: (context, ref, child) {
+            final authState = ref.watch(authProvider);
+            return ElevatedButton(
+              onPressed: authState.isLoading ? null : () => _handleLogin(context, ref, emailController, passwordController),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: AppColors.primary,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(vertical: 16),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: authState.isLoading
+                  ? const SizedBox(
+                      height: 20,
+                      width: 20,
+                      child: CircularProgressIndicator(
+                        strokeWidth: 2,
+                        valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+                      ),
+                    )
+                  : const Text('Sign In'),
+            );
+          }),
         ],
-      ],
+      ),
     );
   }
-}
 
-// Placeholder AuthViewModel
-class AuthViewModel {
-  bool _isLoading = false;
-  String? _error;
-
-  bool get isLoading => _isLoading;
-  String? get error => _error;
-  bool get hasError => _error != null;
-
-  Future<void> login(String email, String password) async {
-    _isLoading = true;
-    _error = null;
-    
-    // Simulate API call
-    await Future.delayed(const Duration(seconds: 2));
-    
-    _isLoading = false;
-    
-    // For demo purposes, navigate to home
-    NavigationHelper.goToHome();
+  void _handleLogin(BuildContext context, WidgetRef ref, TextEditingController emailController, TextEditingController passwordController) async {
+    ref.read(authProvider.notifier).login(
+      emailController.text.trim(),
+      passwordController.text,
+    ).then((success) {
+      if (success && context.mounted) {
+        context.go(AppRoutes.home);
+      }
+    });
   }
 }

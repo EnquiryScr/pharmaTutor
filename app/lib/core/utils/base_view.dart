@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:provider/provider.dart';
 import '../utils/base_viewmodel.dart';
 
-/// Base class for all Views (Pages) in the MVVM architecture
+/// Base class for all Views (Pages) in the MVVM architecture using Riverpod
 abstract class BaseView<T extends BaseViewModel> extends ConsumerStatefulWidget {
   const BaseView({super.key});
 
@@ -18,7 +17,7 @@ abstract class BaseViewState<T extends BaseViewModel> extends ConsumerState<Base
   T get viewModel => _viewModel;
 
   /// Override this method to return the ViewModel instance
-  /// This should use Provider/Riverpod to create the ViewModel
+  /// This should use Riverpod to create the ViewModel
   @protected
   T createViewModel();
 
@@ -227,16 +226,13 @@ abstract class BaseViewState<T extends BaseViewModel> extends ConsumerState<Base
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider.value(
-      value: _viewModel,
-      child: Consumer<T>(
-        builder: (context, viewModel, child) {
-          return buildScaffold(
-            context,
-            buildView(context),
-          );
-        },
-      ),
+    return Consumer(
+      builder: (context, ref, child) {
+        return buildScaffold(
+          context,
+          buildView(context),
+        );
+      },
     );
   }
 }

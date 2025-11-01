@@ -92,38 +92,38 @@ class BaseButton extends StatelessWidget {
     switch (type) {
       case ButtonType.primary:
         return ButtonStyleConfig(
-          backgroundColor: Colors.primary,
-          textColor: Colors.white,
+          backgroundColor: AppColors.primary,
+          textColor: AppColors.white,
           elevation: 2,
         );
       case ButtonType.secondary:
         return ButtonStyleConfig(
-          backgroundColor: Colors.secondary,
-          textColor: Colors.white,
+          backgroundColor: AppColors.secondary,
+          textColor: AppColors.white,
           elevation: 2,
         );
       case ButtonType.outline:
         return ButtonStyleConfig(
           backgroundColor: Colors.transparent,
-          textColor: Colors.primary,
+          textColor: AppColors.primary,
           elevation: 0,
         );
       case ButtonType.ghost:
         return ButtonStyleConfig(
           backgroundColor: Colors.transparent,
-          textColor: Colors.primary,
+          textColor: AppColors.primary,
           elevation: 0,
         );
       case ButtonType.destructive:
         return ButtonStyleConfig(
-          backgroundColor: Colors.error,
-          textColor: Colors.white,
+          backgroundColor: AppColors.error,
+          textColor: AppColors.white,
           elevation: 2,
         );
       case ButtonType.success:
         return ButtonStyleConfig(
-          backgroundColor: Colors.success,
-          textColor: Colors.white,
+          backgroundColor: AppColors.success,
+          textColor: AppColors.white,
           elevation: 2,
         );
     }
@@ -252,13 +252,13 @@ class BaseCard extends StatelessWidget {
       margin: margin,
       padding: padding ?? EdgeInsets.all(Spacing.md),
       decoration: BoxDecoration(
-        color: backgroundColor ?? Colors.white,
+        color: backgroundColor ?? AppColors.white,
         borderRadius: BorderRadius.all(
           Radius.circular(borderRadius ?? BorderRadius.md),
         ),
         boxShadow: shadow ?? [
           BoxShadow(
-            color: Colors.black.withOpacity(0.1),
+            color: AppColors.black.withOpacity(0.1),
             blurRadius: 4,
             offset: const Offset(0, 2),
           ),
@@ -330,7 +330,7 @@ class BaseInputField extends StatelessWidget {
           style: const TextStyle(
             fontSize: FontSizes.sm,
             fontWeight: FontWeights.medium,
-            color: Colors.textPrimary,
+            color: AppColors.textPrimary,
           ),
         ),
         const SizedBox(height: Spacing.sm),
@@ -349,28 +349,28 @@ class BaseInputField extends StatelessWidget {
           decoration: InputDecoration(
             hintText: hint,
             hintStyle: const TextStyle(
-              color: Colors.textMuted,
+              color: AppColors.textMuted,
             ),
             errorText: error,
             prefixIcon: prefixIcon,
             suffixIcon: suffixIcon,
             filled: true,
-            fillColor: enabled ? Colors.gray50 : Colors.gray100,
+            fillColor: enabled ? AppColors.gray50 : AppColors.gray100,
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(BorderRadius.md),
-              borderSide: const BorderSide(color: Colors.gray300),
+              borderSide: const BorderSide(color: AppColors.gray300),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(BorderRadius.md),
-              borderSide: const BorderSide(color: Colors.gray300),
+              borderSide: const BorderSide(color: AppColors.gray300),
             ),
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(BorderRadius.md),
-              borderSide: const BorderSide(color: Colors.primary, width: 2),
+              borderSide: const BorderSide(color: AppColors.primary, width: 2),
             ),
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(BorderRadius.md),
-              borderSide: const BorderSide(color: Colors.error),
+              borderSide: const BorderSide(color: AppColors.error),
             ),
             contentPadding: const EdgeInsets.symmetric(
               horizontal: Spacing.md,
@@ -407,7 +407,7 @@ class BaseLoading extends StatelessWidget {
             width: size ?? 40,
             child: CircularProgressIndicator(
               valueColor: AlwaysStoppedAnimation<Color>(
-                color ?? Colors.primary,
+                color ?? AppColors.primary,
               ),
             ),
           ),
@@ -417,7 +417,7 @@ class BaseLoading extends StatelessWidget {
               message!,
               style: const TextStyle(
                 fontSize: FontSizes.md,
-                color: Colors.textSecondary,
+                color: AppColors.textSecondary,
               ),
             ),
           ],
@@ -459,7 +459,7 @@ class BaseEmptyState extends StatelessWidget {
             Icon(
               icon,
               size: iconSize,
-              color: iconColor ?? Colors.textMuted,
+              color: iconColor ?? AppColors.textMuted,
             ),
             const SizedBox(height: Spacing.lg),
             Text(
@@ -467,7 +467,7 @@ class BaseEmptyState extends StatelessWidget {
               style: const TextStyle(
                 fontSize: FontSizes.lg,
                 fontWeight: FontWeights.semibold,
-                color: Colors.textPrimary,
+                color: AppColors.textPrimary,
               ),
               textAlign: TextAlign.center,
             ),
@@ -477,7 +477,7 @@ class BaseEmptyState extends StatelessWidget {
                 message!,
                 style: const TextStyle(
                   fontSize: FontSizes.md,
-                  color: Colors.textSecondary,
+                  color: AppColors.textSecondary,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -522,7 +522,7 @@ class BaseErrorState extends StatelessWidget {
       message: message,
       actionText: actionText,
       onAction: onAction,
-      iconColor: Colors.error,
+      iconColor: AppColors.error,
     );
   }
 }
@@ -568,8 +568,8 @@ class BaseAppBar extends StatelessWidget implements PreferredSizeWidget {
       actions: actions,
       leading: effectiveLeading,
       automaticallyImplyLeading: automaticallyImplyLeading,
-      backgroundColor: backgroundColor ?? Colors.white,
-      foregroundColor: foregroundColor ?? Colors.textPrimary,
+      backgroundColor: backgroundColor ?? AppColors.white,
+      foregroundColor: foregroundColor ?? AppColors.textPrimary,
       elevation: elevation,
       centerTitle: true,
     );
@@ -602,8 +602,8 @@ class BaseFAB extends StatelessWidget {
   Widget build(BuildContext context) {
     return FloatingActionButton(
       onPressed: onPressed,
-      backgroundColor: backgroundColor ?? Colors.primary,
-      foregroundColor: foregroundColor ?? Colors.white,
+      backgroundColor: backgroundColor ?? AppColors.primary,
+      foregroundColor: foregroundColor ?? AppColors.white,
       elevation: elevation ?? 6,
       tooltip: tooltip,
       child: child,

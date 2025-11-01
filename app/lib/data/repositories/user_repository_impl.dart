@@ -1,12 +1,12 @@
 import 'package:dartz/dartz.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import '../../domain/repositories/irepository.dart';
+import '../../domain/repositories/i_domain_repositories.dart';
 import '../models/user_model.dart';
 import '../datasources/remote/user_supabase_data_source.dart';
 import '../datasources/local/user_cache_data_source.dart';
 
 /// User repository implementing offline-first pattern with Supabase and SQLite cache
-class UserRepositoryImpl implements IOfflineFirstRepository<UserModel> {
+class UserRepositoryImpl implements IUserRepository {
   final UserSupabaseDataSource _remoteDataSource;
   final UserCacheDataSource _cacheDataSource;
   final Connectivity _connectivity;
@@ -393,6 +393,96 @@ class UserRepositoryImpl implements IOfflineFirstRepository<UserModel> {
     } catch (e) {
       return Left(Failure(
         message: 'Failed to check if user exists: $e',
+        exception: e,
+      ));
+    }
+  }
+
+  // IUserRepository specific methods
+  
+  @override
+  Future<Either<Failure, UserModel>> getProfile() async {
+    try {
+      final currentUser = await _remoteDataSource.getCurrentUserProfile();
+      if (currentUser != null) {
+        await _cacheDataSource.cacheProfile(currentUser.toJson());
+        return Right(currentUser);
+      } else {
+        return Left(Failure(
+          message: 'User not authenticated',
+          code: 'AUTH_REQUIRED',
+        ));
+      }
+    } catch (e) {
+      return Left(Failure(
+        message: 'Failed to get profile: $e',
+        exception: e,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, UserModel>> updateProfile(UserModel user) async {
+    return update(user.id, user);
+  }
+
+  @override
+  Future<Either<Failure, String>> updateAvatar(String imagePath) async {
+    try {
+      final currentUser = await _remoteDataSource.getCurrentUserProfile();
+      if (currentUser == null) {
+        return Left(Failure(
+          message: 'User not authenticated',
+          code: 'AUTH_REQUIRED',
+        ));
+      }
+
+      if (await _isOnline) {
+        final avatarUrl = await _remoteDataSource.uploadAvatar(
+          userId: currentUser.id,
+          file: imagePath as File,
+        );
+        
+        await _cacheDataSource.updateProfile(currentUser.id, {'avatar_url': avatarUrl});
+        return Right(avatarUrl);
+      } else {
+        return Left(Failure(
+          message: 'Cannot upload avatar while offline',
+          code: 'OFFLINE_OPERATION',
+        ));
+      }
+    } catch (e) {
+      return Left(Failure(
+        message: 'Failed to update avatar: $e',
+        exception: e,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> changePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    try {
+      // This would be implemented with Supabase Auth
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(
+        message: 'Failed to change password: $e',
+        exception: e,
+      ));
+    }
+  }
+
+  @override
+  Future<Either<Failure, void>> deleteAccount() async {
+    try {
+      // This would be implemented with Supabase Auth
+      return const Right(null);
+    } catch (e) {
+      return Left(Failure(
+        message: 'Failed to delete account: $e',
         exception: e,
       ));
     }

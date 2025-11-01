@@ -1,23 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../core/utils/base_view.dart';
-import '../../core/widgets/base_widgets.dart';
-import '../../core/constants/app_constants.dart';
-import '../../core/extensions/ui_extensions.dart';
 import '../../core/navigation/app_router.dart';
-import '../../core/utils/service_locator.dart';
-import '../viewmodels/splash_viewmodel.dart';
+import '../../core/constants/colors.dart';
 
-class SplashPage extends BaseView<SplashViewModel> {
+class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
 
   @override
-  SplashViewModel createViewModel() {
-    return SplashViewModel();
-  }
-
-  @override
-  Widget buildView(BuildContext context) {
+  Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
         width: double.infinity,
@@ -26,8 +15,8 @@ class SplashPage extends BaseView<SplashViewModel> {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: [
-              Colors.primary,
-              Colors.primaryLight,
+              AppColors.primary,
+              AppColors.primaryLight,
             ],
           ),
         ),
@@ -36,11 +25,11 @@ class SplashPage extends BaseView<SplashViewModel> {
           children: [
             // App Logo
             Container(
-              width: 120.w,
-              height: 120.w,
+              width: 120,
+              height: 120,
               decoration: BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.circular(24.r),
+                borderRadius: BorderRadius.circular(24),
                 boxShadow: [
                   BoxShadow(
                     color: Colors.black.withOpacity(0.1),
@@ -49,50 +38,44 @@ class SplashPage extends BaseView<SplashViewModel> {
                   ),
                 ],
               ),
-              child: Icon(
+              child: const Icon(
                 Icons.school,
-                size: 60.sp,
-                color: Colors.primary,
+                size: 60,
+                color: AppColors.primary,
               ),
             ),
             
-            SizedBox(height: 32.h),
+            const SizedBox(height: 32),
             
             // App Name
-            Text(
-              AppConstants.appName,
+            const Text(
+              'TutorFlow',
               style: TextStyle(
-                fontSize: 32.sp,
+                fontSize: 32,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
                 letterSpacing: 1.2,
               ),
             ),
             
-            SizedBox(height: 8.h),
+            const SizedBox(height: 8),
             
             // Tagline
-            Text(
+            const Text(
               'Learn. Grow. Succeed.',
               style: TextStyle(
-                fontSize: 16.sp,
-                color: Colors.white.withOpacity(0.9),
+                fontSize: 16,
+                color: Colors.white,
                 fontWeight: FontWeight.w300,
               ),
             ),
             
-            SizedBox(height: 80.h),
+            const SizedBox(height: 80),
             
             // Loading Indicator
-            final viewModel = SplashViewModel();
-            
-            if (viewModel.isLoading) {
-              return CircularProgressIndicator(
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-              );
-            }
-            
-            const SizedBox.shrink(),
+            const CircularProgressIndicator(
+              valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+            ),
           ],
         ),
       ),

@@ -50,7 +50,8 @@ dependencies:
   # Dependency Injection
   get_it: ^7.6.7
   
-  # Encryption
+  # Encryption & Security
+  crypto: ^3.0.3
   encrypt: ^5.0.3
   pointycastle: ^3.7.3
   

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'package:dartz/dartz.dart';
 import '../../data/models/models.dart';
 import 'irepository.dart';
+import 'i_auth_repository.dart';
 
 /// User repository interface
 abstract class IUserRepository extends IRepository<UserModel> {

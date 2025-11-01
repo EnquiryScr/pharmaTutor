@@ -17,12 +17,9 @@ class SecureStorageManager {
   final FlutterSecureStorage _secureStorage = const FlutterSecureStorage(
     aOptions: AndroidOptions(
       encryptedSharedPreferences: true,
-      keyCipherAlgorithm: KeyCipherAlgorithm.RSA_ECB_PKCS1Padding,
-      storageCipherAlgorithm: StorageCipherAlgorithm.AES_GCM_NoPadding,
     ),
     iOptions: IOSOptions(
       accessibility: KeychainAccessibility.first_unlock_this_device,
-      accountName: 'tutoring_secure_storage',
     ),
   );
 
@@ -53,7 +50,6 @@ class SecureStorageManager {
         '$_defaultNamespace.biometric',
         biometricOnly: true,
         authenticatePrompt: 'Authenticate to access secure data',
-        biometricHint: 'Use your fingerprint or face to unlock',
       );
       print('✅ Biometric storage initialized');
     } catch (error) {
