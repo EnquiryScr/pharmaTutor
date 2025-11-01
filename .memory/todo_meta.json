@@ -3,24 +3,24 @@
     "Coordinator": {
       "1": {
         "id": "1",
-        "content": "Reorganize Flutter project structure according to GitHub best practices",
-        "details": "1. Remove embedded Flutter SDK from project root\n2. Create proper .github folder structure\n3. Organize documentation in dedicated folders\n4. Reorganize configuration files\n5. Create proper testing structure\n6. Implement environment configuration",
-        "status": "completed",
+        "content": "Fix json_serializable syntax errors in core Dart files",
+        "details": "1. Fix syntax error in flutter_security_manager.dart (line 461)\n2. Fix missing semicolon in secure_storage_manager.dart (line 438)\n3. Fix function body missing in base_model.dart (line 12)\n4. Fix any other syntax errors in related core files",
+        "status": "pending",
         "priority": "high"
       },
       "2": {
         "id": "2",
-        "content": "Push reorganized project to GitHub",
-        "details": "1. Commit all reorganized files\n2. Push to remote repository\n3. Verify structure in GitHub web interface",
-        "status": "completed",
+        "content": "Fix mockito @GenerateMocks configuration errors",
+        "details": "1. Review and fix @GenerateMocks annotation in user_repository_test.dart\n2. Review and fix @GenerateMocks annotation in message_provider_test.dart\n3. Ensure classes argument contains valid, importable concrete classes\n4. Verify all imports are correct in test files",
+        "status": "pending",
         "priority": "high"
       },
       "3": {
         "id": "3",
-        "content": "Proceed with Flutter dependency setup and error fixing",
-        "details": "1. Add missing dependencies to pubspec.yaml\n2. Run flutter pub get\n3. Begin systematic error resolution",
-        "status": "completed",
-        "priority": "high"
+        "content": "Update build runner command and test fixes",
+        "details": "1. Update documentation to use 'dart run' instead of 'flutter pub run'\n2. Run build_runner with corrected syntax\n3. Verify all code generation works correctly\n4. Test that project compiles successfully",
+        "status": "pending",
+        "priority": "medium"
       }
     }
   }
