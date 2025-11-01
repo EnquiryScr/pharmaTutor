@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/utils/base_view.dart';
 import '../../core/widgets/base_widgets.dart';
 import '../../core/constants/app_constants.dart';
+import '../../core/extensions/ui_extensions.dart';
 import '../../core/navigation/app_router.dart';
+import '../../core/utils/service_locator.dart';
 import '../viewmodels/splash_viewmodel.dart';
 
 class SplashPage extends BaseView<SplashViewModel> {
@@ -10,7 +13,7 @@ class SplashPage extends BaseView<SplashViewModel> {
 
   @override
   SplashViewModel createViewModel() {
-    return serviceLocator<SplashViewModel>();
+    return SplashViewModel();
   }
 
   @override
@@ -81,19 +84,15 @@ class SplashPage extends BaseView<SplashViewModel> {
             SizedBox(height: 80.h),
             
             // Loading Indicator
-            Consumer(
-              builder: (context, ref, child) {
-                final isLoading = ref.watch(viewModel).isLoading;
-                
-                if (isLoading) {
-                  return CircularProgressIndicator(
-                    valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
-                  );
-                }
-                
-                return const SizedBox.shrink();
-              },
-            ),
+            final viewModel = SplashViewModel();
+            
+            if (viewModel.isLoading) {
+              return CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.white),
+              );
+            }
+            
+            const SizedBox.shrink(),
           ],
         ),
       ),

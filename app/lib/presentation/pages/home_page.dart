@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/utils/base_view.dart';
 import '../../core/widgets/base_widgets.dart';
 import '../../core/navigation/app_router.dart';
+import '../../core/utils/service_locator.dart';
+import '../../core/constants/app_constants.dart';
 import '../viewmodels/home_viewmodel.dart';
 
 class HomePage extends BaseView<HomeViewModel> {
@@ -16,7 +19,7 @@ class HomePage extends BaseView<HomeViewModel> {
   Widget buildView(BuildContext context) {
     return Consumer(
       builder: (context, ref, child) {
-        final viewModel = ref.watch(serviceLocator<HomeViewModel>());
+        final viewModel = serviceLocator<HomeViewModel>();
         
         return Scaffold(
           body: IndexedStack(
@@ -34,8 +37,8 @@ class HomePage extends BaseView<HomeViewModel> {
             currentIndex: viewModel.currentIndex,
             onTap: (index) => viewModel.setIndex(index),
             type: BottomNavigationBarType.fixed,
-            selectedItemColor: Colors.primary,
-            unselectedItemColor: Colors.textMuted,
+            selectedItemColor: AppColors.primary,
+            unselectedItemColor: AppColors.textMuted,
             selectedLabelStyle: const TextStyle(fontWeight: FontWeight.w600),
             items: const [
               BottomNavigationBarItem(
@@ -93,7 +96,7 @@ class DashboardPage extends StatelessWidget {
             Icon(
               Icons.dashboard,
               size: 64,
-              color: Colors.primary,
+              color: AppColors.primary,
             ),
             SizedBox(height: 16),
             Text(
@@ -108,7 +111,7 @@ class DashboardPage extends StatelessWidget {
               'Your learning overview will be displayed here',
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.textSecondary,
+                color: AppColors.textSecondary,
               ),
             ),
           ],

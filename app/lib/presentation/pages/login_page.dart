@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/utils/base_view.dart';
 import '../../core/widgets/base_widgets.dart';
 import '../../core/utils/validators.dart';
 import '../../core/navigation/app_router.dart';
+import '../../core/utils/service_locator.dart';
+import '../../core/utils/navigation_helper.dart';
+import '../../core/constants/app_constants.dart';
 import '../viewmodels/auth_viewmodel.dart';
 
 class LoginPage extends BaseView<AuthViewModel> {
@@ -10,7 +14,7 @@ class LoginPage extends BaseView<AuthViewModel> {
 
   @override
   AuthViewModel createViewModel() {
-    return serviceLocator<AuthViewModel>();
+    return AuthViewModel();
   }
 
   @override
@@ -35,7 +39,7 @@ class LoginPage extends BaseView<AuthViewModel> {
                 style: TextStyle(
                   fontSize: 28.sp,
                   fontWeight: FontWeight.bold,
-                  color: Colors.textPrimary,
+                  color: AppColors.textPrimary,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -46,7 +50,7 @@ class LoginPage extends BaseView<AuthViewModel> {
                 'Sign in to continue learning',
                 style: TextStyle(
                   fontSize: 16.sp,
-                  color: Colors.textSecondary,
+                  color: AppColors.textSecondary,
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -67,7 +71,7 @@ class LoginPage extends BaseView<AuthViewModel> {
                     'Forgot Password?',
                     style: TextStyle(
                       fontSize: 14.sp,
-                      color: Colors.primary,
+                      color: AppColors.primary,
                     ),
                   ),
                 ),
@@ -88,7 +92,7 @@ class LoginPage extends BaseView<AuthViewModel> {
                     'Don\'t have an account? ',
                     style: TextStyle(
                       fontSize: 14.sp,
-                      color: Colors.textSecondary,
+                      color: AppColors.textSecondary,
                     ),
                   ),
                   TextButton(
@@ -98,7 +102,7 @@ class LoginPage extends BaseView<AuthViewModel> {
                       style: TextStyle(
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w600,
-                        color: Colors.primary,
+                        color: AppColors.primary,
                       ),
                     ),
                   ),
@@ -127,9 +131,7 @@ class _LoginFormState extends State<_LoginForm> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (context, ref, child) {
-        final viewModel = ref.watch(serviceLocator<AuthViewModel>());
+    final viewModel = AuthViewModel();
         
         return Form(
           key: _formKey,
@@ -188,15 +190,15 @@ class _LoginFormState extends State<_LoginForm> {
                 Container(
                   padding: const EdgeInsets.all(12),
                   decoration: BoxDecoration(
-                    color: Colors.error.withOpacity(0.1),
+                    color: AppColors.error.withOpacity(0.1),
                     borderRadius: BorderRadius.circular(8),
-                    border: Border.all(color: Colors.error.withOpacity(0.3)),
+                    border: Border.all(color: AppColors.error.withOpacity(0.3)),
                   ),
                   child: Row(
                     children: [
                       const Icon(
                         Icons.error_outline,
-                        color: Colors.error,
+                        color: AppColors.error,
                         size: 20,
                       ),
                       const SizedBox(width: 8),
@@ -204,7 +206,7 @@ class _LoginFormState extends State<_LoginForm> {
                         child: Text(
                           viewModel.error ?? 'An error occurred',
                           style: const TextStyle(
-                            color: Colors.error,
+                            color: AppColors.error,
                             fontSize: 14,
                           ),
                         ),
@@ -215,9 +217,6 @@ class _LoginFormState extends State<_LoginForm> {
               ],
             ],
           ),
-        );
-      },
-    );
   }
 
   void _handleLogin() {
@@ -251,7 +250,7 @@ class _SocialLoginDivider extends StatelessWidget {
                 'Or continue with',
                 style: TextStyle(
                   fontSize: 14.sp,
-                  color: Colors.textMuted,
+                  color: AppColors.textMuted,
                 ),
               ),
             ),
