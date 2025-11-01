@@ -1,0 +1,33 @@
+# 🚀 Flutter Setup Commands for Codespaces
+# Copy and run these commands one by one in your Codespaces terminal:
+
+# 1. Navigate to your project
+cd /workspaces/pharmaTutor
+
+# 2. Download Flutter
+wget https://storage.googleapis.com/flutter_infra_release/releases/stable/linux/flutter_linux_3.22.3-stable.tar.xz
+
+# 3. Extract Flutter
+tar xf flutter_linux_3.22.3-stable.tar.xz
+
+# 4. Add Flutter to PATH
+export PATH="$PATH:$PWD/flutter/bin"
+echo 'export PATH="$PATH:$PWD/flutter/bin"' >> ~/.bashrc
+
+# 5. Configure Flutter
+flutter config --no-analytics
+flutter config --enable-linux-desktop
+
+# 6. Accept Android licenses
+echo "y" | flutter doctor --android-licenses
+
+# 7. Navigate to app directory and install dependencies
+cd app
+flutter pub get
+
+# 8. Verify installation
+flutter doctor
+flutter --version
+
+# 9. Run your app!
+flutter run

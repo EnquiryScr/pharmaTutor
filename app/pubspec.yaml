@@ -41,6 +41,20 @@ dependencies:
   dartz: ^0.10.1
   connectivity_plus: ^7.0.0
   
+  # Security & Authentication
+  flutter_secure_storage: ^9.0.0
+  local_auth: ^2.1.7
+  device_info_plus: ^9.1.1
+  biometric_storage: ^5.0.1
+  permission_handler: ^11.1.0
+  
+  # Dependency Injection
+  get_it: ^7.6.7
+  
+  # Encryption
+  encrypt: ^5.0.3
+  pointycastle: ^3.7.3
+  
   # Development Tools
   json_annotation: ^4.8.1
   # DOWNGRADE: Aligning with the Flutter SDK's pinned analysis tools (was ^2.10.1).
