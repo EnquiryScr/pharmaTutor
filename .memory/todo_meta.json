@@ -5,21 +5,21 @@
         "id": "1",
         "content": "Fix json_serializable syntax errors in core Dart files",
         "details": "1. Fix syntax error in flutter_security_manager.dart (line 461)\n2. Fix missing semicolon in secure_storage_manager.dart (line 438)\n3. Fix function body missing in base_model.dart (line 12)\n4. Fix any other syntax errors in related core files",
-        "status": "pending",
+        "status": "completed",
         "priority": "high"
       },
       "2": {
         "id": "2",
         "content": "Fix mockito @GenerateMocks configuration errors",
         "details": "1. Review and fix @GenerateMocks annotation in user_repository_test.dart\n2. Review and fix @GenerateMocks annotation in message_provider_test.dart\n3. Ensure classes argument contains valid, importable concrete classes\n4. Verify all imports are correct in test files",
-        "status": "pending",
+        "status": "completed",
         "priority": "high"
       },
       "3": {
         "id": "3",
         "content": "Update build runner command and test fixes",
         "details": "1. Update documentation to use 'dart run' instead of 'flutter pub run'\n2. Run build_runner with corrected syntax\n3. Verify all code generation works correctly\n4. Test that project compiles successfully",
-        "status": "pending",
+        "status": "completed",
         "priority": "medium"
       }
     }

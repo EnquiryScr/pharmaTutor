@@ -5,15 +5,23 @@ abstract class BaseModel extends Equatable {
   const BaseModel();
 
   /// Convert the model to JSON map
-  Map<String, dynamic> toJson();
+  /// Override in subclasses and annotate with @JsonSerializable if needed
+  Map<String, dynamic> toJson() {
+    throw UnimplementedError('Subclasses must implement toJson()');
+  }
 
   /// Create a model instance from JSON map
   /// This should be implemented by each model class
-  factory BaseModel.fromJson(Map<String, dynamic> json);
+  /// Override in subclasses and annotate with @JsonSerializable if needed
+  static T fromJson<T extends BaseModel>(Map<String, dynamic> json) {
+    throw UnimplementedError('Subclasses must implement fromJson()');
+  }
 
   /// Create a copy of the model with updated properties
   /// This should be implemented by each model class with copyWith method
-  BaseModel copyWith();
+  T copyWith() {
+    throw UnimplementedError('Subclasses must implement copyWith()');
+  }
 
   /// Validate the model data
   /// Return true if valid, false otherwise

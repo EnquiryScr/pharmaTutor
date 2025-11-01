@@ -4,11 +4,11 @@ import 'package:mockito/annotations.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:dartz/dartz.dart';
 
-import 'package:pharmaT/data/repositories/user_repository_impl.dart';
-import 'package:pharmaT/data/datasources/remote/user_supabase_data_source.dart';
-import 'package:pharmaT/data/datasources/local/user_cache_data_source.dart';
-import 'package:pharmaT/data/models/user_model.dart';
-import 'package:pharmaT/data/models/failure.dart';
+import 'package:flutter_tutoring_app/data/repositories/user_repository_impl.dart';
+import 'package:flutter_tutoring_app/data/datasources/remote/user_supabase_data_source.dart';
+import 'package:flutter_tutoring_app/data/datasources/local/user_cache_data_source.dart';
+import 'package:flutter_tutoring_app/data/models/user_model.dart';
+import 'package:flutter_tutoring_app/data/models/failure.dart';
 
 // Generate mocks with: flutter pub run build_runner build
 @GenerateMocks([UserSupabaseDataSource, UserCacheDataSource, Connectivity])
